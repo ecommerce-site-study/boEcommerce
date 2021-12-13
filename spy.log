@@ -1,0 +1,21 @@
+1638201287311|1|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop table if exists answer_list CASCADE |drop table if exists answer_list CASCADE 
+1638201287313|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop table if exists board CASCADE |drop table if exists board CASCADE 
+1638201287313|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop table if exists book_order CASCADE |drop table if exists book_order CASCADE 
+1638201287314|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop table if exists book_order_product CASCADE |drop table if exists book_order_product CASCADE 
+1638201287314|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop table if exists contents_type CASCADE |drop table if exists contents_type CASCADE 
+1638201287315|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop table if exists exhibition CASCADE |drop table if exists exhibition CASCADE 
+1638201287315|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop table if exists exhibition_category CASCADE |drop table if exists exhibition_category CASCADE 
+1638201287315|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop table if exists favorite CASCADE |drop table if exists favorite CASCADE 
+1638201287316|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop table if exists member CASCADE |drop table if exists member CASCADE 
+1638201287316|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop table if exists pay_info CASCADE |drop table if exists pay_info CASCADE 
+1638201287317|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop table if exists product CASCADE |drop table if exists product CASCADE 
+1638201287317|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop table if exists product_option CASCADE |drop table if exists product_option CASCADE 
+1638201287317|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop table if exists refund CASCADE |drop table if exists refund CASCADE 
+1638201287318|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop table if exists review CASCADE |drop table if exists review CASCADE 
+1638201287318|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop table if exists sns_info CASCADE |drop table if exists sns_info CASCADE 
+1638201287318|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop table if exists vertity CASCADE |drop table if exists vertity CASCADE 
+1638201287318|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop sequence if exists category_seq|drop sequence if exists category_seq
+1638201287318|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop sequence if exists contents_seq|drop sequence if exists contents_seq
+1638201287318|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop sequence if exists exhibition_seq|drop sequence if exists exhibition_seq
+1638201287319|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop sequence if exists product_option_seq|drop sequence if exists product_option_seq
+1638201287319|0|statement|connection 45|url jdbc:h2:mem:557add22-8826-4109-81d5-341f813e4b12|drop sequence if exists product_seq|drop sequence if exists product_seq
