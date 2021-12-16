@@ -136,7 +136,7 @@ public class ExhibitionTest extends WebIntegrationTest {
                 .build();
         exhibitionRepository.save(exData);
 
-        Optional<Exhibition> exhibitionSn = exhibitionRepository.findById(10000001L);
+        Optional<Exhibition> exhibitionSn = exhibitionRepository.findById(exData.getExhibition_sn());
 
         for (ContentEnum contentEnum : contentMap.keySet()) {
             ContentsType contentsData = ContentsType.builder()
@@ -184,7 +184,7 @@ public class ExhibitionTest extends WebIntegrationTest {
                 .build();
         exhibitionRepository.save(exData);
 
-        Optional<Exhibition> exhibitionSn = exhibitionRepository.findById(10000001L);
+        Optional<Exhibition> exhibitionSn = exhibitionRepository.findById(exData.getExhibition_sn());
 
         for (ContentEnum contentEnum : contentMap.keySet()) {
             ContentsType contentsData = ContentsType.builder()
