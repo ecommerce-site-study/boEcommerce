@@ -10,7 +10,7 @@ import com.teckstudy.book.domain.member.types.MemberStatus;
 import com.teckstudy.book.domain.enums.YesNoStatus;
 import com.teckstudy.book.domain.product.repository.AnswerListRepository;
 import com.teckstudy.book.domain.product.repository.BoardRepository;
-import com.teckstudy.book.domain.product.repository.MemberRepository;
+import com.teckstudy.book.domain.member.repository.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

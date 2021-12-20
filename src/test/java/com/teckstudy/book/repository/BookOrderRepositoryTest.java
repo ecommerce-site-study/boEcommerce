@@ -5,6 +5,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.teckstudy.book.domain.*;
 import com.teckstudy.book.domain.enums.*;
 import com.teckstudy.book.domain.member.Member;
+import com.teckstudy.book.domain.member.repository.MemberRepository;
 import com.teckstudy.book.domain.member.types.Gender;
 import com.teckstudy.book.domain.member.types.MemberStatus;
 import com.teckstudy.book.domain.product.repository.*;

@@ -1,4 +1,4 @@
-package com.teckstudy.book.domain.product.repository;
+package com.teckstudy.book.domain.member.repository;
 
 import com.teckstudy.book.domain.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;

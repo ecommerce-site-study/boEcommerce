@@ -6,7 +6,7 @@ import com.teckstudy.book.domain.enums.*;
 import com.teckstudy.book.domain.member.Member;
 import com.teckstudy.book.domain.member.types.Gender;
 import com.teckstudy.book.domain.member.types.MemberStatus;
-import com.teckstudy.book.domain.product.repository.MemberRepository;
+import com.teckstudy.book.domain.member.repository.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
