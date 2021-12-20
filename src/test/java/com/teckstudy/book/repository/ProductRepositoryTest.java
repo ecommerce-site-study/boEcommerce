@@ -2,11 +2,11 @@ package com.teckstudy.book.repository;
 
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.teckstudy.book.entity.Product;
-import com.teckstudy.book.entity.ProductOption;
-import com.teckstudy.book.entity.enums.ProductType;
-import com.teckstudy.book.product.repository.ProductOptionRepository;
-import com.teckstudy.book.product.repository.ProductRepository;
+import com.teckstudy.book.domain.Product;
+import com.teckstudy.book.domain.ProductOption;
+import com.teckstudy.book.domain.enums.ProductType;
+import com.teckstudy.book.domain.product.repository.ProductOptionRepository;
+import com.teckstudy.book.domain.product.repository.ProductRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-import static com.teckstudy.book.entity.QProduct.product;
-import static com.teckstudy.book.entity.QProductOption.productOption;
+import static com.teckstudy.book.domain.QProduct.product;
+import static com.teckstudy.book.domain.QProductOption.productOption;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest

@@ -1,10 +1,10 @@
 package com.teckstudy.book.lib.common.util;
 
-import com.teckstudy.book.entity.ContentsType;
-import com.teckstudy.book.entity.enums.ContentEnum;
-import com.teckstudy.book.entity.enums.ExhibitionType;
-import com.teckstudy.book.entity.enums.YesNoStatus;
-import com.teckstudy.book.exhibition.domain.dto.ExhibitionRequestDto;
+import com.teckstudy.book.domain.exhibition.ContentsType;
+import com.teckstudy.book.domain.enums.ContentEnum;
+import com.teckstudy.book.domain.enums.ExhibitionType;
+import com.teckstudy.book.domain.enums.YesNoStatus;
+import com.teckstudy.book.ui.exhibition.ExhibitionRequestDto;
 import com.teckstudy.book.lib.common.message.api.ExhibitionCode;
 
 import java.time.LocalDateTime;

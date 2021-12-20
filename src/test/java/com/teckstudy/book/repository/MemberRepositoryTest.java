@@ -1,9 +1,12 @@
 package com.teckstudy.book.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.teckstudy.book.entity.*;
-import com.teckstudy.book.entity.enums.*;
-import com.teckstudy.book.product.repository.MemberRepository;
+import com.teckstudy.book.domain.*;
+import com.teckstudy.book.domain.enums.*;
+import com.teckstudy.book.domain.member.Member;
+import com.teckstudy.book.domain.member.types.Gender;
+import com.teckstudy.book.domain.member.types.MemberStatus;
+import com.teckstudy.book.domain.product.repository.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,9 +19,9 @@ import javax.persistence.EntityManager;
 
 import java.util.List;
 
-import static com.teckstudy.book.entity.QMember.member;
-import static com.teckstudy.book.entity.QSnsInfo.snsInfo;
-import static com.teckstudy.book.entity.QVertity.vertity;
+import static com.teckstudy.book.domain.QMember.member;
+import static com.teckstudy.book.domain.QSnsInfo.snsInfo;
+import static com.teckstudy.book.domain.QVertity.vertity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

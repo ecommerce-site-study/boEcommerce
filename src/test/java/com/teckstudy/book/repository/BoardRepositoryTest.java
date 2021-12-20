@@ -1,16 +1,16 @@
 package com.teckstudy.book.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.teckstudy.book.entity.AnswerList;
-import com.teckstudy.book.entity.Board;
-import com.teckstudy.book.entity.Member;
-import com.teckstudy.book.entity.enums.Category;
-import com.teckstudy.book.entity.enums.Gender;
-import com.teckstudy.book.entity.enums.MemberStatus;
-import com.teckstudy.book.entity.enums.YesNoStatus;
-import com.teckstudy.book.product.repository.AnswerListRepository;
-import com.teckstudy.book.product.repository.BoardRepository;
-import com.teckstudy.book.product.repository.MemberRepository;
+import com.teckstudy.book.domain.AnswerList;
+import com.teckstudy.book.domain.board.Board;
+import com.teckstudy.book.domain.member.Member;
+import com.teckstudy.book.domain.board.types.Category;
+import com.teckstudy.book.domain.member.types.Gender;
+import com.teckstudy.book.domain.member.types.MemberStatus;
+import com.teckstudy.book.domain.enums.YesNoStatus;
+import com.teckstudy.book.domain.product.repository.AnswerListRepository;
+import com.teckstudy.book.domain.product.repository.BoardRepository;
+import com.teckstudy.book.domain.product.repository.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
