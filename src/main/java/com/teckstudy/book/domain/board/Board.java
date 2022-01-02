@@ -1,15 +1,14 @@
 package com.teckstudy.book.domain.board;
 
-import com.teckstudy.book.domain.AnswerList;
+import com.teckstudy.book.domain.Answer;
 import com.teckstudy.book.domain.BaseEntity;
-import com.teckstudy.book.domain.member.Member;
 import com.teckstudy.book.domain.board.types.Category;
 import com.teckstudy.book.domain.enums.YesNoStatus;
 import lombok.*;
 
 import javax.persistence.*;
 
-import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.FetchType.EAGER;
 
 @Entity
 @Getter @Setter
@@ -20,11 +19,9 @@ public class Board extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long board_sn;
+    private Long boardId;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_sn")
-    private Member member;
+    private Long memberId;
 
     private Category category;
 
@@ -39,8 +36,8 @@ public class Board extends BaseEntity {
 
     private String file_path;
 
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "board_sn")
-    private AnswerList answerList;
+    private Answer answer;
 
 }

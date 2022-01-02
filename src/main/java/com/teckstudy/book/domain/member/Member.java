@@ -1,17 +1,13 @@
 package com.teckstudy.book.domain.member;
 
 import com.teckstudy.book.domain.*;
-import com.teckstudy.book.domain.board.Board;
 import com.teckstudy.book.domain.member.types.Gender;
 import com.teckstudy.book.domain.member.types.MemberStatus;
-import com.teckstudy.book.domain.enums.YesNoStatus;
 import lombok.*;
 
 import javax.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
@@ -23,15 +19,15 @@ public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long member_sn;
+    private String memberId;
 
-    @Column(length = 30)
-    private String member_id;
+    @Column(unique = true)
+    private String email;
 
-    @Column(length = 30)
+    @Column(length = 30, nullable = true)
     private String password;
 
-    @Column(length = 20)
+    @Column(length = 20, nullable = false)
     private String name;
 
     @Enumerated(EnumType.STRING)
@@ -41,38 +37,20 @@ public class Member extends BaseEntity {
     private String birthday;
 
     @Column(length = 20)
-    private String phone_number;
+    private String phoneNumber;
 
     @Column(length = 100)
     private String address;
 
     @Enumerated(EnumType.STRING)
-    private YesNoStatus sns_yn;
+    private MemberStatus memberStatus;
 
-    @Enumerated(EnumType.STRING)
-    private MemberStatus member_status;
-
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_sn")
-    private SnsInfo snsInfo;
+    private AuthInfo authInfo;
 
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_sn")
-    private Vertity vertity;
+    private SocialInfo socialInfo;
 
-    @Builder.Default
-    @OneToMany(mappedBy = "member")
-    private List<BookOrder> bookOrders = new ArrayList<>();
-
-    @Builder.Default
-    @OneToMany(mappedBy = "member")
-    private List<Favorite> favorite = new ArrayList<>();
-
-    @Builder.Default
-    @OneToMany(mappedBy = "member")
-    private List<Board> boards = new ArrayList<>();
-
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_sn")
-    private Review review;
 }

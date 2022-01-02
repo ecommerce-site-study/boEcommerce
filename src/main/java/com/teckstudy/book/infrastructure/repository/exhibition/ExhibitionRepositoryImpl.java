@@ -1,11 +1,11 @@
 package com.teckstudy.book.infrastructure.repository.exhibition;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.teckstudy.book.domain.exhibition.repository.ExhibitionRepositoryCustom;
 import com.teckstudy.book.ui.exhibition.ContentsTypeResponseDto;
 import com.teckstudy.book.ui.exhibition.ExhibitionResponseDto;
-import com.teckstudy.book.exhibition.domain.dto.QContentsTypeResponseDto;
-import com.teckstudy.book.exhibition.domain.dto.QExhibitionResponseDto;
-import com.teckstudy.book.domain.exhibition.repository.ExhibitionRepositoryCustom;
+import com.teckstudy.book.ui.exhibition.QContentsTypeResponseDto;
+import com.teckstudy.book.ui.exhibition.QExhibitionResponseDto;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

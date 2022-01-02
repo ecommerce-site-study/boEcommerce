@@ -1,28 +1,23 @@
 package com.teckstudy.book.domain;
 
-import com.teckstudy.book.domain.board.Board;
+import com.teckstudy.book.domain.enums.YesNoStatus;
 import lombok.*;
 
 import javax.persistence.*;
-
-import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class AnswerList extends BaseEntity {
+public class Answer extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long answer_sn;
-
-    @OneToOne(mappedBy = "answerList", fetch = LAZY)
-    @JoinColumn(name = "board_sn")
-    private Board board;
+    private Long answerId;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
+    private YesNoStatus displayYn;
 }
