@@ -7,9 +7,6 @@ import javax.persistence.Entity;
 
 @Entity
 @Getter
-@Setter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 public class Favorite {
 

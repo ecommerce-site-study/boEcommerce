@@ -13,8 +13,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 public class Refund extends BaseEntity {
 

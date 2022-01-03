@@ -11,8 +11,6 @@ import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 public class Review extends BaseEntity {
 

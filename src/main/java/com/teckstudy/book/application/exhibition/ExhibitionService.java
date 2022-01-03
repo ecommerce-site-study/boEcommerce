@@ -2,7 +2,7 @@ package com.teckstudy.book.application.exhibition;
 
 import com.teckstudy.book.domain.exhibition.ContentsType;
 import com.teckstudy.book.domain.exhibition.Exhibition;
-import com.teckstudy.book.domain.enums.ContentEnum;
+import com.teckstudy.book.domain.exhibition.types.ContentEnum;
 import com.teckstudy.book.ui.exhibition.ContentsTypeResponseDto;
 import com.teckstudy.book.ui.exhibition.ExhibitionRequestDto;
 import com.teckstudy.book.ui.exhibition.ExhibitionResponseDto;

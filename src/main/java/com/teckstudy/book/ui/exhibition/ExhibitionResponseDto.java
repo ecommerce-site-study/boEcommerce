@@ -2,7 +2,7 @@ package com.teckstudy.book.ui.exhibition;
 
 import com.querydsl.core.annotations.QueryProjection;
 import com.teckstudy.book.domain.exhibition.Exhibition;
-import com.teckstudy.book.domain.enums.ExhibitionType;
+import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
 import com.teckstudy.book.domain.base.YesNoStatus;
 import lombok.Data;
 import lombok.Getter;

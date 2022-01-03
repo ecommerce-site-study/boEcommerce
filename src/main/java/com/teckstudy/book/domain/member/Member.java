@@ -10,9 +10,7 @@ import javax.persistence.*;
 import static javax.persistence.FetchType.EAGER;
 
 @Entity
-@Getter @Setter
-@Builder
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
 public class Member extends BaseEntity {
 

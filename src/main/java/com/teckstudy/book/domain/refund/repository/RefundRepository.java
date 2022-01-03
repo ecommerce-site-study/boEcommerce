@@ -1,4 +1,4 @@
-package com.teckstudy.book.domain.product.repository;
+package com.teckstudy.book.domain.refund.repository;
 
 import com.teckstudy.book.domain.refund.Refund;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -54,7 +54,7 @@
 //    BookOrderProductRepository bookOrderProductRepository;
 //
 //    @Autowired
-//    PayInfoRepository payInfoRepository;
+//    PaymentRepository payInfoRepository;
 //
 //    @Autowired
 //    ReviewRepository reviewRepository;

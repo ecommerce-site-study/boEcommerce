@@ -16,8 +16,6 @@ import java.util.List;
  */
 @Entity
 @Getter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 public class Order extends BaseEntity {
 

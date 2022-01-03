@@ -11,10 +11,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@Getter
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass // 매핑정보 속성만 받는 슈퍼클래스 자주씀
-@Getter
-@Setter
 public class BaseEntity {
 
     @CreatedDate

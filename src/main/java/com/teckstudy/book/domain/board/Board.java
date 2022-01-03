@@ -7,12 +7,13 @@ import lombok.*;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.LAZY;
 
 @Entity
-@Getter @Setter
-@Builder
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
 public class Board extends BaseEntity {
 
@@ -37,8 +38,8 @@ public class Board extends BaseEntity {
 
     private String file_path;
 
-    @OneToOne(fetch = EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "board_sn")
-    private Answer answers;
+    private List<Answer> answers;
 
 }

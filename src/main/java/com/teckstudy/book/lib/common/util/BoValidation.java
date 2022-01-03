@@ -1,8 +1,8 @@
 package com.teckstudy.book.lib.common.util;
 
 import com.teckstudy.book.domain.exhibition.ContentsType;
-import com.teckstudy.book.domain.enums.ContentEnum;
-import com.teckstudy.book.domain.enums.ExhibitionType;
+import com.teckstudy.book.domain.exhibition.types.ContentEnum;
+import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
 import com.teckstudy.book.domain.base.YesNoStatus;
 import com.teckstudy.book.ui.exhibition.ExhibitionRequestDto;
 import com.teckstudy.book.lib.common.message.api.ExhibitionCode;

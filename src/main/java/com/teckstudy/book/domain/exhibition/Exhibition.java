@@ -1,7 +1,7 @@
 package com.teckstudy.book.domain.exhibition;
 
 import com.teckstudy.book.domain.base.BaseEntity;
-import com.teckstudy.book.domain.enums.ExhibitionType;
+import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
 import com.teckstudy.book.domain.base.YesNoStatus;
 import lombok.*;
 
@@ -10,9 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter @Setter
-@Builder
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
 @SequenceGenerator(
         name = "EXHIBITION_SEQ_GENERATOR",
@@ -62,7 +60,6 @@ public class Exhibition extends BaseEntity {
 
     // 컨텐츠 유형
     @OneToMany(mappedBy = "exhibition")
-    @Builder.Default
     private List<ContentsType> contentsType = new ArrayList<>();
 
     public Exhibition(YesNoStatus use_yn, String name, ExhibitionType exhibitionType,

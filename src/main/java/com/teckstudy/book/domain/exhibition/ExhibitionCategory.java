@@ -1,7 +1,7 @@
 package com.teckstudy.book.domain.exhibition;
 
 import com.teckstudy.book.domain.base.BaseEntity;
-import com.teckstudy.book.domain.enums.ExhibitionType;
+import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
 import com.teckstudy.book.domain.base.YesNoStatus;
 import lombok.*;
 
@@ -9,9 +9,6 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Setter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 @SequenceGenerator(
         name = "CATEGORY_SEQ_GENERATOR",

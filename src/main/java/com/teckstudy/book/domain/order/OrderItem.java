@@ -11,9 +11,7 @@ import java.math.BigInteger;
  * 주문리스트
  */
 @Entity
-@Getter @Setter
-@AllArgsConstructor
-@Builder
+@Getter
 @NoArgsConstructor
 public class OrderItem extends BaseEntity {
 

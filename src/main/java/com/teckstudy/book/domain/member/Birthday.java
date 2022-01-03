@@ -1,13 +1,14 @@
 package com.teckstudy.book.domain.member;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 import java.time.LocalDate;
 
+@Getter
 @Embeddable
-@Data
 @NoArgsConstructor
 public class Birthday {
 
