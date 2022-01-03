@@ -1,7 +1,7 @@
 package com.teckstudy.book.domain.board;
 
 import com.teckstudy.book.domain.base.BaseEntity;
-import com.teckstudy.book.domain.enums.YesNoStatus;
+import com.teckstudy.book.domain.base.YesNoStatus;
 import lombok.*;
 
 import javax.persistence.*;

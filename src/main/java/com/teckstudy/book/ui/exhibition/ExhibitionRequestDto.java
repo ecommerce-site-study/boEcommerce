@@ -3,7 +3,7 @@ package com.teckstudy.book.ui.exhibition;
 import com.teckstudy.book.domain.exhibition.ContentsType;
 import com.teckstudy.book.domain.exhibition.Exhibition;
 import com.teckstudy.book.domain.enums.ExhibitionType;
-import com.teckstudy.book.domain.enums.YesNoStatus;
+import com.teckstudy.book.domain.base.YesNoStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

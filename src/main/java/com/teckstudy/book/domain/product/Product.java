@@ -2,8 +2,8 @@ package com.teckstudy.book.domain.product;
 
 import com.sun.istack.NotNull;
 import com.teckstudy.book.domain.base.BaseEntity;
-import com.teckstudy.book.domain.enums.BookType;
-import com.teckstudy.book.domain.enums.ProductType;
+import com.teckstudy.book.domain.product.types.BookType;
+import com.teckstudy.book.domain.product.types.ProductType;
 import lombok.*;
 
 import javax.persistence.*;

@@ -1,7 +1,7 @@
 package com.teckstudy.book.domain.order;
 
 import com.teckstudy.book.domain.base.BaseEntity;
-import com.teckstudy.book.domain.enums.DeliveryStatus;
+import com.teckstudy.book.domain.order.types.DeliveryStatusType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,7 +31,7 @@ public class OrderItem extends BaseEntity {
     private BigInteger discountOrderPrice;
 
     @Enumerated(EnumType.STRING)
-    private DeleveryStatus delevery;
+    private DeliveryStatusType deliveryStatus;
 
 //    @Column(length = 100)
 //    private String order_address;

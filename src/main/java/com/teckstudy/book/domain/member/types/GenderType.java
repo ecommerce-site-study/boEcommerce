@@ -1,5 +1,5 @@
 package com.teckstudy.book.domain.member.types;
 
-public enum Gender {
+public enum GenderType {
     MALE, FEMALE
 }

@@ -1,8 +1,8 @@
 package com.teckstudy.book.domain.member;
 
 import com.teckstudy.book.domain.base.BaseEntity;
-import com.teckstudy.book.domain.member.types.Gender;
-import com.teckstudy.book.domain.member.types.MemberStatus;
+import com.teckstudy.book.domain.member.types.GenderType;
+import com.teckstudy.book.domain.member.types.MemberStatusType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,7 +30,7 @@ public class Member extends BaseEntity {
     private String name;
 
     @Enumerated(EnumType.STRING)
-    private Gender sex;
+    private GenderType sex;
 
     @Column(length = 20)
     private String birthday;
@@ -42,7 +42,7 @@ public class Member extends BaseEntity {
     private String address;
 
     @Enumerated(EnumType.STRING)
-    private MemberStatus memberStatus;
+    private MemberStatusType memberStatusType;
 
     @OneToOne(fetch = EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_sn")

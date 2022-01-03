@@ -1,4 +1,4 @@
-package com.teckstudy.book.domain.enums;
+package com.teckstudy.book.domain.product.types;
 
 import lombok.Getter;
 

@@ -6,7 +6,7 @@ import com.teckstudy.book.domain.exhibition.ContentsType;
 import com.teckstudy.book.domain.exhibition.Exhibition;
 import com.teckstudy.book.domain.enums.ContentEnum;
 import com.teckstudy.book.domain.enums.ExhibitionType;
-import com.teckstudy.book.domain.enums.YesNoStatus;
+import com.teckstudy.book.domain.base.YesNoStatus;
 import com.teckstudy.book.domain.exhibition.repository.ContentsTypeRepository;
 import com.teckstudy.book.domain.exhibition.repository.ExhibitionRepository;
 import com.teckstudy.book.lib.common.util.BoValidation;

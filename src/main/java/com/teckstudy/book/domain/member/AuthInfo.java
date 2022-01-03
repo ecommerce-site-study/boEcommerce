@@ -1,6 +1,6 @@
 package com.teckstudy.book.domain.member;
 
-import com.teckstudy.book.domain.enums.YesNoStatus;
+import com.teckstudy.book.domain.base.YesNoStatus;
 import com.teckstudy.book.domain.member.types.AuthInfoType;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
