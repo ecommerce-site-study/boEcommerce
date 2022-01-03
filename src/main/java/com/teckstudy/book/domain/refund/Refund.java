@@ -1,5 +1,6 @@
-package com.teckstudy.book.domain;
+package com.teckstudy.book.domain.refund;
 
+import com.teckstudy.book.domain.OrderItem;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Refund {
 
     @Id
@@ -19,7 +20,7 @@ public class Refund {
 
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_sn")
-    private BookOrder bookOrder;
+    private OrderItem orderItem;
 
     @Column(length = 20, nullable = false)
     private String bank_name;

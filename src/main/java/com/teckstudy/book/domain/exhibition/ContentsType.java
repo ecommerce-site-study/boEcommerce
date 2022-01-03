@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @AllArgsConstructor
 @SequenceGenerator(
         name = "CONTENTS_SEQ_GENERATOR",

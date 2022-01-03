@@ -1,6 +1,6 @@
 package com.teckstudy.book.domain.board.types;
 
-public enum Category {
+public enum CategoryType {
 
     NOTICE("공지사항", "10"),
     FAQ("FAQ", "20"),
@@ -11,7 +11,7 @@ public enum Category {
     private final String legacyName;
     private final String legacyCode;
 
-    Category(String legacyName, String legacyCode) {
+    CategoryType(String legacyName, String legacyCode) {
         this.legacyName = legacyName;
         this.legacyCode = legacyCode;
     }

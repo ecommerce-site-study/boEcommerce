@@ -1,5 +1,6 @@
-package com.teckstudy.book.domain;
+package com.teckstudy.book.domain.payment;
 
+import com.teckstudy.book.domain.OrderItem;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,15 +11,14 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PayInfo {
+public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pay_sn;
+    private Long PaymentId;
 
     @OneToOne(mappedBy = "payInfo",fetch = FetchType.LAZY)
     @JoinColumn(name = "order_sn")
     private OrderItem orderItem;
 
     private Integer total_price;
-
 }

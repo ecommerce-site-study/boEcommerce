@@ -1,9 +1,14 @@
 package com.teckstudy.book.domain;
 
 import com.sun.istack.NotNull;
+import com.teckstudy.book.domain.product.Product;
+import com.teckstudy.book.domain.product.ProductRelationShip;
 import lombok.*;
 
 import javax.persistence.*;
+
+import java.math.BigInteger;
+import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -11,7 +16,7 @@ import static javax.persistence.FetchType.LAZY;
 @Getter @Setter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @SequenceGenerator(
         name = "PRODUCT_OPTION_SEQ_GENERATOR",
         sequenceName = "PRODUCT_OPTION_SEQ", // 매핑할 데이터베이스 시퀀스 이름
@@ -21,24 +26,18 @@ public class ProductOption {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "PRODUCT_OPTION_SEQ_GENERATOR")
-    private Long product_option_sn;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_sn")
-    private Product product;
-
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_option_sn")
-    private BookOrderProduct bookOrderProduct;
+    private Long ProductOptionId;
 
     @Column(length = 100)
-    private String product_option_name;
+    private String name;
 
     @Column(length = 11)
     @NotNull
-    private Integer plus_price;
+    private BigInteger amount;
 
     @Column(length = 10)
-    private Integer stock_cnt;
+    private Long quantity;
 
+    @OneToMany(mappedBy = "productOptionId")
+    private List<ProductRelationShip> productRelationShip;
 }

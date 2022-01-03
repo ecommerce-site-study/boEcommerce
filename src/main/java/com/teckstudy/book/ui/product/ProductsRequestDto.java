@@ -1,6 +1,6 @@
 package com.teckstudy.book.ui.product;
 
-import com.teckstudy.book.domain.Product;
+import com.teckstudy.book.domain.product.Product;
 import com.teckstudy.book.domain.ProductOption;
 import com.teckstudy.book.domain.enums.ProductType;
 import lombok.*;

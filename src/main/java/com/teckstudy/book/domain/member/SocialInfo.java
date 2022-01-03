@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class SocialInfo extends BaseEntity {
 
     @Id

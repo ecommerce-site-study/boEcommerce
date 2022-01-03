@@ -9,15 +9,17 @@ import javax.persistence.*;
 @Getter @Setter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Answer extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
 
+    private String memberId;
+
     @Column(columnDefinition = "TEXT", nullable = false)
-    private String content;
+    private String contents;
 
     private YesNoStatus displayYn;
 }

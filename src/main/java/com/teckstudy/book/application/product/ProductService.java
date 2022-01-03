@@ -1,6 +1,6 @@
 package com.teckstudy.book.application.product;
 
-import com.teckstudy.book.domain.Product;
+import com.teckstudy.book.domain.product.Product;
 import com.teckstudy.book.ui.product.ProductsRequestDto;
 import com.teckstudy.book.ui.product.ProductsResponseDto;
 import com.teckstudy.book.domain.product.repository.ProductOptionRepository;

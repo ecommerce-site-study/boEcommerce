@@ -2,7 +2,7 @@ package com.teckstudy.book.domain.board;
 
 import com.teckstudy.book.domain.Answer;
 import com.teckstudy.book.domain.BaseEntity;
-import com.teckstudy.book.domain.board.types.Category;
+import com.teckstudy.book.domain.board.types.CategoryType;
 import com.teckstudy.book.domain.enums.YesNoStatus;
 import lombok.*;
 
@@ -14,7 +14,7 @@ import static javax.persistence.FetchType.EAGER;
 @Getter @Setter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Board extends BaseEntity {
 
     @Id
@@ -23,21 +23,23 @@ public class Board extends BaseEntity {
 
     private Long memberId;
 
-    private Category category;
+    private CategoryType categoryType;
 
-    private String name;
+    private String title;
 
-    private String subject;
-
-    private String content;
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String contents;
 
     @Enumerated(EnumType.STRING)
-    private YesNoStatus top_show_yn;
+    private YesNoStatus topShow;
+
+    @Enumerated(EnumType.STRING)
+    private YesNoStatus displayYn;
 
     private String file_path;
 
     @OneToOne(fetch = EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "board_sn")
-    private Answer answer;
+    private Answer answers;
 
 }

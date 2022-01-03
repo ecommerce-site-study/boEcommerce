@@ -1,6 +1,7 @@
 package com.teckstudy.book.domain;
 
 import com.teckstudy.book.domain.member.Member;
+import com.teckstudy.book.domain.product.Product;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Review extends BaseEntity{
 
     @Id
