@@ -1,5 +1,6 @@
-package com.teckstudy.book.domain;
+package com.teckstudy.book.domain.product;
 
+import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.member.Member;
 import com.teckstudy.book.domain.product.Product;
 import lombok.*;
@@ -13,7 +14,7 @@ import static javax.persistence.FetchType.LAZY;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Review extends BaseEntity{
+public class Review extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

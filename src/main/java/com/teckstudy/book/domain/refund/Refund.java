@@ -1,31 +1,35 @@
 package com.teckstudy.book.domain.refund;
 
-import com.teckstudy.book.domain.OrderItem;
-import lombok.*;
+import com.teckstudy.book.domain.base.BaseEntity;
+import com.teckstudy.book.domain.enums.RefundStatus;
+import com.teckstudy.book.domain.enums.RefundType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
-import static javax.persistence.FetchType.LAZY;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Refund {
+public class Refund extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int refund_sn;
+    private Long refundId;
 
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_sn")
-    private OrderItem orderItem;
+    private RefundType refundType;
 
-    @Column(length = 20, nullable = false)
-    private String bank_name;
+    private RefundStatus refundStatus;
 
-    @Column(length = 30, nullable = false)
-    private String acc_number;
+    private String refundTitle;
+
+    private String refundContent;
+
+    private LocalDateTime requestAt;
 
 }

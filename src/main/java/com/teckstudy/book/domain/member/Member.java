@@ -1,6 +1,6 @@
 package com.teckstudy.book.domain.member;
 
-import com.teckstudy.book.domain.*;
+import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.member.types.Gender;
 import com.teckstudy.book.domain.member.types.MemberStatus;
 import lombok.*;
@@ -8,7 +8,6 @@ import lombok.*;
 import javax.persistence.*;
 
 import static javax.persistence.FetchType.EAGER;
-import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter @Setter

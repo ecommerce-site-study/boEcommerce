@@ -1,7 +1,7 @@
-package com.teckstudy.book.domain;
+package com.teckstudy.book.domain.product;
 
 import com.sun.istack.NotNull;
-import com.teckstudy.book.domain.product.Product;
+import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.product.ProductRelationShip;
 import lombok.*;
 
@@ -9,8 +9,6 @@ import javax.persistence.*;
 
 import java.math.BigInteger;
 import java.util.List;
-
-import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter @Setter
@@ -22,7 +20,7 @@ import static javax.persistence.FetchType.LAZY;
         sequenceName = "PRODUCT_OPTION_SEQ", // 매핑할 데이터베이스 시퀀스 이름
         initialValue = 10000001,
         allocationSize = 1)
-public class ProductOption {
+public class ProductOption extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "PRODUCT_OPTION_SEQ_GENERATOR")

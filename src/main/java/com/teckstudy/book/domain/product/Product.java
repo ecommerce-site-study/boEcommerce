@@ -1,7 +1,7 @@
 package com.teckstudy.book.domain.product;
 
 import com.sun.istack.NotNull;
-import com.teckstudy.book.domain.BaseEntity;
+import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.enums.BookType;
 import com.teckstudy.book.domain.enums.ProductType;
 import lombok.*;

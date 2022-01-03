@@ -1,4 +1,4 @@
-package com.teckstudy.book.domain;
+package com.teckstudy.book.domain.base;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,7 +1,6 @@
 package com.teckstudy.book.domain.board;
 
-import com.teckstudy.book.domain.Answer;
-import com.teckstudy.book.domain.BaseEntity;
+import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.board.types.CategoryType;
 import com.teckstudy.book.domain.enums.YesNoStatus;
 import lombok.*;

@@ -3,7 +3,7 @@ package com.teckstudy.book.repository;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.teckstudy.book.domain.product.Product;
-import com.teckstudy.book.domain.ProductOption;
+import com.teckstudy.book.domain.product.ProductOption;
 import com.teckstudy.book.domain.enums.ProductType;
 import com.teckstudy.book.domain.product.repository.ProductOptionRepository;
 import com.teckstudy.book.domain.product.repository.ProductRepository;

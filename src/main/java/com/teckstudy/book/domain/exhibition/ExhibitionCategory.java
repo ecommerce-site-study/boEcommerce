@@ -1,5 +1,6 @@
-package com.teckstudy.book.domain;
+package com.teckstudy.book.domain.exhibition;
 
+import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.enums.ExhibitionType;
 import com.teckstudy.book.domain.enums.YesNoStatus;
 import lombok.*;
@@ -17,7 +18,7 @@ import javax.persistence.*;
         sequenceName = "CATEGORY_SEQ", // 매핑할 데이터베이스 시퀀스 이름
         initialValue = 10000001,
         allocationSize = 1)
-public class ExhibitionCategory extends BaseEntity{
+public class ExhibitionCategory extends BaseEntity {
 
     // 전시코너코드
     @Id

@@ -1,9 +1,14 @@
 package com.teckstudy.book.domain.payment;
 
-import com.teckstudy.book.domain.OrderItem;
+import com.teckstudy.book.domain.base.BaseEntity;
+import com.teckstudy.book.domain.enums.PaymentType;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -11,14 +16,14 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Payment {
+public class Payment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long PaymentId;
+    private Long paymentId;
 
-    @OneToOne(mappedBy = "payInfo",fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_sn")
-    private OrderItem orderItem;
+    private PaymentType paymentType;
 
-    private Integer total_price;
+    private LocalDateTime paymentAt;
+
+    private LocalDateTime cancelAt;
 }

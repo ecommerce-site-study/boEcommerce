@@ -1,6 +1,6 @@
 package com.teckstudy.book.domain.member;
 
-import com.teckstudy.book.domain.BaseEntity;
+import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.member.types.SocialType;
 import lombok.*;
 
