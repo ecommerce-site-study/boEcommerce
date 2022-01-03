@@ -35,7 +35,7 @@ public class Board extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private YesNoStatus displayYn;
 
-    private String file_path;
+    private String filePath;
 
     @OneToOne(fetch = EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "board_sn")

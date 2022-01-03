@@ -31,14 +31,14 @@ public class OrderItem extends BaseEntity {
     private BigInteger discountOrderPrice;
 
     @Enumerated(EnumType.STRING)
-    private DeleveryStatus delevery;
+    private DeliveryStatus delivery;
 
 //    @Column(length = 100)
 //    private String order_address;
 
     private Long paymentId;
 
-    private Long RefundId;
+    private Long refundId;
 
     private Long count;
 

@@ -18,21 +18,17 @@ public class Review extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long review_sn;
+    private Long reviewId;
 
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_sn")
-    private Member member;
+    private Long memberId;
 
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_sn")
-    private Product product;
+    private Long productId;
 
     @Column(length = 40, nullable = false)
-    private String review_sub;
+    private String reviewTitle;
 
     @Column(columnDefinition = "TEXT", nullable = false)
-    private String review_content;
+    private String reviewContent;
 
     @Column(length = 1, nullable = false)
     private int gpa;
