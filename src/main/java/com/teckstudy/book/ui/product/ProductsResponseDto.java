@@ -2,7 +2,7 @@ package com.teckstudy.book.ui.product;
 
 import com.querydsl.core.annotations.QueryProjection;
 import com.teckstudy.book.domain.product.Product;
-import com.teckstudy.book.domain.enums.ProductType;
+import com.teckstudy.book.domain.product.types.ProductType;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;

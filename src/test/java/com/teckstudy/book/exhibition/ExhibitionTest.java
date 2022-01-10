@@ -2,11 +2,11 @@ package com.teckstudy.book.exhibition;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.teckstudy.book.common.WebIntegrationTest;
-import com.teckstudy.book.domain.exhibition.ContentsType;
+import com.teckstudy.book.domain.exhibition.types.ContentsType;
 import com.teckstudy.book.domain.exhibition.Exhibition;
-import com.teckstudy.book.domain.enums.ContentEnum;
-import com.teckstudy.book.domain.enums.ExhibitionType;
-import com.teckstudy.book.domain.enums.YesNoStatus;
+import com.teckstudy.book.domain.exhibition.types.ContentEnum;
+import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
+import com.teckstudy.book.domain.base.types.YesNoStatus;
 import com.teckstudy.book.domain.exhibition.repository.ContentsTypeRepository;
 import com.teckstudy.book.domain.exhibition.repository.ExhibitionRepository;
 import com.teckstudy.book.lib.common.util.BoValidation;

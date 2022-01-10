@@ -1,4 +1,4 @@
-package com.teckstudy.book.domain.enums;
+package com.teckstudy.book.domain.base.types;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

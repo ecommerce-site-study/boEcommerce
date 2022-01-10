@@ -1,4 +1,4 @@
-package com.teckstudy.book.domain.enums;
+package com.teckstudy.book.domain.order.types;
 
 public enum OrderStatus {
     WAIT("입금대기", "100"),

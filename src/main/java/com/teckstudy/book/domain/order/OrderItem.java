@@ -2,8 +2,7 @@ package com.teckstudy.book.domain.order;
 
 import com.teckstudy.book.domain.base.Amount;
 import com.teckstudy.book.domain.base.BaseEntity;
-import com.teckstudy.book.domain.enums.DeliveryStatus;
-import com.teckstudy.book.domain.enums.OrderStatus;
+import com.teckstudy.book.domain.order.types.OrderStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
