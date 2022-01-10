@@ -1,8 +1,8 @@
 package com.teckstudy.book.domain.exhibition;
 
 import com.teckstudy.book.domain.base.BaseEntity;
-import com.teckstudy.book.domain.enums.ExhibitionType;
-import com.teckstudy.book.domain.enums.YesNoStatus;
+import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
+import com.teckstudy.book.domain.base.types.YesNoStatus;
 import lombok.*;
 
 import javax.persistence.*;

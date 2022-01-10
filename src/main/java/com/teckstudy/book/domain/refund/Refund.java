@@ -1,8 +1,7 @@
 package com.teckstudy.book.domain.refund;
 
 import com.teckstudy.book.domain.base.BaseEntity;
-import com.teckstudy.book.domain.enums.RefundStatus;
-import com.teckstudy.book.domain.enums.RefundType;
+import com.teckstudy.book.domain.refund.types.RefundType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

@@ -4,7 +4,7 @@ import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.teckstudy.book.domain.product.Product;
 import com.teckstudy.book.domain.product.ProductOption;
-import com.teckstudy.book.domain.enums.ProductType;
+import com.teckstudy.book.domain.product.types.ProductType;
 import com.teckstudy.book.domain.product.repository.ProductOptionRepository;
 import com.teckstudy.book.domain.product.repository.ProductRepository;
 import org.junit.jupiter.api.DisplayName;

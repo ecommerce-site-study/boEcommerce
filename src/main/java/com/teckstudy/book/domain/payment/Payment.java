@@ -1,7 +1,7 @@
 package com.teckstudy.book.domain.payment;
 
 import com.teckstudy.book.domain.base.BaseEntity;
-import com.teckstudy.book.domain.enums.PaymentType;
+import com.teckstudy.book.domain.payment.types.PaymentType;
 import com.teckstudy.book.domain.order.OrderItem;
 import lombok.*;
 

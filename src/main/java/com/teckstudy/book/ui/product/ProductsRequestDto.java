@@ -2,7 +2,7 @@ package com.teckstudy.book.ui.product;
 
 import com.teckstudy.book.domain.product.Product;
 import com.teckstudy.book.domain.product.ProductOption;
-import com.teckstudy.book.domain.enums.ProductType;
+import com.teckstudy.book.domain.product.types.ProductType;
 import lombok.*;
 
 @AllArgsConstructor
