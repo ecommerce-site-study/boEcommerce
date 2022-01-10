@@ -1,14 +1,21 @@
 package com.teckstudy.book.domain.product;
 
 
-import com.teckstudy.book.domain.product.relationship.ProductRelationId;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
+@NoArgsConstructor
 public class ProductRelationShip {
 
-    @EmbeddedId
-    private ProductRelationId productRelationId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long productRelationId;
+
+    @ManyToOne
+    private Product productId;
+
+    @ManyToOne
+    private ProductOption productOptionId;
 }

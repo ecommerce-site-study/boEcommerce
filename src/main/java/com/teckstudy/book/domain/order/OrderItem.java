@@ -39,7 +39,8 @@ public class OrderItem extends BaseEntity {
 
     private Long paymentId;
 
-    private Long RefundId;
+//    @OneToMany(mappedBy = "orderId")
+//    private Refund refundId;
 
     private Long count;
 

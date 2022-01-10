@@ -24,7 +24,7 @@ public class Member extends BaseEntity {
     @Column(unique = true)
     private String email;
 
-    @Column(length = 30, nullable = true)
+    @Column(length = 100)
     private String password;
 
     @Column(length = 20, nullable = false)
@@ -33,10 +33,10 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Gender sex;
 
-    @Column(length = 20)
+    @Column(length = 8)
     private String birthday;
 
-    @Column(length = 20)
+    @Column(length = 11 )
     private String phoneNumber;
 
     @Embedded
