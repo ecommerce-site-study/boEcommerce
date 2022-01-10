@@ -2,17 +2,18 @@ package com.teckstudy.book.domain.favorite;
 
 import lombok.*;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
-@Entity
+
 @Getter
-@Setter
-@Builder
-@AllArgsConstructor
+@Entity
 @NoArgsConstructor
 public class Favorite {
 
-    @EmbeddedId
-    private FavoriteId favoriteId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long favoriteId;
+
+    private Long memberId;
+    private Long productId;
 }

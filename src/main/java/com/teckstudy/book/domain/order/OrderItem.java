@@ -1,19 +1,19 @@
 package com.teckstudy.book.domain.order;
 
+import com.teckstudy.book.domain.base.Amount;
 import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.enums.DeliveryStatus;
-import lombok.*;
+import com.teckstudy.book.domain.enums.OrderStatus;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigInteger;
 
 /**
  * 주문리스트
  */
 @Entity
-@Getter @Setter
-@AllArgsConstructor
-@Builder
+@Getter
 @NoArgsConstructor
 public class OrderItem extends BaseEntity {
 
@@ -25,21 +25,30 @@ public class OrderItem extends BaseEntity {
 
     private Long productId;
 
-    @Column(length = 11)
-    private BigInteger amount;
+    @Embedded
+    private Amount amount;
 
-    private BigInteger discountOrderPrice;
+    @Embedded
+    private Amount discountOrderPrice;
 
     @Enumerated(EnumType.STRING)
-    private DeleveryStatus delevery;
+    private OrderStatus orderStatus;
 
-//    @Column(length = 100)
-//    private String order_address;
+    @Enumerated(EnumType.STRING)
+    private DeliveryStatus deliveryStatus;
 
     private Long paymentId;
 
-    private Long RefundId;
+//    @OneToMany(mappedBy = "orderId")
+//    private Refund refundId;
 
     private Long count;
 
+    /**
+     * 할인율 계산
+     * @return
+     */
+    public int salePercent() {
+        return ((amount.intValue() - discountOrderPrice.intValue()) / amount.intValue()) * 100;
+    }
 }
