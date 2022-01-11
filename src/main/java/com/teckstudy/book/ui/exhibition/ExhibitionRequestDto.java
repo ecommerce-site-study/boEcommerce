@@ -13,7 +13,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+//@Builder
 @Data
 public class ExhibitionRequestDto {
 
@@ -30,21 +30,21 @@ public class ExhibitionRequestDto {
     private List<ContentsType> contentsList;
     private int bundleContentCnt;
 
-    public Exhibition fromExhibitionEntity() {
-
-        return Exhibition.builder()
-                .use_yn(use_yn)
-                .name(name)
-                .exhibitionType(exhibitionType)
-                .date_yn(date_yn)
-                .image(image)
-                .description(description)
-                .url(url)
-                .exhibition_start(exhibition_start)
-                .exhibition_end(exhibition_end)
-                .bundleContentCnt(bundleContentCnt)
-                .build();
-    }
+//    public Exhibition fromExhibitionEntity() {
+//
+//        return Exhibition.builder()
+//                .use_yn(use_yn)
+//                .name(name)
+//                .exhibitionType(exhibitionType)
+//                .date_yn(date_yn)
+//                .image(image)
+//                .description(description)
+//                .url(url)
+//                .exhibition_start(exhibition_start)
+//                .exhibition_end(exhibition_end)
+//                .bundleContentCnt(bundleContentCnt)
+//                .build();
+//    }
 
 
 

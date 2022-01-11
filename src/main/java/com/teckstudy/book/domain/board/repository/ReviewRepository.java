@@ -1,6 +1,6 @@
 package com.teckstudy.book.domain.board.repository;
 
-import com.teckstudy.book.domain.product.Review;
+import com.teckstudy.book.domain.review.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

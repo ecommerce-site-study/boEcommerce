@@ -9,8 +9,6 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 public class SocialInfo extends BaseEntity {
 

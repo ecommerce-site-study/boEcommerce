@@ -9,9 +9,6 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Setter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 @SequenceGenerator(
         name = "CATEGORY_SEQ_GENERATOR",

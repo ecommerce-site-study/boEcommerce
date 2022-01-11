@@ -7,9 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Getter @Setter
-@Builder
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
 public class Answer extends BaseEntity {
 

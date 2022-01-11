@@ -1,11 +1,8 @@
 package com.teckstudy.book.ui.product;
 
-import com.teckstudy.book.domain.product.Product;
-import com.teckstudy.book.domain.product.ProductOption;
 import com.teckstudy.book.domain.product.types.ProductType;
 import lombok.*;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
@@ -20,22 +17,22 @@ public class ProductsRequestDto {
     private ProductType product_option;
     private Integer stock_cnt;
 
-    public Product toProductEntity() {
-        return Product.builder()
-                .product_name(product_name)
-                .product_option(product_option)
-                .price(price)
-                .stock_cnt(stock_cnt)
-                .build();
-    }
-
-    public ProductOption toProductOptionEntity(Product productOptionNo) {
-        return ProductOption.builder()
-                .product(productOptionNo)
-                .product_option_name(product_option_name)
-                .plus_price(plus_price)
-                .stock_cnt(stock_cnt)
-                .build();
-    }
+//    public Product toProductEntity() {
+//        return Product.builder()
+//                .product_name(product_name)
+//                .product_option(product_option)
+//                .price(price)
+//                .stock_cnt(stock_cnt)
+//                .build();
+//    }
+//
+//    public ProductOption toProductOptionEntity(Product productOptionNo) {
+//        return ProductOption.builder()
+//                .product(productOptionNo)
+//                .product_option_name(product_option_name)
+//                .plus_price(plus_price)
+//                .stock_cnt(stock_cnt)
+//                .build();
+//    }
 
 }

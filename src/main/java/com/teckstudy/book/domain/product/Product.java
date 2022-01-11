@@ -11,9 +11,7 @@ import java.math.BigInteger;
 import java.util.List;
 
 @Entity
-@Getter @Setter
-@Builder
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
 @SequenceGenerator(
         name = "PRODUCT_SEQ_GENERATOR",

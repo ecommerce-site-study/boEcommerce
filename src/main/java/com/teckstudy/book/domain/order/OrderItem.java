@@ -33,8 +33,8 @@ public class OrderItem extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
-    @Enumerated(EnumType.STRING)
-    private DeliveryStatus deliveryStatus;
+//    @Enumerated(EnumType.STRING)
+//    private DeliveryStatus deliveryStatus;
 
     private Long paymentId;
 

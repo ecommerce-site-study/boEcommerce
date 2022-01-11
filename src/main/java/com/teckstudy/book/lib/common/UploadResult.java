@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class UploadResult {
 
     private int code; // 100 성공

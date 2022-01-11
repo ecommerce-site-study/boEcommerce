@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Setter
 @EntityListeners(AuditingEntityListener.class)
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
 public class AuthInfo {
 

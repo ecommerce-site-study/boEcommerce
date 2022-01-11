@@ -8,10 +8,8 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Setter
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @SequenceGenerator(
         name = "CONTENTS_SEQ_GENERATOR",
         sequenceName = "CONTENTS_SEQ", // 매핑할 데이터베이스 시퀀스 이름
