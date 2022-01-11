@@ -1,6 +1,7 @@
 package com.teckstudy.book.domain.refund;
 
 import com.teckstudy.book.domain.base.BaseEntity;
+import com.teckstudy.book.domain.order.types.OrderStatus;
 import com.teckstudy.book.domain.refund.types.RefundType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,8 @@ public class Refund extends BaseEntity {
 //    private OrderItem orderId;
 
     private RefundType refundType;
+
+    private OrderStatus refundStatus;
 
     private String refundTitle;
 
