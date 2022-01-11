@@ -26,8 +26,6 @@ public class Refund extends BaseEntity {
 
     private RefundType refundType;
 
-    private RefundStatus refundStatus;
-
     private String refundTitle;
 
     private String refundContent;
