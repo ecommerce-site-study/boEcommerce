@@ -16,11 +16,10 @@ public class Payment extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long paymentId;
 
-    @OneToOne
-    @JoinColumn(name = "orderItemId")
-    private OrderItem orderId;
-
     private PaymentType paymentType;
+
+    @OneToOne
+    private OrderItem orderItem;
 
     private LocalDateTime paymentAt;
 

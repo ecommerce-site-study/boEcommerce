@@ -7,6 +7,8 @@ import lombok.*;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 import static javax.persistence.FetchType.EAGER;
 
 @Entity
@@ -33,10 +35,8 @@ public class Board extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private YesNoStatus displayYn;
 
-    private String file_path;
+    private String filePath;
 
-    @OneToOne(fetch = EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "board_sn")
-    private Answer answers;
-
+    @OneToMany(mappedBy = "board")
+    private List<Answer> answers;
 }

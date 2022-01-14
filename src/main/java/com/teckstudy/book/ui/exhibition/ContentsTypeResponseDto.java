@@ -27,7 +27,7 @@ public class ContentsTypeResponseDto {
     }
 
     public void ContentsTypeResponseDto(ContentsType contentsType) {
-        this.exhibition_sn = contentsType.getExhibition().getExhibition_sn();
+//        this.exhibition_sn = contentsType.getExhibition().getExhibition_sn();
         this.content_sn = contentsType.getContent_sn();
         this.contentEnum = contentsType.getContentEnum();
         this.contentCnt = contentsType.getContentCnt();

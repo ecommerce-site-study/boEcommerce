@@ -10,16 +10,11 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
-@SequenceGenerator(
-        name = "CATEGORY_SEQ_GENERATOR",
-        sequenceName = "CATEGORY_SEQ", // 매핑할 데이터베이스 시퀀스 이름
-        initialValue = 10000001,
-        allocationSize = 1)
 public class ExhibitionCategory extends BaseEntity {
 
     // 전시코너코드
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "CATEGORY_SEQ_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoryId;
 
     // 전시코너명

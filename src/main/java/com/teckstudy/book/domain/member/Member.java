@@ -44,13 +44,9 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private MemberStatus memberStatus;
 
-    @OneToOne
+    @OneToOne(mappedBy = "member")
     private AuthInfo authInfo;
 
-    @OneToOne
+    @OneToOne(mappedBy = "member")
     private SocialInfo socialInfo;
-
-    @OneToOne
-    private Review review;
-
 }

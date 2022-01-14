@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
+@Table(name = "answer_tb")
 @NoArgsConstructor
 public class Answer extends BaseEntity {
 
@@ -15,10 +16,16 @@ public class Answer extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
 
-    private String memberId;
+    private Long memberId;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String contents;
 
+    @Enumerated(EnumType.STRING)
     private YesNoStatus displayYn;
+
+    @ManyToOne
+    @JoinColumn(name = "board_id")
+    private Board board;
+
 }

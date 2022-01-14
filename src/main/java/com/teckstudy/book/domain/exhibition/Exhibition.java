@@ -12,16 +12,12 @@ import java.util.List;
 
 @Entity
 @Getter
-@SequenceGenerator(
-        name = "EXHIBITION_SEQ_GENERATOR",
-        sequenceName = "EXHIBITION_SEQ", // 매핑할 데이터베이스 시퀀스 이름
-        initialValue = 10000001,
-        allocationSize = 1)
+@NoArgsConstructor
 public class Exhibition extends BaseEntity {
 
     // 전시코너코드
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "EXHIBITION_SEQ_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long exhibition_sn;
 
     // 전시코너 사용여부
@@ -59,8 +55,6 @@ public class Exhibition extends BaseEntity {
     private int bundleContentCnt;
 
     // 컨텐츠 유형
-    @OneToMany(mappedBy = "exhibition")
-    private List<ContentsType> contentsType = new ArrayList<>();
 
     public Exhibition(YesNoStatus use_yn, String name, ExhibitionType exhibitionType,
                       YesNoStatus date_yn, String image, String description, String url,

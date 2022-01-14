@@ -14,6 +14,7 @@ import java.util.List;
  * 주문
  */
 @Entity
+@Table(name = "order_tb")
 @Getter
 @NoArgsConstructor
 public class Order extends BaseEntity {
@@ -22,13 +23,14 @@ public class Order extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
-    @OneToMany(mappedBy = "orderId")
-    private List<OrderItem> orderItems;
-
     private Long memberId;
 
     @Embedded
     private Address orderAddress;
 
     private LocalDateTime orderAt;
+
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> orderItems;
+
 }

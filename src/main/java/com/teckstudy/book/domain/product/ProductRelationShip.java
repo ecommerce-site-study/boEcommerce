@@ -13,9 +13,13 @@ public class ProductRelationShip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productRelationId;
 
-    @ManyToOne
-    private Product productId;
 
     @ManyToOne
-    private ProductOption productOptionId;
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "product_option_id")
+    private ProductOption productOption;
+
 }

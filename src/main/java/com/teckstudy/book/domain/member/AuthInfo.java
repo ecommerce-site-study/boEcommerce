@@ -27,8 +27,7 @@ public class AuthInfo {
     @Enumerated(EnumType.STRING)
     private AuthInfoType authInfoType;
 
-    @OneToOne(mappedBy = "authInfo")
-    @JoinColumn(name = "memberId")
-    private Member member;
 
+    @OneToOne
+    private Member member;
 }

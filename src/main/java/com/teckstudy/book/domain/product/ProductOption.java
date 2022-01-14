@@ -13,15 +13,10 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor
-@SequenceGenerator(
-        name = "PRODUCT_OPTION_SEQ_GENERATOR",
-        sequenceName = "PRODUCT_OPTION_SEQ", // 매핑할 데이터베이스 시퀀스 이름
-        initialValue = 10000001,
-        allocationSize = 1)
 public class ProductOption extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "PRODUCT_OPTION_SEQ_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ProductOptionId;
 
     @Column(length = 100)
@@ -34,6 +29,6 @@ public class ProductOption extends BaseEntity {
     @Column(length = 10)
     private Long quantity;
 
-    @OneToMany(mappedBy = "productOptionId")
-    private List<ProductRelationShip> productRelationShip;
+    @OneToMany(mappedBy = "productOption")
+    private List<ProductRelationShip> productRelationShips;
 }
