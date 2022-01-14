@@ -16,7 +16,8 @@ public class Payment extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long paymentId;
 
-    @OneToOne(mappedBy = "orderItem")
+    @OneToOne
+    @JoinColumn(name = "orderItemId")
     private OrderItem orderId;
 
     private PaymentType paymentType;

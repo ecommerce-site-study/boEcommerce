@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor
 @SequenceGenerator(
         name = "CONTENTS_SEQ_GENERATOR",

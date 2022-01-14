@@ -12,7 +12,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@NoArgsConstructor
 @SequenceGenerator(
         name = "EXHIBITION_SEQ_GENERATOR",
         sequenceName = "EXHIBITION_SEQ", // 매핑할 데이터베이스 시퀀스 이름
@@ -61,7 +60,6 @@ public class Exhibition extends BaseEntity {
 
     // 컨텐츠 유형
     @OneToMany(mappedBy = "exhibition")
-    @Builder.Default
     private List<ContentsType> contentsType = new ArrayList<>();
 
     public Exhibition(YesNoStatus use_yn, String name, ExhibitionType exhibitionType,

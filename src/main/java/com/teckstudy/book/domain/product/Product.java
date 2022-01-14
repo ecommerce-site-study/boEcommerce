@@ -1,9 +1,11 @@
 package com.teckstudy.book.domain.product;
 
 import com.sun.istack.NotNull;
+import com.teckstudy.book.domain.base.Amount;
 import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.board.types.BookType;
 import com.teckstudy.book.domain.product.types.ProductType;
+import com.teckstudy.book.domain.review.Review;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,7 +34,7 @@ public class Product extends BaseEntity {
 
     @Column(length = 11)
     @NotNull
-    private BigInteger amount;
+    private Amount amount;
 
     @Column(length = 10)
     private Long quantity;
@@ -43,5 +45,8 @@ public class Product extends BaseEntity {
 
     @OneToMany(mappedBy = "productId")
     private List<ProductRelationShip> productRelationShip;
+
+    @OneToOne
+    private Review review;
 
 }

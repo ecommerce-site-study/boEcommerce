@@ -1,18 +1,7 @@
 package com.teckstudy.book.application.product;
 
-import com.teckstudy.book.domain.product.Product;
-import com.teckstudy.book.ui.product.ProductsRequestDto;
-import com.teckstudy.book.ui.product.ProductsResponseDto;
-import com.teckstudy.book.domain.product.repository.ProductOptionRepository;
-import com.teckstudy.book.domain.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
-
-import static java.util.Optional.ofNullable;
 
 @Service
 @RequiredArgsConstructor

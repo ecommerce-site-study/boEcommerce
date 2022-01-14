@@ -36,11 +36,11 @@ public class ProductsResponseDto {
         this.stock_cnt = stock_cnt;
     }
 
-    public ProductsResponseDto(Product entity) {
-        this.product_sn = entity.getProduct_sn();
-        this.product_name = entity.getProduct_name();
-        this.product_option = entity.getProduct_option();
-        this.price = entity.getPrice();
-        this.stock_cnt = entity.getStock_cnt();
-    }
+//    public ProductsResponseDto(Product entity) {
+//        this.product_sn = entity.getProduct_sn();
+//        this.product_name = entity.getProduct_name();
+//        this.product_option = entity.getProduct_option();
+//        this.price = entity.getPrice();
+//        this.stock_cnt = entity.getStock_cnt();
+//    }
 }

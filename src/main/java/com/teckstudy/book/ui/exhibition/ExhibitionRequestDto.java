@@ -48,12 +48,12 @@ public class ExhibitionRequestDto {
 
 
 
-    public ContentsType toContentsEntity(ContentsType contentsTypes, Exhibition exhibition) {
-
-        return ContentsType.builder()
-                .exhibition(exhibition)
-                .contentEnum(contentsTypes.getContentEnum())
-                .contentCnt(contentsTypes.getContentCnt())
-                .build();
-    }
+//    public ContentsType toContentsEntity(ContentsType contentsTypes, Exhibition exhibition) {
+//
+//        return ContentsType.builder()
+//                .exhibition(exhibition)
+//                .contentEnum(contentsTypes.getContentEnum())
+//                .contentCnt(contentsTypes.getContentCnt())
+//                .build();
+//    }
 }

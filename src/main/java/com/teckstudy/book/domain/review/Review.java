@@ -11,7 +11,6 @@ import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Review extends BaseEntity {
@@ -20,11 +19,11 @@ public class Review extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
 
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "review")
     @JoinColumn(name = "memberId")
     private Member memberId;
 
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "review")
     @JoinColumn(name = "productId")
     private Product productId;
 

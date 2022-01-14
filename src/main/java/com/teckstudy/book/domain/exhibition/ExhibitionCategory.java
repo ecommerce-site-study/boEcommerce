@@ -20,18 +20,18 @@ public class ExhibitionCategory extends BaseEntity {
     // 전시코너코드
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "CATEGORY_SEQ_GENERATOR")
-    private Long category_sn;
+    private Long categoryId;
 
     // 전시코너명
     private String name;
 
     // 메뉴노출여부
     @Enumerated(EnumType.STRING)
-    private YesNoStatus menu_show_yn;
+    private YesNoStatus menuShowYn;
 
     // 메뉴사용여부
     @Enumerated(EnumType.STRING)
-    private YesNoStatus menu_use_yn;
+    private YesNoStatus menuUseYn;
 
     // 메뉴노출유형
     @Enumerated(EnumType.STRING)
@@ -48,11 +48,12 @@ public class ExhibitionCategory extends BaseEntity {
     private ExhibitionType titleType;
 
     // 타이틀노출 텍스트
-    private String TitleText;
+    private String titleText;
 
     // 타이틀노출 이미지
-    private String TitleImage;
+    private String titleImage;
 
     // 전시코너수
     private int count;
+
 }

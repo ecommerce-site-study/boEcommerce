@@ -4,7 +4,6 @@ import com.teckstudy.book.domain.product.types.ProductType;
 import lombok.*;
 
 @NoArgsConstructor
-@Builder
 @Data
 @Getter
 public class ProductsRequestDto {

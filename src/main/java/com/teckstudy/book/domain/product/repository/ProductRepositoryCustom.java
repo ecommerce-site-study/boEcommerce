@@ -8,6 +8,6 @@ import java.util.List;
 @Repository
 public interface ProductRepositoryCustom {
 
-    List<ProductsResponseDto> findAllDesc(Long id) throws Exception;
+//    List<ProductsResponseDto> findAllDesc(Long id) throws Exception;
 
 }

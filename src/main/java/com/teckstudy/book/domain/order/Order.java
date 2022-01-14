@@ -15,7 +15,6 @@ import java.util.List;
  */
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor
 public class Order extends BaseEntity {
 
@@ -23,7 +22,7 @@ public class Order extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
-    @OneToMany(mappedBy = "orderItemId")
+    @OneToMany(mappedBy = "orderId")
     private List<OrderItem> orderItems;
 
     private Long memberId;

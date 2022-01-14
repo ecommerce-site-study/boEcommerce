@@ -4,6 +4,7 @@ import com.teckstudy.book.domain.base.Address;
 import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.member.types.Gender;
 import com.teckstudy.book.domain.member.types.MemberStatus;
+import com.teckstudy.book.domain.review.Review;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,7 +13,6 @@ import static javax.persistence.FetchType.EAGER;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor
 public class Member extends BaseEntity {
 
@@ -44,12 +44,13 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private MemberStatus memberStatus;
 
-    @OneToOne(fetch = EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_sn")
+    @OneToOne
     private AuthInfo authInfo;
 
-    @OneToOne(fetch = EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_sn")
+    @OneToOne
     private SocialInfo socialInfo;
+
+    @OneToOne
+    private Review review;
 
 }
