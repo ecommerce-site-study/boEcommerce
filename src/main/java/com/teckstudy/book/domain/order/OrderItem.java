@@ -7,7 +7,6 @@ import com.teckstudy.book.domain.payment.Payment;
 import com.teckstudy.book.domain.refund.Refund;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.EnableMBeanExport;
 
 import javax.persistence.*;
 
@@ -42,7 +41,7 @@ public class OrderItem extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "orderId")
-    private Order order;
+    private Orders order;
 
     @OneToOne(mappedBy = "orderItem")
     private Payment payment;
