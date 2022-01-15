@@ -43,10 +43,12 @@ public class OrderItem extends BaseEntity {
     @JoinColumn(name = "orderId")
     private Orders order;
 
-    @OneToOne(mappedBy = "orderItem")
+    @OneToOne
+    @JoinColumn(name = "paymentId")
     private Payment payment;
 
-    @OneToOne(mappedBy = "orderItem")
+    @OneToOne
+    @JoinColumn(name = "refundId")
     private Refund refund;
 
     private Long count;

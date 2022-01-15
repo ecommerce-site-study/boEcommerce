@@ -2,10 +2,13 @@ package com.teckstudy.book.domain.payment;
 
 import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.payment.types.PaymentType;
-import com.teckstudy.book.domain.order.OrderItem;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,9 +20,6 @@ public class Payment extends BaseEntity {
     private Long paymentId;
 
     private PaymentType paymentType;
-
-    @OneToOne
-    private OrderItem orderItem;
 
     private LocalDateTime paymentAt;
 

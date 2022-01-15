@@ -27,9 +27,6 @@ public class Refund extends BaseEntity {
 
     private String refundContent;
 
-    @OneToOne
-    private OrderItem orderItem;
-
     private LocalDateTime requestAt;
 
 }
