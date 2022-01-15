@@ -1,13 +1,13 @@
 package com.teckstudy.book.domain.board;
 
 import com.teckstudy.book.domain.base.BaseEntity;
-import com.teckstudy.book.domain.board.types.CategoryType;
 import com.teckstudy.book.domain.base.types.YesNoStatus;
-import lombok.*;
+import com.teckstudy.book.domain.board.types.CategoryType;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
-import static javax.persistence.FetchType.EAGER;
+import java.util.List;
 
 @Entity
 @Getter
@@ -35,8 +35,7 @@ public class Board extends BaseEntity {
 
     private String file_path;
 
-    @OneToOne(fetch = EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "board_sn")
-    private Answer answers;
+    @OneToMany(mappedBy = "board")
+    private List<Answer> answers;
 
 }

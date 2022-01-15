@@ -1,15 +1,14 @@
 package com.teckstudy.book.domain.product;
 
-import com.sun.istack.NotNull;
 import com.teckstudy.book.domain.base.Amount;
 import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.board.types.BookType;
 import com.teckstudy.book.domain.product.types.ProductType;
 import com.teckstudy.book.domain.review.Review;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigInteger;
 import java.util.List;
 
 @Entity
@@ -30,10 +29,8 @@ public class Product extends BaseEntity {
     private String name;
 
     @Enumerated(EnumType.STRING)
-    private ProductType option;
+    private ProductType productType;
 
-    @Column(length = 11)
-    @NotNull
     private Amount amount;
 
     @Column(length = 10)
@@ -41,10 +38,11 @@ public class Product extends BaseEntity {
 
     private Double discountRate;
 
-    private BookType type;
+    @Enumerated(EnumType.STRING)
+    private BookType bookType;
 
     @OneToMany(mappedBy = "productId")
-    private List<ProductRelationShip> productRelationShip;
+    private List<ProductRelationShip> productRelationShips;
 
     @OneToOne
     private Review review;

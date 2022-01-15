@@ -45,12 +45,11 @@ public class Member extends BaseEntity {
     private MemberStatus memberStatus;
 
     @OneToOne
+    @JoinColumn(name = "authInfoId")
     private AuthInfo authInfo;
 
     @OneToOne
+    @JoinColumn(name = "socialInfoId")
     private SocialInfo socialInfo;
-
-    @OneToOne
-    private Review review;
 
 }

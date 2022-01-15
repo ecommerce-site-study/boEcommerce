@@ -19,13 +19,9 @@ public class Review extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
 
-    @OneToOne(mappedBy = "review")
-    @JoinColumn(name = "memberId")
-    private Member memberId;
+    private Long memberId;
 
-    @OneToOne(mappedBy = "review")
-    @JoinColumn(name = "productId")
-    private Product productId;
+    private Long productId;
 
     @Column(length = 40, nullable = false)
     private String reviewSub;

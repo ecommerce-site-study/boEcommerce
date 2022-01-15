@@ -14,8 +14,10 @@ public class ProductRelationShip {
     private Long productRelationId;
 
     @ManyToOne
+    @JoinColumn(name = "productId")
     private Product productId;
 
     @ManyToOne
+    @JoinColumn(name = "productOptionId")
     private ProductOption productOptionId;
 }

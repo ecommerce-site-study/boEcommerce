@@ -35,5 +35,5 @@ public class ProductOption extends BaseEntity {
     private Long quantity;
 
     @OneToMany(mappedBy = "productOptionId")
-    private List<ProductRelationShip> productRelationShip;
+    private List<ProductRelationShip> productRelationShips;
 }

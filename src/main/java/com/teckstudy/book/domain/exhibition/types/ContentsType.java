@@ -25,8 +25,8 @@ public class ContentsType extends BaseEntity {
 
     private int contentCnt;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "exhibition_sn")
+    @ManyToOne
+    @JoinColumn(name = "exhibitionId")
     private Exhibition exhibition;
 
 }

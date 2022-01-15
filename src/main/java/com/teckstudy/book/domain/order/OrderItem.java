@@ -4,6 +4,7 @@ import com.teckstudy.book.domain.base.Amount;
 import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.order.types.OrderStatus;
 import com.teckstudy.book.domain.payment.Payment;
+import com.teckstudy.book.domain.refund.Refund;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.EnableMBeanExport;
@@ -22,10 +23,6 @@ public class OrderItem extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderItemId;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "orderId")
-    private Order orderId;
-
     private Long productId;
 
     @Embedded
@@ -43,14 +40,15 @@ public class OrderItem extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
-//    @Enumerated(EnumType.STRING)
-//    private DeliveryStatus deliveryStatus;
+    @ManyToOne
+    @JoinColumn(name = "orderId")
+    private Order order;
 
-    @OneToOne(mappedBy = "orderId")
-    private Payment paymentId;
+    @OneToOne(mappedBy = "orderItem")
+    private Payment payment;
 
-//    @OneToMany(mappedBy = "orderId")
-//    private Refund refundId;
+    @OneToOne(mappedBy = "orderItem")
+    private Refund refund;
 
     private Long count;
 

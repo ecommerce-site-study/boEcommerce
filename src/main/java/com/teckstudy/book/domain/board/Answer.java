@@ -20,5 +20,10 @@ public class Answer extends BaseEntity {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String contents;
 
+    @Enumerated(EnumType.STRING)
     private YesNoStatus displayYn;
+
+    @ManyToOne
+    @JoinColumn(name = "boardId")
+    private Board board;
 }

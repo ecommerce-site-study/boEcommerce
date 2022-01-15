@@ -21,8 +21,4 @@ public class SocialInfo extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private SocialType socialType;
 
-    @OneToOne(mappedBy = "socialInfo")
-    @JoinColumn(name = "memberId")
-    private Member member;
-
 }

@@ -1,15 +1,13 @@
 package com.teckstudy.book.domain.refund;
 
 import com.teckstudy.book.domain.base.BaseEntity;
+import com.teckstudy.book.domain.order.OrderItem;
 import com.teckstudy.book.domain.order.types.OrderStatus;
 import com.teckstudy.book.domain.refund.types.RefundType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,10 +19,6 @@ public class Refund extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long refundId;
 
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "orderItemId")
-//    private OrderItem orderId;
-
     private RefundType refundType;
 
     private OrderStatus refundStatus;
@@ -32,6 +26,9 @@ public class Refund extends BaseEntity {
     private String refundTitle;
 
     private String refundContent;
+
+    @OneToOne
+    private OrderItem orderItem;
 
     private LocalDateTime requestAt;
 
