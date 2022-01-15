@@ -1,6 +1,7 @@
 package com.teckstudy.book.domain.product;
 
 import com.sun.istack.NotNull;
+import com.teckstudy.book.domain.base.Amount;
 import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.product.ProductRelationShip;
 import lombok.*;
@@ -27,9 +28,7 @@ public class ProductOption extends BaseEntity {
     @Column(length = 100)
     private String name;
 
-    @Column(length = 11)
-    @NotNull
-    private BigInteger amount;
+    private Amount amount;
 
     @Column(length = 10)
     private Long quantity;
