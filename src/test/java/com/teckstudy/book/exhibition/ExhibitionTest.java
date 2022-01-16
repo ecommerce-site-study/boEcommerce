@@ -2,7 +2,7 @@
 //
 //import com.querydsl.jpa.impl.JPAQueryFactory;
 //import com.teckstudy.book.common.WebIntegrationTest;
-//import com.teckstudy.book.domain.exhibition.types.ContentsType;
+//import com.teckstudy.book.domain.exhibition.ContentsType;
 //import com.teckstudy.book.domain.exhibition.Exhibition;
 //import com.teckstudy.book.domain.exhibition.types.ContentEnum;
 //import com.teckstudy.book.domain.exhibition.types.ExhibitionType;

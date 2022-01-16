@@ -1,4 +1,4 @@
-package com.teckstudy.book.application.category;
+package com.teckstudy.book.application.category.dto;
 
 public class SearchCategoryDto {
     private Long categoryId;

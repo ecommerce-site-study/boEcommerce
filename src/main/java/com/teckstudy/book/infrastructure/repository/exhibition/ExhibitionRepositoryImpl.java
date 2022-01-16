@@ -2,8 +2,8 @@
 //
 //import com.querydsl.jpa.impl.JPAQueryFactory;
 //import com.teckstudy.book.domain.exhibition.repository.ExhibitionRepositoryCustom;
-//import com.teckstudy.book.ui.exhibition.ContentsTypeResponseDto;
-//import com.teckstudy.book.ui.exhibition.ExhibitionResponseDto;
+//import com.teckstudy.book.ui.exhibition.dto.ContentsTypeResponseDto;
+//import com.teckstudy.book.ui.exhibition.dto.ExhibitionResponseDto;
 //import com.teckstudy.book.ui.exhibition.QContentsTypeResponseDto;
 //import com.teckstudy.book.ui.exhibition.QExhibitionResponseDto;
 //import org.springframework.stereotype.Repository;

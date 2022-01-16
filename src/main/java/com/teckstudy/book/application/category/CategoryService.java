@@ -1,5 +1,6 @@
 package com.teckstudy.book.application.category;
 
+import com.teckstudy.book.application.category.dto.CategoryDto;
 import com.teckstudy.book.domain.category.Category;
 import com.teckstudy.book.domain.category.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;

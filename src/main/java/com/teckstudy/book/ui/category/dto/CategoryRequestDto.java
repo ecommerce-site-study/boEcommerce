@@ -1,6 +1,6 @@
 package com.teckstudy.book.ui.category.dto;
 
-import com.teckstudy.book.application.category.SearchCategoryDto;
+import com.teckstudy.book.application.category.dto.SearchCategoryDto;
 
 public class CategoryRequestDto {
 

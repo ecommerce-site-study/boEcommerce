@@ -1,7 +1,8 @@
-package com.teckstudy.book.domain.exhibition.types;
+package com.teckstudy.book.domain.exhibition;
 
 import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.exhibition.Exhibition;
+import com.teckstudy.book.domain.exhibition.types.ContentEnum;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,7 +19,7 @@ public class ContentsType extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "CONTENTS_SEQ_GENERATOR")
-    private Long content_sn;
+    private Long contentId;
 
     @Enumerated(EnumType.STRING)
     private ContentEnum contentEnum;

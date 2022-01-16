@@ -1,20 +1,15 @@
-package com.teckstudy.book.ui.exhibition;
+package com.teckstudy.book.ui.exhibition.dto;
 
-import com.teckstudy.book.domain.exhibition.types.ContentsType;
-import com.teckstudy.book.domain.exhibition.Exhibition;
+import com.teckstudy.book.application.exhibition.dto.SearchExhibitionDto;
+import com.teckstudy.book.domain.exhibition.ContentsType;
 import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
 import com.teckstudy.book.domain.base.types.YesNoStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
-//@Builder
-@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@Data
 public class ExhibitionRequestDto {
 
     private Long exhibition_sn;
@@ -29,6 +24,24 @@ public class ExhibitionRequestDto {
     private String exhibition_end;
     private List<ContentsType> contentsList;
     private int bundleContentCnt;
+
+    public SearchExhibitionDto toWrapper() {
+
+        return new SearchExhibitionDto(
+            this.exhibition_sn,
+            this.use_yn,
+            this.name,
+            this.exhibitionType,
+            this.date_yn,
+            this.image,
+            this.description,
+            this.url,
+            this.exhibition_start,
+            this.exhibition_end,
+            this.contentsList,
+            this.bundleContentCnt
+        );
+    }
 
 //    public Exhibition fromExhibitionEntity() {
 //

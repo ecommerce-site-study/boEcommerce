@@ -1,14 +1,11 @@
 package com.teckstudy.book.domain.exhibition;
 
 import com.teckstudy.book.domain.base.BaseEntity;
-import com.teckstudy.book.domain.board.Answer;
-import com.teckstudy.book.domain.exhibition.types.ContentsType;
 import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
 import com.teckstudy.book.domain.base.types.YesNoStatus;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,11 +20,11 @@ public class Exhibition extends BaseEntity {
     // 전시코너코드
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "EXHIBITION_SEQ_GENERATOR")
-    private Long exhibition_sn;
+    private Long exhibitionId;
 
     // 전시코너 사용여부
     @Enumerated(EnumType.STRING)
-    private YesNoStatus use_yn;
+    private YesNoStatus useYn;
 
     // 전시코너명
     @Column(length = 20)
@@ -39,7 +36,7 @@ public class Exhibition extends BaseEntity {
 
     // 전시기간 설정
     @Enumerated(EnumType.STRING)
-    private YesNoStatus date_yn;
+    private YesNoStatus dateYn;
 
     // 전시코너 이미지
     private String image;
@@ -51,10 +48,10 @@ public class Exhibition extends BaseEntity {
     private String url;
 
     // 전시기간 시작 날짜
-    private String exhibition_start;
+    private String exhibitionStart;
 
     // 전시기간 종료 날짜
-    private String exhibition_end;
+    private String exhibitionEnd;
 
     // 컨텐츠 타입 묶음컨텐츠 최대 개수
     private int bundleContentCnt;

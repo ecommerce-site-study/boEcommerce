@@ -1,4 +1,4 @@
-package com.teckstudy.book.application.category;
+package com.teckstudy.book.application.category.dto;
 
 import com.teckstudy.book.domain.category.Category;
 import lombok.Getter;

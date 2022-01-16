@@ -1,6 +1,6 @@
 package com.teckstudy.book.ui.category.dto;
 
-import com.teckstudy.book.application.category.CategoryDto;
+import com.teckstudy.book.application.category.dto.CategoryDto;
 import lombok.Builder;
 import lombok.Getter;
 

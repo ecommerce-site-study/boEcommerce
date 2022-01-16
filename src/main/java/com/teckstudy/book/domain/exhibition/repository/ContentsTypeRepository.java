@@ -1,6 +1,6 @@
 package com.teckstudy.book.domain.exhibition.repository;
 
-import com.teckstudy.book.domain.exhibition.types.ContentsType;
+import com.teckstudy.book.domain.exhibition.ContentsType;
 import com.teckstudy.book.domain.exhibition.types.ContentEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

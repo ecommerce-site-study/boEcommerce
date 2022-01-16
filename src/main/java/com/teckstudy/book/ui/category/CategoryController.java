@@ -1,6 +1,6 @@
 package com.teckstudy.book.ui.category;
 
-import com.teckstudy.book.application.category.CategoryDto;
+import com.teckstudy.book.application.category.dto.CategoryDto;
 import com.teckstudy.book.application.category.CategoryService;
 import com.teckstudy.book.ui.category.dto.CategoryResponseDto;
 import lombok.RequiredArgsConstructor;
