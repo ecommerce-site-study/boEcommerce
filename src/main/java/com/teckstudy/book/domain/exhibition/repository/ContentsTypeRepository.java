@@ -9,8 +9,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface ContentsTypeRepository extends JpaRepository<ContentsType, Long> {
 
-    @Modifying(clearAutomatically = true)
-    @Query("UPDATE ContentsType p SET p.contentEnum = :contentEnum, p.contentCnt = :contentCnt WHERE p.content_sn = :id")
-    void updateContents(@Param("id")Long id, @Param("contentEnum") ContentEnum contentEnum, @Param("contentCnt") int contentCnt);
+//    @Modifying(clearAutomatically = true)
+//    @Query("UPDATE ContentsType p SET p.contentEnum = :contentEnum, p.contentCnt = :contentCnt WHERE p.content_sn = :id")
+//    void updateContents(@Param("id")Long id, @Param("contentEnum") ContentEnum contentEnum, @Param("contentCnt") int contentCnt);
 
 }

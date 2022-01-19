@@ -1,13 +1,14 @@
 package com.teckstudy.book.application.category;
 
-import com.teckstudy.book.application.category.dto.CategoryDto;
-import com.teckstudy.book.domain.category.Category;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.teckstudy.book.application.category.dto.Categories;
+import com.teckstudy.book.application.category.dto.CategoryWrapper;
 import com.teckstudy.book.domain.category.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -15,13 +16,12 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
-    public List<CategoryDto> findAllDesc() {
+    @Transactional(readOnly = true)
+    public List<CategoryWrapper.LayerCategoryDto> searchCategories() throws JsonProcessingException {
 
-        List<Category> categoryList = categoryRepository.findAll();
+//        Categories categories = Categories.from(categoryRepository.findAll());
+        Categories categories = Categories.dummy();
 
-        return  categoryList.stream()
-                .map(CategoryDto::from)
-                .collect(Collectors.toList());
+        return  categories.layerList();
     }
-
 }
