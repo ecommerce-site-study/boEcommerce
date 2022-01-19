@@ -21,4 +21,19 @@ public class SocialInfo extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private SocialType socialType;
 
+    @OneToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    public Long getSocialInfoId() {
+        return socialInfoId;
+    }
+
+    public String getSocialCode() {
+        return socialCode;
+    }
+
+    public SocialType getSocialType() {
+        return socialType;
+    }
 }

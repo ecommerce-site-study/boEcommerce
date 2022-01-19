@@ -1,5 +1,6 @@
 package com.teckstudy.book.ui.exhibition.dto;
 
+import com.teckstudy.book.application.exhibition.dto.ContentsDto;
 import com.teckstudy.book.domain.exhibition.ContentsType;
 import com.teckstudy.book.domain.exhibition.types.ContentEnum;
 import lombok.Builder;
@@ -24,9 +25,9 @@ public class ContentsTypeResponseDto {
         this.contentCnt = contentCnt;
     }
 
-    public static ContentsTypeResponseDto from(ContentsType contentsType) {
+    public static ContentsTypeResponseDto from(ContentsDto contentsType) {
         return new ContentsTypeResponseDto(
-                contentsType.getExhibition().getExhibitionId(),
+                contentsType.getExhibitionId(),
                 contentsType.getContentId(),
                 contentsType.getContentEnum(),
                 contentsType.getContentCnt()

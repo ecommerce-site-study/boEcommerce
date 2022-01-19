@@ -1,6 +1,7 @@
 package com.teckstudy.book.application.exhibition.dto;
 
 import com.teckstudy.book.domain.base.types.YesNoStatus;
+import com.teckstudy.book.domain.exhibition.ContentsType;
 import com.teckstudy.book.domain.exhibition.Exhibition;
 import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
 import com.teckstudy.book.ui.exhibition.dto.ContentsTypeResponseDto;
@@ -9,13 +10,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Data
 @NoArgsConstructor
 public class ExhibitionDto {
 
-    private Long exhibitionIdn;
+    private Long exhibitionId;
     private YesNoStatus useYn;
     private String name;
     private ExhibitionType exhibitionType;
@@ -26,12 +28,12 @@ public class ExhibitionDto {
     private String exhibitionStart;
     private String exhibitionEnd;
     private int bundleContentCnt;
-    private List<ContentsTypeResponseDto> contentsList;
+    private List<ContentsDto> contentsList;
 
-    public ExhibitionDto(Long exhibitionIdn, YesNoStatus useYn, String name, ExhibitionType exhibitionType,
+    public ExhibitionDto(Long exhibitionId, YesNoStatus useYn, String name, ExhibitionType exhibitionType,
                          YesNoStatus dateYn, String image, String description, String url,
-                         String exhibitionStart, String exhibitionEnd, int bundleContentCnt) {
-        this.exhibitionIdn = exhibitionIdn;
+                         String exhibitionStart, String exhibitionEnd, int bundleContentCnt, List<ContentsDto> contentsList) {
+        this.exhibitionId = exhibitionId;
         this.useYn = useYn;
         this.name = name;
         this.exhibitionType = exhibitionType;
@@ -42,9 +44,11 @@ public class ExhibitionDto {
         this.exhibitionStart = exhibitionStart;
         this.exhibitionEnd = exhibitionEnd;
         this.bundleContentCnt = bundleContentCnt;
+        this.contentsList = contentsList;
     }
 
     public static ExhibitionDto from(Exhibition exhibition) {
+
         return new ExhibitionDto(
                 exhibition.getExhibitionId(),
                 exhibition.getUseYn(),
@@ -56,7 +60,15 @@ public class ExhibitionDto {
                 exhibition.getUrl(),
                 exhibition.getExhibitionStart(),
                 exhibition.getExhibitionEnd(),
-                exhibition.getBundleContentCnt()
+                exhibition.getBundleContentCnt(),
+                convert(exhibition.getContentsType())
+
         );
+    }
+
+    private static List<ContentsDto> convert(List<ContentsType> contentsTypes) {
+        return contentsTypes.stream()
+                .map(ContentsDto::from)
+                .collect(Collectors.toList());
     }
 }

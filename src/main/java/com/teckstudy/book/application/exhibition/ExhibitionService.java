@@ -1,14 +1,13 @@
 package com.teckstudy.book.application.exhibition;
 
-import com.teckstudy.book.application.exhibition.dto.ContentsDto;
 import com.teckstudy.book.application.exhibition.dto.ExhibitionDto;
 import com.teckstudy.book.domain.exhibition.ContentsType;
 import com.teckstudy.book.domain.exhibition.Exhibition;
-import com.teckstudy.book.domain.exhibition.types.ContentEnum;
-import com.teckstudy.book.ui.exhibition.dto.ExhibitionRequestDto;
 import com.teckstudy.book.domain.exhibition.repository.ContentsTypeRepository;
 import com.teckstudy.book.domain.exhibition.repository.ExhibitionRepository;
+import com.teckstudy.book.domain.exhibition.types.ContentEnum;
 import com.teckstudy.book.lib.common.util.BoValidation;
+import com.teckstudy.book.ui.exhibition.dto.ExhibitionRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,24 +34,10 @@ public class ExhibitionService {
     public ExhibitionDto findById(Long id) {
         Exhibition exhibition = exhibitionRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("전시카테고리 정보가 없습니다. id=" + id));
-        return ExhibitionDto.from(exhibition);
-    }
 
-    /**
-     * 컨텐츠타입 조회
-     * @param exhibitionId
-     * @return
-     */
-    public List<ContentsDto> findByContents(Long exhibitionId) {
-        List<ContentsType> contents = null;
-        try {
-            contents = exhibitionRepository.findContents(exhibitionId);
-        } catch (Exception e) {
-            new IllegalArgumentException("전시카테고리 정보가 없습니다. id=" + exhibitionId);
-        }
-        return contents.stream()
-                .map(ContentsDto::from)
-                .collect(Collectors.toList());
+        List<ContentsType> contentsType = exhibition.getContentsType();
+
+        return ExhibitionDto.from(exhibition);
     }
 
     /**
@@ -65,7 +49,7 @@ public class ExhibitionService {
     public Long exhibitionSave(ExhibitionRequestDto exhibitionRequestDto) {
 
         duplicateCheck(exhibitionRequestDto);
-        Exhibition exhibition = exhibitionRepository.save(exhibitionRequestDto.fromExhibitionEntity());
+        exhibitionRepository.save(exhibitionRequestDto.fromExhibitionEntity());
 
         // 컨텐츠타입 적재
         for(ContentsType contentsTypes : exhibitionRequestDto.getContentsList()){

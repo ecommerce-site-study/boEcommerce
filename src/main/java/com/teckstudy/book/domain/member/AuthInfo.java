@@ -2,15 +2,11 @@ package com.teckstudy.book.domain.member;
 
 import com.teckstudy.book.domain.base.types.YesNoStatus;
 import com.teckstudy.book.domain.member.types.AuthInfoType;
-import lombok.*;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
-@EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 public class AuthInfo {
 
@@ -27,4 +23,23 @@ public class AuthInfo {
     @Enumerated(EnumType.STRING)
     private AuthInfoType authInfoType;
 
+    @OneToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    public Long getAuthInfoId() {
+        return authInfoId;
+    }
+
+    public String getAuthInfoCode() {
+        return authInfoCode;
+    }
+
+    public YesNoStatus getAuthInfoStatus() {
+        return authInfoStatus;
+    }
+
+    public AuthInfoType getAuthInfoType() {
+        return authInfoType;
+    }
 }

@@ -1,19 +1,21 @@
 package com.teckstudy.book.ui.exhibition.dto;
 
-import com.querydsl.core.annotations.QueryProjection;
-import com.teckstudy.book.domain.exhibition.Exhibition;
-import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
+import com.teckstudy.book.application.exhibition.dto.ContentsDto;
+import com.teckstudy.book.application.exhibition.dto.ExhibitionDto;
 import com.teckstudy.book.domain.base.types.YesNoStatus;
+import com.teckstudy.book.domain.exhibition.ContentsType;
+import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
-@Builder
+
 public class ExhibitionResponseDto {
 
-    private Long exhibitionIdn;
+    private Long exhibitionId;
     private YesNoStatus useYn;
     private String name;
     private ExhibitionType exhibitionType;
@@ -26,24 +28,13 @@ public class ExhibitionResponseDto {
     private int bundleContentCnt;
     private List<ContentsTypeResponseDto> contentsList;
 
-    /**
-     *
-     * 전시카테고리 전체 조회
-     * @param exhibitionIdn
-     * @param useYn
-     * @param name
-     * @param exhibitionType
-     * @param dateYn
-     * @param image
-     * @param description
-     * @param url
-     * @param exhibitionStart
-     * @param exhibitionEnd
-     * @param bundleContentCnt
-     */
-    @QueryProjection
-    public ExhibitionResponseDto(Long exhibitionIdn, YesNoStatus useYn, String name, ExhibitionType exhibitionType, YesNoStatus dateYn, String image, String description, String url, String exhibitionStart, String exhibitionEnd, int bundleContentCnt) {
-        this.exhibitionIdn = exhibitionIdn;
+
+    @Builder
+    public ExhibitionResponseDto(Long exhibitionId, YesNoStatus useYn, String name,
+                                 ExhibitionType exhibitionType, YesNoStatus dateYn, String image,
+                                 String description, String url, String exhibitionStart, String exhibitionEnd,
+                                 int bundleContentCnt, List<ContentsTypeResponseDto> contentsList) {
+        this.exhibitionId = exhibitionId;
         this.useYn = useYn;
         this.name = name;
         this.exhibitionType = exhibitionType;
@@ -54,27 +45,33 @@ public class ExhibitionResponseDto {
         this.exhibitionStart = exhibitionStart;
         this.exhibitionEnd = exhibitionEnd;
         this.bundleContentCnt = bundleContentCnt;
+        this.contentsList = contentsList;
     }
 
     /**
      * 전시관리 조회
      * @param exhibition
      */
-    public static ExhibitionResponseDto from(Exhibition exhibition) {
-        return new ExhibitionResponseDto(
-                exhibition.getExhibitionId(),
-                exhibition.getUseYn(),
-                exhibition.getName(),
-                exhibition.getExhibitionType(),
-                exhibition.getDateYn(),
-                exhibition.getImage(),
-                exhibition.getDescription(),
-                exhibition.getUrl(),
-                exhibition.getExhibitionStart(),
-                exhibition.getExhibitionEnd(),
-                exhibition.getBundleContentCnt()
-        );
-
+    public static ExhibitionResponseDto from(ExhibitionDto exhibition) {
+        return ExhibitionResponseDto.builder()
+                .exhibitionId(exhibition.getExhibitionId())
+                .useYn(exhibition.getUseYn())
+                .name(exhibition.getName())
+                .exhibitionType(exhibition.getExhibitionType())
+                .dateYn(exhibition.getDateYn())
+                .image(exhibition.getImage())
+                .description(exhibition.getDescription())
+                .url(exhibition.getUrl())
+                .exhibitionStart(exhibition.getExhibitionStart())
+                .exhibitionEnd(exhibition.getExhibitionEnd())
+                .bundleContentCnt(exhibition.getBundleContentCnt())
+                .contentsList(convert(exhibition.getContentsList()))
+                .build();
     }
 
+    private static List<ContentsTypeResponseDto> convert(List<ContentsDto> contentsTypes) {
+        return contentsTypes.stream()
+                .map(ContentsTypeResponseDto::from)
+                .collect(Collectors.toList());
+    }
 }

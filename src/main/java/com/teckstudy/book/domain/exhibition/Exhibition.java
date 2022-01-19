@@ -60,19 +60,4 @@ public class Exhibition extends BaseEntity {
     @OneToMany(mappedBy = "exhibition")
     private List<ContentsType> contentsType;
 
-//    public Exhibition(YesNoStatus use_yn, String name, ExhibitionType exhibitionType,
-//                      YesNoStatus date_yn, String image, String description, String url,
-//                      String exhibition_start, String exhibition_end, int bundleContentCnt) {
-//        this.use_yn = use_yn;
-//        this.name = name;
-//        this.exhibitionType = exhibitionType;
-//        this.date_yn = date_yn;
-//        this.image = image;
-//        this.description = description;
-//        this.url = url;
-//        this.exhibition_start = exhibition_start;
-//        this.exhibition_end = exhibition_end;
-//        this.bundleContentCnt = bundleContentCnt;
-//    }
-
 }
