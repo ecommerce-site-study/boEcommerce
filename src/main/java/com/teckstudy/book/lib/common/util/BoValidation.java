@@ -38,7 +38,7 @@ public class BoValidation {
         boContentValidation(contentInfo, exhibitionRequestDto.getContentsList(), exhibitionRequestDto.getBundleContentCnt());
 
         // 전시기간 벨리데이션
-        dateValidation(exhibitionRequestDto.getDate_yn(), exhibitionRequestDto.getExhibition_start(), exhibitionRequestDto.getExhibition_end());
+        dateValidation(exhibitionRequestDto.getDateYn(), exhibitionRequestDto.getExhibitionStart(), exhibitionRequestDto.getExhibitionEnd());
 
         // 이미지 벨리데이션
         imageValidation(exhibitionRequestDto.getExhibitionType(), exhibitionRequestDto.getImage());
