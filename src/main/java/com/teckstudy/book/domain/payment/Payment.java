@@ -1,19 +1,13 @@
 package com.teckstudy.book.domain.payment;
 
 import com.teckstudy.book.domain.base.BaseEntity;
+import com.teckstudy.book.domain.order.OrderItem;
 import com.teckstudy.book.domain.payment.types.PaymentType;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
-@NoArgsConstructor
 public class Payment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,4 +19,23 @@ public class Payment extends BaseEntity {
 
     private LocalDateTime cancelAt;
 
+    @OneToOne
+    @JoinColumn(name = "order_item_id")
+    private OrderItem orderItem;
+
+    public Long getPaymentId() {
+        return paymentId;
+    }
+
+    public PaymentType getPaymentType() {
+        return paymentType;
+    }
+
+    public LocalDateTime getPaymentAt() {
+        return paymentAt;
+    }
+
+    public LocalDateTime getCancelAt() {
+        return cancelAt;
+    }
 }

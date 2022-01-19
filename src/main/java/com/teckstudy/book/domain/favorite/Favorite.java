@@ -1,13 +1,12 @@
 package com.teckstudy.book.domain.favorite;
 
-import lombok.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-import javax.persistence.*;
 
-
-@Getter
 @Entity
-@NoArgsConstructor
 public class Favorite {
 
     @Id
@@ -16,4 +15,16 @@ public class Favorite {
 
     private Long memberId;
     private Long productId;
+
+    public Long getFavoriteId() {
+        return favoriteId;
+    }
+
+    public Long getMemberId() {
+        return memberId;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
 }

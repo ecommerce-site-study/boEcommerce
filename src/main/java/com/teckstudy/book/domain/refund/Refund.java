@@ -4,15 +4,11 @@ import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.order.OrderItem;
 import com.teckstudy.book.domain.order.types.OrderStatus;
 import com.teckstudy.book.domain.refund.types.RefundType;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
-@NoArgsConstructor
 public class Refund extends BaseEntity {
 
     @Id
@@ -29,4 +25,31 @@ public class Refund extends BaseEntity {
 
     private LocalDateTime requestAt;
 
+    @OneToOne
+    @JoinColumn(name = "order_item_id")
+    private OrderItem orderItem;
+
+    public Long getRefundId() {
+        return refundId;
+    }
+
+    public RefundType getRefundType() {
+        return refundType;
+    }
+
+    public OrderStatus getRefundStatus() {
+        return refundStatus;
+    }
+
+    public String getRefundTitle() {
+        return refundTitle;
+    }
+
+    public String getRefundContent() {
+        return refundContent;
+    }
+
+    public LocalDateTime getRequestAt() {
+        return requestAt;
+    }
 }

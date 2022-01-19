@@ -4,16 +4,13 @@ import com.teckstudy.book.domain.base.Amount;
 import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.board.types.BookType;
 import com.teckstudy.book.domain.product.types.ProductType;
-import com.teckstudy.book.domain.review.Review;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Getter
-@NoArgsConstructor
 @SequenceGenerator(
         name = "PRODUCT_SEQ_GENERATOR",
         sequenceName = "PRODUCT_SEQ", // 매핑할 데이터베이스 시퀀스 이름
@@ -43,8 +40,5 @@ public class Product extends BaseEntity {
 
     @OneToMany(mappedBy = "productId")
     private List<ProductRelationShip> productRelationShips;
-
-    @OneToOne
-    private Review review;
 
 }

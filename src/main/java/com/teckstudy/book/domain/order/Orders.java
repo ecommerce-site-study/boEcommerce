@@ -3,7 +3,6 @@ package com.teckstudy.book.domain.order;
 import com.teckstudy.book.domain.base.Address;
 import com.teckstudy.book.domain.base.BaseEntity;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,7 +13,6 @@ import java.util.List;
  */
 @Entity
 @Getter
-@NoArgsConstructor
 public class Orders extends BaseEntity {
 
     @Id

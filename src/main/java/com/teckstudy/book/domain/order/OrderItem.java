@@ -6,7 +6,6 @@ import com.teckstudy.book.domain.order.types.OrderStatus;
 import com.teckstudy.book.domain.payment.Payment;
 import com.teckstudy.book.domain.refund.Refund;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -15,7 +14,6 @@ import javax.persistence.*;
  */
 @Entity
 @Getter
-@NoArgsConstructor
 public class OrderItem extends BaseEntity {
 
     @Id
@@ -43,12 +41,10 @@ public class OrderItem extends BaseEntity {
     @JoinColumn(name = "orderId")
     private Orders order;
 
-    @OneToOne
-    @JoinColumn(name = "paymentId")
+    @OneToOne(mappedBy = "orderItem")
     private Payment payment;
 
-    @OneToOne
-    @JoinColumn(name = "refundId")
+    @OneToOne(mappedBy = "orderItem")
     private Refund refund;
 
     private Long count;
