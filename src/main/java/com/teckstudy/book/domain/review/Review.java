@@ -1,18 +1,10 @@
 package com.teckstudy.book.domain.review;
 
 import com.teckstudy.book.domain.base.BaseEntity;
-import com.teckstudy.book.domain.member.Member;
-import com.teckstudy.book.domain.product.Product;
-import lombok.*;
 
 import javax.persistence.*;
 
-import static javax.persistence.FetchType.LAZY;
-
 @Entity
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Review extends BaseEntity {
 
     @Id
@@ -31,4 +23,28 @@ public class Review extends BaseEntity {
 
     @Column(length = 1, nullable = false)
     private int gpa;
+
+    public Long getReviewId() {
+        return reviewId;
+    }
+
+    public Long getMemberId() {
+        return memberId;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public String getReviewSub() {
+        return reviewSub;
+    }
+
+    public String getReviewContent() {
+        return reviewContent;
+    }
+
+    public int getGpa() {
+        return gpa;
+    }
 }

@@ -4,16 +4,12 @@ import com.teckstudy.book.domain.base.Address;
 import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.member.types.Gender;
 import com.teckstudy.book.domain.member.types.MemberStatus;
-import com.teckstudy.book.domain.review.Review;
-import lombok.*;
+import lombok.Getter;
 
 import javax.persistence.*;
 
-import static javax.persistence.FetchType.EAGER;
-
 @Entity
 @Getter
-@NoArgsConstructor
 public class Member extends BaseEntity {
 
     @Id
@@ -44,10 +40,10 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private MemberStatus memberStatus;
 
-    @OneToOne
+    @OneToOne(mappedBy = "member")
     private AuthInfo authInfo;
 
-    @OneToOne
+    @OneToOne(mappedBy = "member")
     private SocialInfo socialInfo;
 
 }
