@@ -1,18 +1,13 @@
 package com.teckstudy.book.ui.exhibition;
 
 import com.teckstudy.book.application.exhibition.ExhibitionService;
-import com.teckstudy.book.application.exhibition.dto.ContentsDto;
 import com.teckstudy.book.application.exhibition.dto.ExhibitionDto;
 import com.teckstudy.book.ui.exhibition.dto.ExhibitionRequestDto;
 import com.teckstudy.book.ui.exhibition.dto.ExhibitionResponseDto;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Api(value = "ExhibitionController v1")
 @RequiredArgsConstructor
@@ -23,10 +18,15 @@ public class ExhibitionController {
     private final ExhibitionService exhibitionService;
 
     /**
-     * 전시카테고리 조회
+     * 전시관리 조회
      */
-    @ApiOperation(value = "전시카테고리 조회", notes = "전시카테고리 조회하기")
-    @ApiImplicitParam(name = "id", value = "전시관리번호", required = true)
+    @ApiOperation(value = "전시관리 조회", notes = "전시관리 조회하기")
+    @ApiImplicitParam(name = "id", value = "전시관리번호", required = true, paramType = "path", dataType = "long")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "전시카테고리 조회 성공"),
+            @ApiResponse(code = 400, message = "잘못된 접근"),
+            @ApiResponse(code = 500, message = "서버 에러")
+    })
     @GetMapping("/api/exhibitions/{id}")
     public ResponseEntity<ExhibitionResponseDto> findById (@PathVariable("id") Long id) {
 
@@ -36,35 +36,32 @@ public class ExhibitionController {
     }
 
     /**
-     * 전시카테고리 등록 및 컨텐츠 타입 등록
+     * 전시관리 등록 및 컨텐츠 타입 등록
      */
-    @ApiOperation(value = "전시카테고리 등록", notes = "전시카테고리 등록 및 컨텐츠 타입 등록")
+    @ApiOperation(value = "전시관리 등록", notes = "전시관리 등록 및 컨텐츠 타입 등록")
     @PostMapping("/api/exhibitions")
     public ResponseEntity<ExhibitionResponseDto> registerExhibition(@RequestBody ExhibitionRequestDto requestDto) {
 
-        Long exhibitionId = exhibitionService.exhibitionSave(requestDto.toWrapper());
+        ExhibitionDto exhibition = exhibitionService.exhibitionSave(requestDto.toWrapper());
 
-        ExhibitionDto exhibitionDto = exhibitionService.findById(exhibitionId);
-
-        return ResponseEntity.ok().body(ExhibitionResponseDto.from(exhibitionDto));
+        return ResponseEntity.ok().body(ExhibitionResponseDto.from(exhibition));
     }
 
     /**
-     * 전시카테고리 & 컨텐츠 타입 수정
+     * 전시관리 & 컨텐츠 타입 수정
      */
-    @ApiOperation(value = "전시카테고리 & 컨텐츠 타입 수정", notes = "전시카테고리 & 컨텐츠 타입 수정")
-    @ApiImplicitParam(name = "id", value = "전시관리번호", dataType = "long", required = true)
-    // @PutMapping("/api/exhibitions/")
+    @ApiOperation(value = "전시관리 & 컨텐츠 타입 수정", notes = "전시관리 & 컨텐츠 타입 수정")
+    @ApiImplicitParam(name = "id", value = "전시관리번호", paramType = "path", dataType = "long", required = true)
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "전시관리 수정 성공"),
+            @ApiResponse(code = 400, message = "잘못된 접근"),
+            @ApiResponse(code = 500, message = "서버 에러")
+    })
     @PatchMapping("/api/exhibitions/{id}")
     public ResponseEntity<ExhibitionResponseDto> updateExhibition(@PathVariable("id") Long id, @RequestBody ExhibitionRequestDto requestDto) {
 
-        Long exhibitionSn = exhibitionService.exhibitionUpdate(id, requestDto);
+        ExhibitionDto exhibition = exhibitionService.exhibitionUpdate(id, requestDto.toWrapper());
 
-        List<ContentsDto> contents = exhibitionService.findByContents(exhibitionSn);
-
-        ExhibitionDto exhibitionDto = exhibitionService.findById(exhibitionSn);
-        exhibitionDto.setContentsList(contents);
-
-        return ResponseEntity.ok().body(ExhibitionResponseDto.builder().build());
+        return ResponseEntity.ok().body(ExhibitionResponseDto.from(exhibition));
     }
 }

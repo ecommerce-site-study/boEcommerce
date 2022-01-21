@@ -1,20 +1,14 @@
 package com.teckstudy.book.application.exhibition;
 
 import com.teckstudy.book.application.exhibition.dto.ExhibitionDto;
+import com.teckstudy.book.application.exhibition.dto.SearchExhibitionDto;
 import com.teckstudy.book.domain.exhibition.ContentsType;
 import com.teckstudy.book.domain.exhibition.Exhibition;
 import com.teckstudy.book.domain.exhibition.repository.ContentsTypeRepository;
 import com.teckstudy.book.domain.exhibition.repository.ExhibitionRepository;
-import com.teckstudy.book.domain.exhibition.types.ContentEnum;
-import com.teckstudy.book.lib.common.util.BoValidation;
-import com.teckstudy.book.ui.exhibition.dto.ExhibitionRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -35,41 +29,39 @@ public class ExhibitionService {
         Exhibition exhibition = exhibitionRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("전시카테고리 정보가 없습니다. id=" + id));
 
-        List<ContentsType> contentsType = exhibition.getContentsType();
-
         return ExhibitionDto.from(exhibition);
     }
 
     /**
      * 전시카테고리 등록
-     * @param exhibitionRequestDto
+     * @param searchExhibitionDto
      * @return
      */
     @Transactional
-    public Long exhibitionSave(ExhibitionRequestDto exhibitionRequestDto) {
+    public ExhibitionDto exhibitionSave(SearchExhibitionDto searchExhibitionDto) {
 
-        duplicateCheck(exhibitionRequestDto);
-        exhibitionRepository.save(exhibitionRequestDto.fromExhibitionEntity());
+//        duplicateCheck(searchExhibitionDto);
+        Exhibition exhibition = exhibitionRepository.save(searchExhibitionDto.toEntity());
 
         // 컨텐츠타입 적재
-        for(ContentsType contentsTypes : exhibitionRequestDto.getContentsList()){
-            contentsTypeRepository.save(exhibitionRequestDto.toContentsEntity(contentsTypes, exhibition));
+        for(ContentsType contentsTypes : searchExhibitionDto.toEntity().getContentsType()){
+            contentsTypeRepository.save(searchExhibitionDto.toContentsEntity(contentsTypes, exhibition));
         }
 
-        return exhibition.getExhibitionId();
+        return ExhibitionDto.from(exhibition);
     }
 
 
     @Transactional
-    public Long exhibitionUpdate(Long id, ExhibitionRequestDto exhibitionRequestDto) {
+    public ExhibitionDto exhibitionUpdate(Long id, SearchExhibitionDto searchExhibitionDto) {
         Exhibition exhibition = exhibitionRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("전시카테고리 정보가 없습니다. id=" + id));
 
-        duplicateCheck(exhibitionRequestDto);
+//        duplicateCheck(searchExhibitionDto);
 
-        exhibitionRepository.updateExhibition(exhibitionRequestDto, id);
+        exhibitionRepository.updateExhibition(searchExhibitionDto, exhibition.getExhibitionId());
 
-        for(ContentsType contentsTypes : exhibitionRequestDto.getContentsList()){
+        for(ContentsType contentsTypes : searchExhibitionDto.toEntity().getContentsType()){
             contentsTypeRepository.updateContents(
                     contentsTypes.getContentId(),
                     contentsTypes.getContentEnum(),
@@ -77,20 +69,20 @@ public class ExhibitionService {
             );
         }
 
-        return exhibition.getExhibitionId();
+        return ExhibitionDto.from(exhibition);
     }
 
-    /**
-     * 벨리데이션 체크
-     * @param exhibitionRequestDto
-     */
-    private void duplicateCheck(ExhibitionRequestDto exhibitionRequestDto) {
-        Map<ContentEnum, Integer> contentMap = new LinkedHashMap<>();
-
-        for(ContentsType contentsTypes : exhibitionRequestDto.getContentsList()){
-            contentMap.put(contentsTypes.getContentEnum(), contentMap.getOrDefault(contentsTypes.getContentEnum(), 0) +1);
-        }
-
-        new BoValidation(exhibitionRequestDto, contentMap);
-    }
+//    /**
+//     * 벨리데이션 체크
+//     * @param searchExhibitionDto
+//     */
+//    private void duplicateCheck(SearchExhibitionDto searchExhibitionDto) {
+//        Map<ContentEnum, Integer> contentMap = new LinkedHashMap<>();
+//
+//        for(ContentsType contentsTypes : searchExhibitionDto.getContentsList()){
+//            contentMap.put(contentsTypes.getContentEnum(), contentMap.getOrDefault(contentsTypes.getContentEnum(), 0) +1);
+//        }
+//
+//        new BoValidation(searchExhibitionDto, contentMap);
+//    }
 }

@@ -1,9 +1,9 @@
 package com.teckstudy.book.domain.exhibition;
 
 import com.teckstudy.book.domain.base.BaseEntity;
-import com.teckstudy.book.domain.exhibition.Exhibition;
 import com.teckstudy.book.domain.exhibition.types.ContentEnum;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -30,4 +30,14 @@ public class ContentsType extends BaseEntity {
     @JoinColumn(name = "exhibitionId")
     private Exhibition exhibition;
 
+    public ContentsType(Long contentId, ContentEnum contentEnum, int contentCnt, Exhibition exhibition) {
+        this.contentId = contentId;
+        this.contentEnum = contentEnum;
+        this.contentCnt = contentCnt;
+        this.exhibition = exhibition;
+    }
+
+    public static ContentsType ofNew(ContentsType contentsTypes, Exhibition exhibition) {
+        return new ContentsType(contentsTypes.contentId, contentsTypes.contentEnum, contentsTypes.contentCnt, exhibition);
+    }
 }

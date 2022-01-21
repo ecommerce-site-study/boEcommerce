@@ -3,15 +3,14 @@ package com.teckstudy.book.ui.exhibition.dto;
 import com.teckstudy.book.application.exhibition.dto.SearchExhibitionDto;
 import com.teckstudy.book.domain.base.types.YesNoStatus;
 import com.teckstudy.book.domain.exhibition.ContentsType;
-import com.teckstudy.book.domain.exhibition.Exhibition;
 import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Data
-@Builder
+@Getter
+@NoArgsConstructor
 public class ExhibitionRequestDto {
 
     private Long exhibitionId;
@@ -44,27 +43,4 @@ public class ExhibitionRequestDto {
         );
     }
 
-    public Exhibition fromExhibitionEntity() {
-
-        this.exhibitionId = exhibitionId;
-        this.useYn = useYn;
-        this.name = name;
-        this.exhibitionType = exhibitionType;
-        this.dateYn = dateYn;
-        this.image = image;
-        this.description = description;
-        this.url = url;
-        this.exhibitionStart = exhibitionStart;
-        this.exhibitionEnd = exhibitionEnd;
-        this.bundleContentCnt = bundleContentCnt;
-        this.contentsList = contentsList;
-    }
-
-    public ContentsType toContentsEntity(ContentsType contentsTypes, Exhibition exhibition) {
-        return ContentsType.builder()
-                .exhibition(exhibition)
-                .contentEnum(contentsTypes.getContentEnum())
-                .contentCnt(contentsTypes.getContentCnt())
-                .build();
-    }
 }
