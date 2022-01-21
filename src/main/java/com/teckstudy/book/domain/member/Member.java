@@ -1,6 +1,5 @@
 package com.teckstudy.book.domain.member;
 
-import com.teckstudy.book.domain.base.Address;
 import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.member.types.Gender;
 import com.teckstudy.book.domain.member.types.MemberStatus;
@@ -34,8 +33,8 @@ public class Member extends BaseEntity {
     @Column(length = 11 )
     private String phoneNumber;
 
-    @Embedded
-    private Address address;
+//    @Embedded
+    private String address;
 
     @Enumerated(EnumType.STRING)
     private MemberStatus memberStatus;
@@ -45,5 +44,22 @@ public class Member extends BaseEntity {
 
     @OneToOne(mappedBy = "member")
     private SocialInfo socialInfo;
+
+    protected Member() {
+
+    }
+
+    public Member(String email, String password, String name,
+                  Gender sex, String birthday, String phoneNumber, String address,
+                  MemberStatus memberStatus) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.sex = sex;
+        this.birthday = birthday;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.memberStatus = memberStatus;
+    }
 
 }
