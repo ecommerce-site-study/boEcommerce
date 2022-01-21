@@ -1,8 +1,8 @@
 package com.teckstudy.book.application.exhibition.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
-import com.teckstudy.book.domain.exhibition.types.ContentEnum;
 import com.teckstudy.book.domain.exhibition.ContentsType;
+import com.teckstudy.book.domain.exhibition.types.ContentEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

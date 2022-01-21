@@ -34,7 +34,7 @@ public class CategoryResponse {
                     .categoryId(category.getCategoryId())
                     .parentId(category.getParentId())
                     .displayName(category.getDisplayName())
-                    .order(category.getOrder())
+                    .order(category.getOrdering())
                     .hasSubCategories(category.isHasSubCategories())
                     .subCategories(convertSubCategories(category.getSubCategories()))
                     .build();
@@ -45,6 +45,69 @@ public class CategoryResponse {
                     .map(LayerCategory::from)
                     .collect(Collectors.toList());
 
+        }
+    }
+
+    @Getter
+    public static class PersistCategory {
+        private Long categoryId;
+        private Long parentId;
+        private String displayName;
+        private Long ordering;
+        private String useYn;
+        private String displayYn;
+
+        @Builder
+        public PersistCategory(Long categoryId, Long parentId, String displayName, Long ordering, String useYn, String displayYn) {
+            this.categoryId = categoryId;
+            this.parentId = parentId;
+            this.displayName = displayName;
+            this.ordering = ordering;
+            this.useYn = useYn;
+            this.displayYn = displayYn;
+        }
+
+        public static PersistCategory from(CategoryWrapper.PersistCategory category) {
+            return PersistCategory.builder()
+                    .categoryId(category.getCategoryId())
+                    .parentId(category.getParentId())
+                    .displayName(category.getDisplayName())
+                    .ordering(category.getOrdering())
+                    .useYn(category.getUseYn())
+                    .displayYn(category.getDisplayYn())
+                    .build();
+        }
+    }
+
+    @Getter
+    public static class UpdateCategory {
+
+        private Long categoryId;
+        private Long parentId;
+        private String displayName;
+        private Long ordering;
+        private String useYn;
+        private String displayYn;
+
+        @Builder
+        public UpdateCategory(Long categoryId, Long parentId, String displayName, Long ordering, String useYn, String displayYn) {
+            this.categoryId = categoryId;
+            this.parentId = parentId;
+            this.displayName = displayName;
+            this.ordering = ordering;
+            this.useYn = useYn;
+            this.displayYn = displayYn;
+        }
+
+        public static UpdateCategory from(CategoryWrapper.UpdateCategory category) {
+            return UpdateCategory.builder()
+                    .categoryId(category.getCategoryId())
+                    .parentId(category.getParentId())
+                    .displayName(category.getDisplayName())
+                    .ordering(category.getOrdering())
+                    .useYn(category.getUseYn())
+                    .displayYn(category.getDisplayYn())
+                    .build();
         }
     }
 }

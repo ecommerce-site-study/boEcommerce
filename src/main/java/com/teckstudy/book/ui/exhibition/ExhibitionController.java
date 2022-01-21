@@ -61,7 +61,7 @@ public class ExhibitionController {
     public ResponseEntity<ExhibitionResponseDto> updateExhibition(@PathVariable("id") Long id, @RequestBody ExhibitionRequestDto requestDto) {
 
         ExhibitionDto exhibition = exhibitionService.exhibitionUpdate(id, requestDto.toWrapper());
-
         return ResponseEntity.ok().body(ExhibitionResponseDto.from(exhibition));
+
     }
 }

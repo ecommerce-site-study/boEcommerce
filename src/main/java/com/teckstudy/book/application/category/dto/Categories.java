@@ -22,9 +22,9 @@ import java.util.stream.Collectors;
 
 public class Categories {
 
-    private final List<CategoryWrapper.CategoryDto> categories;
+    private final List<CategoryWrapper.SearchCategory> categories;
 
-    private Categories(List<CategoryWrapper.CategoryDto> categories) {
+    private Categories(List<CategoryWrapper.SearchCategory> categories) {
         this.categories = categories;
     }
 
@@ -32,61 +32,14 @@ public class Categories {
         return new Categories(convertWrapper(categories));
     }
 
-    private static List<CategoryWrapper.CategoryDto> convertWrapper(List<Category> categories) {
+    private static List<CategoryWrapper.SearchCategory> convertWrapper(List<Category> categories) {
         return categories
                 .stream()
-                .map(CategoryWrapper.CategoryDto::from)
+                .map(CategoryWrapper.SearchCategory::from)
                 .collect(Collectors.toList());
     }
 
-    public static Categories dummy() throws JsonProcessingException {
-        String dummyData = "[\n" +
-                "  {\n" +
-                "    \"categoryId\": 1,\n" +
-                "    \"displayName\": \"category1\",\n" +
-                "    \"parentId\": null,\n" +
-                "    \"order\": 1\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"categoryId\": 2,\n" +
-                "    \"displayName\": \"category2\",\n" +
-                "    \"parentId\": null,\n" +
-                "    \"order\": 1\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"categoryId\": 3,\n" +
-                "    \"displayName\": \"category3\",\n" +
-                "    \"parentId\": null\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"categoryId\": 4,\n" +
-                "    \"displayName\": \"category4\",\n" +
-                "    \"parentId\": 1,\n" +
-                "    \"order\": 1\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"categoryId\": 5,\n" +
-                "    \"displayName\": \"category5\",\n" +
-                "    \"parentId\": 2,\n" +
-                "    \"order\": 1\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"categoryId\": 6,\n" +
-                "    \"displayName\": \"category6\",\n" +
-                "    \"parentId\": 4\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"categoryId\": 7,\n" +
-                "    \"displayName\": \"category7\",\n" +
-                "    \"parentId\": 4\n" +
-                "  }\n" +
-                "]";
-        ObjectMapper obm = new ObjectMapper();
-        List<Category> categoryDtos = obm.readValue(dummyData, new TypeReference<List<Category>>(){} );
-        return Categories.from(categoryDtos);
-    }
-
-    public List<CategoryWrapper.CategoryDto> list() {
+    public List<CategoryWrapper.SearchCategory> list() {
         return this.categories;
     }
 
@@ -96,7 +49,7 @@ public class Categories {
 
     private List<CategoryWrapper.LayerCategoryDto> bundleSubCategories() {
         return this.categories.stream()
-                .filter(CategoryWrapper.CategoryDto::isRootParent)
+                .filter(CategoryWrapper.SearchCategory::isRootParent)
                 .map(v ->
                         CategoryWrapper.LayerCategoryDto.bundle(
                                 v,

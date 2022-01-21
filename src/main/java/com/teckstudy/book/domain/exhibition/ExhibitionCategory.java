@@ -1,9 +1,10 @@
 package com.teckstudy.book.domain.exhibition;
 
 import com.teckstudy.book.domain.base.BaseEntity;
-import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
 import com.teckstudy.book.domain.base.types.YesNoStatus;
-import lombok.*;
+import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 

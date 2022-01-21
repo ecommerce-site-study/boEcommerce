@@ -1,20 +1,16 @@
 package com.teckstudy.book.domain.category;
 
 
-import com.teckstudy.book.domain.base.BaseEntity;
+import com.teckstudy.book.domain.base.types.YesNoStatus;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
-@Setter
 @NoArgsConstructor
-//public class Category extends BaseEntity {
-public class Category  {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +19,24 @@ public class Category  {
     private String displayName;
 
     private Long parentId;
-    private Long order;
+    private Long ordering;
 
-    public Category(Long categoryId, String displayName, Long parentId, Long order) {
-        this.categoryId = categoryId;
+    @Enumerated(EnumType.STRING)
+    private YesNoStatus useYn;
+
+    @Enumerated(EnumType.STRING)
+    private YesNoStatus displayYn;
+
+    private Category( String displayName, Long parentId, Long ordering, YesNoStatus useYn, YesNoStatus displayYn) {
         this.displayName = displayName;
         this.parentId = parentId;
-        this.order = order;
+        this.ordering = ordering;
+        this.useYn = useYn;
+        this.displayYn = displayYn;
+    }
+
+    public static Category newCategory(String displayName, Long parentId, Long ordering, YesNoStatus useYn, YesNoStatus displayYn) {
+        return new Category(displayName,parentId,ordering,useYn,displayYn);
     }
 
     public Long categoryId() {
@@ -41,6 +48,33 @@ public class Category  {
     public Long parentId() {
         return this.parentId;
     }
-    public Long order(){return this.order;}
+    public Long ordering(){return this.ordering;}
+    public String useYn() {return this.useYn.name();}
+    public String displayYn() {return this.displayYn.name();}
 
+    public void update(String displayName, Long parentId, Long ordering, YesNoStatus useYn, YesNoStatus displayYn) {
+        this.displayName = displayName;
+        this.parentId = parentId;
+        this.ordering = ordering;
+        this.useYn = useYn;
+        this.displayYn = changeDisplay(useYn,displayYn);
+    }
+
+    private YesNoStatus changeDisplay(YesNoStatus useYn, YesNoStatus displayYn) {
+        if (YesNoStatus.N == useYn) return YesNoStatus.N;
+        return displayYn;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return Objects.equals(categoryId, category.categoryId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(categoryId);
+    }
 }

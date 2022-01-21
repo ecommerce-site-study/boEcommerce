@@ -2,7 +2,9 @@ package com.teckstudy.book.domain.member;
 
 import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.member.types.SocialType;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 

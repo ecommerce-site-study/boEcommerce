@@ -20,9 +20,13 @@ public class SuccessResponse<T> {
     private String message;
     private T data;
 
-    public SuccessResponse(Long status, String message, T data) {
+    private SuccessResponse(Long status, String message, T data) {
         this.status = status;
         this.message = message;
         this.data = data;
+    }
+
+    public static <T> SuccessResponse of(Long status, String message, T data) {
+        return new SuccessResponse(status,message,data);
     }
 }

@@ -1,7 +1,6 @@
 package com.teckstudy.book.ui.exhibition.dto;
 
 import com.teckstudy.book.application.exhibition.dto.ContentsDto;
-import com.teckstudy.book.domain.exhibition.ContentsType;
 import com.teckstudy.book.domain.exhibition.types.ContentEnum;
 import lombok.Builder;
 import lombok.Getter;
