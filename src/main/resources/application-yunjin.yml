@@ -1,0 +1,47 @@
+server:
+  address: 0.0.0.0
+  port: 8080
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  profiles:
+    active: default
+  datasource:
+    url: jdbc:mysql://petlendar.csni78yzxjkm.ap-northeast-2.rds.amazonaws.com/babybook?serverTimezone=UTC&characterEncoding=UTF-8
+    username: petlendar
+    password: petlendar12
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+      use-new-id-generator-mappings: true
+    properties:
+      hibernate:
+        #show_sql: true
+        format_sql: true
+        use_sql_comments: true
+# 태경님 mariaDB
+#  profiles:
+#    active: default
+#    datasource:
+#      url: jdbc:mariadb://ctk0327.iptime.org:3406/sys?serverTimezone=UTC&characterEncoding=UTF-8
+#      username: root
+#      password: root
+#      driver-class-name: org.mariadb.jdbc.Driver
+#    jpa:
+#      database: mysql
+#      database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+#      hibernate:
+#        ddl-auto: update
+#      properties:
+#        hibernate:
+#          #show_sql: true
+#          format_sql: true
+#          use_sql_comments: true
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.type: trace
