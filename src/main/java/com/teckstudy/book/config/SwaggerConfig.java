@@ -21,7 +21,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.teckstudy.book.exhibition.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.teckstudy.book.ui.exhibition"))
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .paths(PathSelectors.ant("/v1/**"))
