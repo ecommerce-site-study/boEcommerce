@@ -5,15 +5,11 @@ import com.teckstudy.book.domain.base.types.YesNoStatus;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
-@Setter
 @NoArgsConstructor
-//public class Category extends BaseEntity {
 public class Category {
 
     @Id
@@ -25,7 +21,10 @@ public class Category {
     private Long parentId;
     private Long ordering;
 
+    @Enumerated(EnumType.STRING)
     private YesNoStatus useYn;
+
+    @Enumerated(EnumType.STRING)
     private YesNoStatus displayYn;
 
     private Category( String displayName, Long parentId, Long ordering, YesNoStatus useYn, YesNoStatus displayYn) {
@@ -50,7 +49,32 @@ public class Category {
         return this.parentId;
     }
     public Long ordering(){return this.ordering;}
-    public YesNoStatus useYn() {return this.useYn;}
-    public YesNoStatus displayYn() {return this.displayYn;}
+    public String useYn() {return this.useYn.name();}
+    public String displayYn() {return this.displayYn.name();}
 
+    public void update(String displayName, Long parentId, Long ordering, YesNoStatus useYn, YesNoStatus displayYn) {
+        this.displayName = displayName;
+        this.parentId = parentId;
+        this.ordering = ordering;
+        this.useYn = useYn;
+        this.displayYn = changeDisplay(useYn,displayYn);
+    }
+
+    private YesNoStatus changeDisplay(YesNoStatus useYn, YesNoStatus displayYn) {
+        if (YesNoStatus.N == useYn) return YesNoStatus.N;
+        return displayYn;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return Objects.equals(categoryId, category.categoryId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(categoryId);
+    }
 }

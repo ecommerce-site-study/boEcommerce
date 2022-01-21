@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 public class CategoryRequest {
 
-
     @Getter
     @NoArgsConstructor
     public static class RegisterCategory {
@@ -18,6 +17,27 @@ public class CategoryRequest {
 
         public CategoryWrapper.PersistCategory toWrapper() {
             return CategoryWrapper.PersistCategory.builder()
+                    .parentId(this.parentId)
+                    .displayName(this.displayName)
+                    .ordering(this.ordering)
+                    .useYn(this.useYn)
+                    .displayYn(this.displayYn)
+                    .build();
+        }
+    }
+
+    @Getter
+    @NoArgsConstructor
+    public static class UpdateCategory {
+        private Long parentId;
+        private String displayName;
+        private Long ordering;
+        private String useYn;
+        private String displayYn;
+
+        public CategoryWrapper.UpdateCategory toWrapper(Long categoryId) {
+            return CategoryWrapper.UpdateCategory.builder()
+                    .categoryId(categoryId)
                     .parentId(this.parentId)
                     .displayName(this.displayName)
                     .ordering(this.ordering)

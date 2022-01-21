@@ -1,5 +1,6 @@
 package com.teckstudy.book.application.category.dto;
 
+import com.teckstudy.book.application.category.CategoryValidator;
 import com.teckstudy.book.domain.base.types.YesNoStatus;
 import com.teckstudy.book.domain.category.Category;
 import lombok.Builder;
@@ -30,11 +31,11 @@ public class CategoryWrapper {
         private String displayName;
         private Long parentId;
         private Long ordering;
-        private YesNoStatus useYn;
-        private YesNoStatus displayYn;
+        private String useYn;
+        private String displayYn;
 
         @Builder
-        public SearchCategory(Long categoryId, String displayName, Long parentId, Long ordering, YesNoStatus useYn, YesNoStatus displayYn) {
+        public SearchCategory(Long categoryId, String displayName, Long parentId, Long ordering, String useYn, String displayYn) {
             this.categoryId = categoryId;
             this.displayName = displayName;
             this.parentId = parentId;
@@ -125,6 +126,7 @@ public class CategoryWrapper {
     @Getter
     @NoArgsConstructor
     public static class PersistCategory {
+        private Long categoryId;
         private Long parentId;
         private String displayName;
         private Long ordering;
@@ -132,12 +134,24 @@ public class CategoryWrapper {
         private String displayYn;
 
         @Builder
-        public PersistCategory(Long parentId, String displayName, Long ordering, String useYn, String displayYn) {
+        public PersistCategory(Long categoryId, Long parentId, String displayName, Long ordering, String useYn, String displayYn) {
+            this.categoryId = categoryId;
             this.parentId = parentId;
             this.displayName = displayName;
             this.ordering = ordering;
             this.useYn = useYn;
             this.displayYn = displayYn;
+        }
+
+        public static PersistCategory from(Category category) {
+            return PersistCategory.builder()
+                    .categoryId(category.categoryId())
+                    .parentId(category.parentId())
+                    .displayName(category.displayName())
+                    .ordering(category.ordering())
+                    .useYn(category.useYn())
+                    .displayYn(category.displayYn())
+                    .build();
         }
 
         public Category toEntity() {
@@ -148,6 +162,50 @@ public class CategoryWrapper {
                     YesNoStatus.valueOf(this.useYn),
                     YesNoStatus.valueOf(this.displayYn)
             );
+        }
+
+        public boolean isParentId() {
+            return Objects.nonNull(parentId);
+        }
+
+        public void validate(CategoryValidator validator) {
+            validator.validate(this);
+        }
+    }
+
+    @Getter
+    @NoArgsConstructor
+    public static class UpdateCategory {
+        private Long categoryId;
+        private Long parentId;
+        private String displayName;
+        private Long ordering;
+        private String useYn;
+        private String displayYn;
+
+        @Builder
+        public UpdateCategory(Long categoryId, Long parentId, String displayName, Long ordering, String useYn, String displayYn) {
+            this.categoryId = categoryId;
+            this.parentId = parentId;
+            this.displayName = displayName;
+            this.ordering = ordering;
+            this.useYn = useYn;
+            this.displayYn = displayYn;
+        }
+
+        public static UpdateCategory from(Category category) {
+            return UpdateCategory.builder()
+                    .categoryId(category.categoryId())
+                    .parentId(category.parentId())
+                    .displayName(category.displayName())
+                    .ordering(category.ordering())
+                    .useYn(category.useYn())
+                    .displayYn(category.displayYn())
+                    .build();
+        }
+
+        public void validate(CategoryValidator validator) {
+            validator.validate(this);
         }
     }
 }
