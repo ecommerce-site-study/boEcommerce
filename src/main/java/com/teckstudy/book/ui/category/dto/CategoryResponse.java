@@ -34,7 +34,7 @@ public class CategoryResponse {
                     .categoryId(category.getCategoryId())
                     .parentId(category.getParentId())
                     .displayName(category.getDisplayName())
-                    .order(category.getOrder())
+                    .order(category.getOrdering())
                     .hasSubCategories(category.isHasSubCategories())
                     .subCategories(convertSubCategories(category.getSubCategories()))
                     .build();

@@ -4,7 +4,6 @@ import com.teckstudy.book.domain.base.types.YesNoStatus;
 import com.teckstudy.book.domain.exhibition.ContentsType;
 import com.teckstudy.book.domain.exhibition.Exhibition;
 import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
-import com.teckstudy.book.ui.exhibition.dto.ContentsTypeResponseDto;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

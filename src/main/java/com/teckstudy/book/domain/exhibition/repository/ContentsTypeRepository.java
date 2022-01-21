@@ -1,11 +1,7 @@
 package com.teckstudy.book.domain.exhibition.repository;
 
 import com.teckstudy.book.domain.exhibition.ContentsType;
-import com.teckstudy.book.domain.exhibition.types.ContentEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 public interface ContentsTypeRepository extends JpaRepository<ContentsType, Long> {
 

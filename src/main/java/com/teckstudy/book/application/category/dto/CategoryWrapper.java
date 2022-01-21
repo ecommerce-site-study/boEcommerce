@@ -1,16 +1,15 @@
 package com.teckstudy.book.application.category.dto;
 
+import com.teckstudy.book.domain.base.types.YesNoStatus;
 import com.teckstudy.book.domain.category.Category;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * <pre>
@@ -26,26 +25,33 @@ public class CategoryWrapper {
 
     @Getter
     @NoArgsConstructor
-    public static class CategoryDto {
+    public static class SearchCategory {
         private Long categoryId;
         private String displayName;
         private Long parentId;
-        private Long order;
+        private Long ordering;
+        private YesNoStatus useYn;
+        private YesNoStatus displayYn;
 
-        public CategoryDto(Long categoryId, String displayName, Long parentId, Long order) {
+        @Builder
+        public SearchCategory(Long categoryId, String displayName, Long parentId, Long ordering, YesNoStatus useYn, YesNoStatus displayYn) {
             this.categoryId = categoryId;
             this.displayName = displayName;
             this.parentId = parentId;
-            this.order = order;
+            this.ordering = ordering;
+            this.useYn = useYn;
+            this.displayYn = displayYn;
         }
 
-        public static CategoryDto from(Category category) {
-            return new CategoryDto(
-                    category.categoryId(),
-                    category.displayName(),
-                    category.parentId(),
-                    category.order()
-            );
+        public static SearchCategory from(Category category) {
+            return SearchCategory.builder()
+                    .categoryId(category.categoryId())
+                    .displayName(category.displayName())
+                    .parentId(category.parentId())
+                    .ordering(category.ordering())
+                    .useYn(category.useYn())
+                    .displayYn(category.displayYn())
+                    .build();
         }
 
         public boolean isRootParent() {
@@ -59,44 +65,44 @@ public class CategoryWrapper {
         private Long categoryId;
         private Long parentId;
         private String displayName;
-        private Long order;
+        private Long ordering;
         private boolean hasSubCategories;
         private List<LayerCategoryDto> subCategories;
 
         @Builder
-        public LayerCategoryDto(Long categoryId, Long parentId, String displayName, Long order, boolean hasSubCategories, List<LayerCategoryDto> subCategories) {
+        public LayerCategoryDto(Long categoryId, Long parentId, String displayName, Long ordering, boolean hasSubCategories, List<LayerCategoryDto> subCategories) {
             this.categoryId = categoryId;
             this.parentId = parentId;
             this.displayName = displayName;
-            this.order = order;
+            this.ordering = ordering;
             this.hasSubCategories = hasSubCategories;
             this.subCategories = subCategories;
         }
 
 
-        public static LayerCategoryDto hasNotChildLayerCategory(CategoryDto category) {
+        public static LayerCategoryDto hasNotChildLayerCategory(SearchCategory category) {
             return LayerCategoryDto.builder()
                     .categoryId(category.getCategoryId())
                     .parentId(category.getParentId())
                     .displayName(category.getDisplayName())
-                    .order(category.getOrder())
+                    .ordering(category.getOrdering())
                     .hasSubCategories(false)
                     .subCategories(Collections.emptyList())
                     .build();
         }
 
-        public static LayerCategoryDto hasChildLayerCategory(CategoryDto category, List<LayerCategoryDto> children){
+        public static LayerCategoryDto hasChildLayerCategory(SearchCategory category, List<LayerCategoryDto> children){
             return LayerCategoryDto.builder()
                     .categoryId(category.getCategoryId())
                     .parentId(category.getParentId())
                     .displayName(category.getDisplayName())
-                    .order(category.getOrder())
+                    .ordering(category.getOrdering())
                     .hasSubCategories(true)
                     .subCategories(children)
                     .build();
         }
 
-        public static LayerCategoryDto bundle(CategoryDto parent, List<CategoryDto> categories, List<CategoryDto> matchCategories) {
+        public static LayerCategoryDto bundle(SearchCategory parent, List<SearchCategory> categories, List<SearchCategory> matchCategories) {
             if (matchCategories.size() == 0) return hasNotChildLayerCategory(parent);
 
             List<LayerCategoryDto> children = matchCategories
@@ -115,4 +121,33 @@ public class CategoryWrapper {
         }
     }
 
+
+    @Getter
+    @NoArgsConstructor
+    public static class PersistCategory {
+        private Long parentId;
+        private String displayName;
+        private Long ordering;
+        private String useYn;
+        private String displayYn;
+
+        @Builder
+        public PersistCategory(Long parentId, String displayName, Long ordering, String useYn, String displayYn) {
+            this.parentId = parentId;
+            this.displayName = displayName;
+            this.ordering = ordering;
+            this.useYn = useYn;
+            this.displayYn = displayYn;
+        }
+
+        public Category toEntity() {
+            return Category.newCategory(
+                    this.displayName,
+                    this.parentId,
+                    this.ordering,
+                    YesNoStatus.valueOf(this.useYn),
+                    YesNoStatus.valueOf(this.displayYn)
+            );
+        }
+    }
 }

@@ -1,9 +1,7 @@
 package com.teckstudy.book.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.teckstudy.book.domain.AnswerList;
 import com.teckstudy.book.domain.board.Board;
-import com.teckstudy.book.domain.board.repository.AnswerListRepository;
 import com.teckstudy.book.domain.board.repository.BoardRepository;
 import com.teckstudy.book.domain.member.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -29,9 +27,9 @@ class BoardRepositoryTest {
     BoardRepository boardRepository;
 
     @Autowired
-    AnswerListRepository answerListRepository;
+//    AnswerListRepository answerListRepository;
 
-    private Mock mvc;
+//    private Mock mvc;
 
 //    @BeforeEach
 //    public void testEntity() {
@@ -79,7 +77,7 @@ class BoardRepositoryTest {
         List<Board> all = boardRepository.findAll();
 
         for (Board board1 : all) {
-            System.out.println(board1.getName());
+//            System.out.println(board1.getName());
         }
     }
 

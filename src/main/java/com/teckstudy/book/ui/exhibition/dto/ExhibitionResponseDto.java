@@ -3,7 +3,6 @@ package com.teckstudy.book.ui.exhibition.dto;
 import com.teckstudy.book.application.exhibition.dto.ContentsDto;
 import com.teckstudy.book.application.exhibition.dto.ExhibitionDto;
 import com.teckstudy.book.domain.base.types.YesNoStatus;
-import com.teckstudy.book.domain.exhibition.ContentsType;
 import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
 import lombok.Builder;
 import lombok.Getter;

@@ -2,7 +2,8 @@ package com.teckstudy.book.domain.board;
 
 import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.base.types.YesNoStatus;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 

@@ -6,7 +6,6 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
-  profiles:
     active: default
   datasource:
     url: jdbc:mysql://petlendar.csni78yzxjkm.ap-northeast-2.rds.amazonaws.com/babybook?serverTimezone=UTC&characterEncoding=UTF-8

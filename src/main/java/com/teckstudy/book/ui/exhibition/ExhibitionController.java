@@ -42,11 +42,12 @@ public class ExhibitionController {
     @PostMapping("/api/exhibitions")
     public ResponseEntity<ExhibitionResponseDto> registerExhibition(@RequestBody ExhibitionRequestDto requestDto) {
 
-        Long exhibitionId = exhibitionService.exhibitionSave(requestDto.toWrapper());
-
-        ExhibitionDto exhibitionDto = exhibitionService.findById(exhibitionId);
-
-        return ResponseEntity.ok().body(ExhibitionResponseDto.from(exhibitionDto));
+//        Long exhibitionId = exhibitionService.exhibitionSave(requestDto.toWrapper());
+//
+//        ExhibitionDto exhibitionDto = exhibitionService.findById(exhibitionId);
+//
+//        return ResponseEntity.ok().body(ExhibitionResponseDto.from(exhibitionDto));
+        return ResponseEntity.ok().body(ExhibitionResponseDto.builder().build());
     }
 
     /**
@@ -58,12 +59,12 @@ public class ExhibitionController {
     @PatchMapping("/api/exhibitions/{id}")
     public ResponseEntity<ExhibitionResponseDto> updateExhibition(@PathVariable("id") Long id, @RequestBody ExhibitionRequestDto requestDto) {
 
-        Long exhibitionSn = exhibitionService.exhibitionUpdate(id, requestDto);
-
-        List<ContentsDto> contents = exhibitionService.findByContents(exhibitionSn);
-
-        ExhibitionDto exhibitionDto = exhibitionService.findById(exhibitionSn);
-        exhibitionDto.setContentsList(contents);
+//        Long exhibitionSn = exhibitionService.exhibitionUpdate(id, requestDto);
+//
+//        List<ContentsDto> contents = exhibitionService.findByContents(exhibitionSn);
+//
+//        ExhibitionDto exhibitionDto = exhibitionService.findById(exhibitionSn);
+//        exhibitionDto.setContentsList(contents);
 
         return ResponseEntity.ok().body(ExhibitionResponseDto.builder().build());
     }

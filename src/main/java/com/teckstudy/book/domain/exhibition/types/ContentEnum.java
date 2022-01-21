@@ -1,5 +1,4 @@
 package com.teckstudy.book.domain.exhibition.types;
-
 import lombok.Getter;
 
 @Getter

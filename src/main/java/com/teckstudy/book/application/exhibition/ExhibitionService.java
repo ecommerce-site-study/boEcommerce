@@ -48,15 +48,16 @@ public class ExhibitionService {
     @Transactional
     public Long exhibitionSave(ExhibitionRequestDto exhibitionRequestDto) {
 
-        duplicateCheck(exhibitionRequestDto);
-        exhibitionRepository.save(exhibitionRequestDto.fromExhibitionEntity());
-
-        // 컨텐츠타입 적재
-        for(ContentsType contentsTypes : exhibitionRequestDto.getContentsList()){
-            contentsTypeRepository.save(exhibitionRequestDto.toContentsEntity(contentsTypes, exhibition));
-        }
-
-        return exhibition.getExhibitionId();
+//        duplicateCheck(exhibitionRequestDto);
+//        exhibitionRepository.save(exhibitionRequestDto.fromExhibitionEntity());
+//
+//        // 컨텐츠타입 적재
+//        for(ContentsType contentsTypes : exhibitionRequestDto.getContentsList()){
+//            contentsTypeRepository.save(exhibitionRequestDto.toContentsEntity(contentsTypes, exhibition));
+//        }
+//
+//        return exhibition.getExhibitionId();
+        return null;
     }
 
 
@@ -69,13 +70,13 @@ public class ExhibitionService {
 
         exhibitionRepository.updateExhibition(exhibitionRequestDto, id);
 
-        for(ContentsType contentsTypes : exhibitionRequestDto.getContentsList()){
-            contentsTypeRepository.updateContents(
-                    contentsTypes.getContentId(),
-                    contentsTypes.getContentEnum(),
-                    contentsTypes.getContentCnt()
-            );
-        }
+//        for(ContentsType contentsTypes : exhibitionRequestDto.getContentsList()){
+//            contentsTypeRepository.updateContents(
+//                    contentsTypes.getContentId(),
+//                    contentsTypes.getContentEnum(),
+//                    contentsTypes.getContentCnt()
+//            );
+//        }
 
         return exhibition.getExhibitionId();
     }
