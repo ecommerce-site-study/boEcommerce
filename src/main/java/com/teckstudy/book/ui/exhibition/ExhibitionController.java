@@ -2,6 +2,7 @@ package com.teckstudy.book.ui.exhibition;
 
 import com.teckstudy.book.application.exhibition.ExhibitionService;
 import com.teckstudy.book.application.exhibition.dto.ExhibitionDto;
+import com.teckstudy.book.lib.common.base.BaseAbstractController;
 import com.teckstudy.book.ui.exhibition.dto.ExhibitionRequestDto;
 import com.teckstudy.book.ui.exhibition.dto.ExhibitionResponseDto;
 import io.swagger.annotations.*;
@@ -12,8 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(value = "ExhibitionController v1")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/v1")
-public class ExhibitionController {
+public class ExhibitionController extends BaseAbstractController {
 
     private final ExhibitionService exhibitionService;
 

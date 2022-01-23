@@ -4,13 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.teckstudy.book.application.category.CategoryService;
 import com.teckstudy.book.application.category.dto.CategoryWrapper;
 import com.teckstudy.book.domain.category.Category;
+import com.teckstudy.book.lib.common.base.BaseAbstractController;
 import com.teckstudy.book.lib.common.base.SuccessResponse;
 import com.teckstudy.book.ui.category.dto.CategoryRequest;
 import com.teckstudy.book.ui.category.dto.CategoryResponse;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import io.swagger.models.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,13 +18,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * 레이어별로 DTO를 가져감
- */
+
+@Api(value = "CategoryController v1")
 @RestController
-@RequestMapping("/v1")
 @RequiredArgsConstructor
-public class CategoryController {
+public class CategoryController extends BaseAbstractController {
 
     private final CategoryService categoryService;
 
@@ -57,6 +53,7 @@ public class CategoryController {
     }
 
     @ApiOperation(value = "[카테고리] 수정", notes = "[카테고리] 수정하기")
+    @ApiImplicitParam(name = "categoryId", value = "카테고리 고유 ID", required = true, paramType = "path", dataType = "long")
     @ApiResponses({
             @ApiResponse(code = 200, message = "카테고리 수정 성공"),
             @ApiResponse(code = 400, message = "잘못된 접근"),
@@ -72,6 +69,7 @@ public class CategoryController {
 
 
     @ApiOperation(value = "[카테고리] 삭제", notes = "[카테고리] 삭젤하기")
+    @ApiImplicitParam(name = "categoryId", value = "카테고리 고유 ID", required = true, paramType = "path", dataType = "long")
     @ApiResponses({
             @ApiResponse(code = 200, message = "카테고리 삭제 성공"),
             @ApiResponse(code = 400, message = "잘못된 접근"),
