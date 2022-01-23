@@ -1,7 +1,9 @@
 package com.teckstudy.book.lib.common.util;
 
+import com.teckstudy.book.application.exhibition.dto.SearchExhibitionDto;
 import com.teckstudy.book.domain.base.types.YesNoStatus;
 import com.teckstudy.book.domain.exhibition.ContentsType;
+import com.teckstudy.book.domain.exhibition.Exhibition;
 import com.teckstudy.book.domain.exhibition.types.ContentEnum;
 import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
 import com.teckstudy.book.lib.common.message.api.ExhibitionCode;
@@ -29,19 +31,21 @@ public class BoValidation {
 
     }
 
-    public BoValidation(ExhibitionRequestDto exhibitionRequestDto, Map<ContentEnum, Integer> contentInfo) {
+    public BoValidation(SearchExhibitionDto searchExhibitionDto, Map<ContentEnum, Integer> contentInfo) {
+
+        Exhibition exhibitionDto = searchExhibitionDto.toEntity();
 
         // 글자 벨리데이션
-        nameValidation(exhibitionRequestDto.getName());
+        nameValidation(exhibitionDto.getName());
 
         // 컨텐츠 벨리데이션(컨텐츠정보, 컨텐츠 최대갯수, 컨텐츠 묶음갯수)
-        boContentValidation(contentInfo, exhibitionRequestDto.getContentsList(), exhibitionRequestDto.getBundleContentCnt());
+        boContentValidation(contentInfo, exhibitionDto.getContentsType(), exhibitionDto.getBundleContentCnt());
 
         // 전시기간 벨리데이션
-        dateValidation(exhibitionRequestDto.getDateYn(), exhibitionRequestDto.getExhibitionStart(), exhibitionRequestDto.getExhibitionEnd());
+        dateValidation(exhibitionDto.getDateYn(), exhibitionDto.getExhibitionStart(), exhibitionDto.getExhibitionEnd());
 
         // 이미지 벨리데이션
-        imageValidation(exhibitionRequestDto.getExhibitionType(), exhibitionRequestDto.getImage());
+        imageValidation(exhibitionDto.getExhibitionType(), exhibitionDto.getImage());
 
         // 파일 사이즈 체크
 //        multiFileUpload(exhibitionRequestDto long megabyte);
