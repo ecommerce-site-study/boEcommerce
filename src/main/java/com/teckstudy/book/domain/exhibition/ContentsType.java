@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -39,5 +40,24 @@ public class ContentsType extends BaseEntity {
 
     public static ContentsType ofNew(ContentsType contentsTypes, Exhibition exhibition) {
         return new ContentsType(contentsTypes.contentId, contentsTypes.contentEnum, contentsTypes.contentCnt, exhibition);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContentsType that = (ContentsType) o;
+        return Objects.equals(contentId, that.contentId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(contentId);
+    }
+
+    public void updateContentsType(ContentEnum contentEnum, int contentCnt, Exhibition exhibition) {
+        this.contentEnum = contentEnum;
+        this.contentCnt = contentCnt;
+        this.exhibition = exhibition;
     }
 }
