@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +26,7 @@ public class ExhibitionService {
 
     /**
      * 전시카테고리 조회
+     *
      * @param id
      * @return
      */
@@ -39,6 +41,7 @@ public class ExhibitionService {
 
     /**
      * 전시카테고리 등록
+     *
      * @param searchExhibitionDto
      * @return
      */
@@ -49,7 +52,7 @@ public class ExhibitionService {
         Exhibition exhibition = exhibitionRepository.save(searchExhibitionDto.toEntity());
 
         // 컨텐츠타입 적재
-        for(ContentsType contentsTypes : searchExhibitionDto.toEntity().getContentsType()){
+        for (ContentsType contentsTypes : searchExhibitionDto.toEntity().getContentsType()) {
             contentsTypeRepository.save(searchExhibitionDto.toContentsEntity(contentsTypes, exhibition));
         }
 
@@ -64,28 +67,43 @@ public class ExhibitionService {
 
         duplicateCheck(searchExhibitionDto);
 
-        exhibitionRepository.updateExhibition(searchExhibitionDto, exhibition.getExhibitionId());
+        exhibition.updateExhibition(
+                searchExhibitionDto.getUseYn(),
+                searchExhibitionDto.getName(),
+                searchExhibitionDto.getExhibitionType(),
+                searchExhibitionDto.getDateYn(),
+                searchExhibitionDto.getImage(),
+                searchExhibitionDto.getDescription(),
+                searchExhibitionDto.getUrl(),
+                searchExhibitionDto.getExhibitionStart(),
+                searchExhibitionDto.getExhibitionEnd(),
+                searchExhibitionDto.getBundleContentCnt()
+        );
 
-        for(ContentsType contentsTypes : searchExhibitionDto.toEntity().getContentsType()){
-            contentsTypeRepository.updateContents(
-                    contentsTypes.getContentId(),
-                    contentsTypes.getContentEnum(),
-                    contentsTypes.getContentCnt()
-            );
-        }
+        exhibition.getContentsType()
+                .stream()
+                .forEach(v -> {
+                    if(!searchExhibitionDto.getContentsList().contains(v.getContentId())) return;
+                    Optional<ContentsType> contentsTypeById = searchExhibitionDto.findContentsTypeById(v.getContentId());
+
+                    ContentsType contentsType = searchExhibitionDto.findContentsTypeById(v.getContentId()).get();
+                    v.updateContentsType(contentsType.getContentEnum(), contentsType.getContentCnt(), contentsType.getExhibition());
+                });
+
 
         return ExhibitionDto.from(exhibition);
     }
 
     /**
      * 벨리데이션 체크
+     *
      * @param searchExhibitionDto
      */
     private void duplicateCheck(SearchExhibitionDto searchExhibitionDto) {
         Map<ContentEnum, Integer> contentMap = new LinkedHashMap<>();
 
-        for(ContentsType contentsTypes : searchExhibitionDto.toEntity().getContentsType()){
-            contentMap.put(contentsTypes.getContentEnum(), contentMap.getOrDefault(contentsTypes.getContentEnum(), 0) +1);
+        for (ContentsType contentsTypes : searchExhibitionDto.toEntity().getContentsType()) {
+            contentMap.put(contentsTypes.getContentEnum(), contentMap.getOrDefault(contentsTypes.getContentEnum(), 0) + 1);
         }
 
         new BoValidation(searchExhibitionDto, contentMap);
