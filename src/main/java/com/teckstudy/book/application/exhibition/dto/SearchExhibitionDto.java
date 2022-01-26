@@ -5,9 +5,12 @@ import com.teckstudy.book.domain.exhibition.ContentsType;
 import com.teckstudy.book.domain.exhibition.Exhibition;
 import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
 import lombok.Builder;
+import lombok.Getter;
 
 import java.util.List;
+import java.util.Optional;
 
+@Getter
 @Builder
 public class SearchExhibitionDto {
 
@@ -48,5 +51,12 @@ public class SearchExhibitionDto {
 
     public ContentsType toContentsEntity(ContentsType contentsTypes, Exhibition exhibition) {
         return ContentsType.ofNew(contentsTypes, exhibition);
+    }
+
+    public Optional<ContentsType> findContentsTypeById(Long contentsId) {
+        return this.contentsList
+                .stream()
+                .filter(contentsType -> contentsType.getContentId() == contentsId)
+                .findAny();
     }
 }
