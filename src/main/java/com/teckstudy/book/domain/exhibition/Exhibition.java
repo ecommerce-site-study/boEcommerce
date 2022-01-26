@@ -3,7 +3,8 @@ package com.teckstudy.book.domain.exhibition;
 import com.teckstudy.book.domain.base.BaseEntity;
 import com.teckstudy.book.domain.base.types.YesNoStatus;
 import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Collections;
@@ -93,6 +94,21 @@ public class Exhibition extends BaseEntity {
                                    List<ContentsType> contentsList, int bundleContentCnt) {
         return new Exhibition(exhibitionId, useYn, name, exhibitionType, dateYn, image, description,
                 url, exhibitionStart, exhibitionEnd, contentsList, bundleContentCnt);
+    }
+
+    public void updateExhibition(YesNoStatus useYn, String name, ExhibitionType exhibitionType,
+                                 YesNoStatus dateYn, String image, String description,
+                                 String url, String exhibitionStart, String exhibitionEnd, int bundleContentCnt) {
+        this.useYn = useYn;
+        this.name = name;
+        this.exhibitionType = exhibitionType;
+        this.dateYn = dateYn;
+        this.image = image;
+        this.description = description;
+        this.url = url;
+        this.exhibitionStart = exhibitionStart;
+        this.exhibitionEnd = exhibitionEnd;
+        this.bundleContentCnt = bundleContentCnt;
     }
 
 }
