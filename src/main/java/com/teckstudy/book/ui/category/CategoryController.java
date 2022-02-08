@@ -65,7 +65,7 @@ public class CategoryController extends BaseAbstractController {
     }
 
 
-    @ApiOperation(value = "[카테고리] 삭제", notes = "[카테고리] 삭젤하기")
+    @ApiOperation(value = "[카테고리] 삭제", notes = "[카테고리] 삭제하기")
     @ApiImplicitParam(name = "categoryId", value = "카테고리 고유 ID", required = true, paramType = "path", dataType = "long")
     @ApiResponses({
             @ApiResponse(code = 200, message = "카테고리 삭제 성공"),
