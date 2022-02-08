@@ -7,10 +7,8 @@ import com.teckstudy.book.domain.exhibition.Exhibition;
 import com.teckstudy.book.domain.exhibition.types.ContentEnum;
 import com.teckstudy.book.domain.exhibition.types.ExhibitionType;
 import com.teckstudy.book.lib.common.message.api.ExhibitionCode;
-import com.teckstudy.book.ui.exhibition.dto.ExhibitionRequestDto;
+import org.apache.commons.lang3.StringUtils;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -127,14 +125,14 @@ public class BoValidation {
      * @param end
      */
     public void dateValidation(YesNoStatus dateYn, String start, String end) {
-        if(dateYn.equals(YesNoStatus.Y) && ("".equals(start) || "".equals(end))) {
+        if(dateYn.isY() && (StringUtils.isBlank(start) || StringUtils.isBlank(end))) {
             throw new IllegalArgumentException(ExhibitionCode.DATE_AND_TIME.getMsg());
         }
 
-        LocalDateTime startDate = LocalDateTime.parse(start, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        LocalDateTime endDate = LocalDateTime.parse(end, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        Integer startDate = Integer.valueOf(start);
+        Integer endDate = Integer.valueOf(end);
 
-        if (startDate.isAfter(endDate)) {
+        if(startDate > endDate) {
             throw new IllegalArgumentException(ExhibitionCode.END_DATE_EXHIBITION_CANNOT_START_DATE.getMsg());
         }
     }
