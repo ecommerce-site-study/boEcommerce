@@ -1,0 +1,76 @@
+### [GET] exhibition 리스트 API
+GET {{host}}/v1/api/exhibitions/10000033
+
+### [POST] exhibition 등록 API
+POST {{host}}/v1/api/exhibitions
+Content-Type: application/json
+
+{
+  "name" : "까치와 설날2",
+  "useYn" : "Y",
+  "dateYn" : "Y",
+  "exhibitionStart" : "2021-10-30 12:30",
+  "exhibitionEnd" : "2021-11-05 13:50",
+  "image" : "C:/Programer/imageTest/bigImage.bmp",
+  "exhibitionType" : "IMAGE",
+  "description" : "자유롭게 설명 하세요33",
+  "url" : "www.naver.com",
+  "bundleContentCnt" : 88,
+  "contentsList" : [
+    {
+      "contentEnum" : "TEXT",
+      "contentCnt" : 3
+    },
+    {
+      "contentEnum" : "HTML",
+      "contentCnt" : 4
+    },
+    {
+      "contentEnum" : "CONTENTS",
+      "contentCnt" : 2
+    },
+    {
+      "contentEnum" : "VIDEO",
+      "contentCnt" : 9
+    }
+  ]
+}
+
+### [PATCH] exhibition 수정 API
+PATCH {{host}}/v1/api/exhibitions/10000033
+Content-Type: application/json
+
+{
+  "name": "이 달의 추천 게임 리니지",
+  "useYn": "N",
+  "dateYn": "N",
+  "exhibitionStart": "20220210",
+  "exhibitionEnd": "20220209",
+  "image": "C:/Programer/imageTest/updateImage.png",
+  "exhibitionType": "UNEXPOSED",
+  "description": "전시관리 삼성역",
+  "url": "www.daum.com",
+  "bundleContentCnt" : 80,
+  "contentsList": [
+    {
+      "contentId": 10000117,
+      "contentEnum": "HTML",
+      "contentCnt": 60
+    },
+    {
+      "contentId": 10000118,
+      "contentEnum": "TEXT",
+      "contentCnt": 50
+    },
+    {
+      "contentId": 10000119,
+      "contentEnum": "CONTENTS",
+      "contentCnt": 20
+    },
+    {
+      "contentId": 10000120,
+      "contentEnum": "VIDEO",
+      "contentCnt": 20
+    }
+  ]
+}

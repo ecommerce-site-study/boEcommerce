@@ -1,0 +1,31 @@
+### [GET] Category 리스트 API
+GET {{host}}/v1/api/categories
+
+### [POST] Category 등록 API
+POST {{host}}/v1/api/categories
+Content-Type: application/json
+
+{
+  "categoryId": 3,
+  "displayName": "display_subss",
+  "displayYn": "Y",
+  "ordering": 1,
+  "parentId": 1,
+  "useYn": "Y"
+}
+
+### [PATCH] Category 수정 API
+PATCH {{host}}/v1/api/categories/3
+Content-Type: application/json
+
+{
+  "displayName": "display_sub2222ss",
+  "displayYn": "Y",
+  "ordering": 1,
+  "parentId": 1,
+  "useYn": "Y"
+}
+
+### [DELETE] Category 삭제 API
+DELETE {{host}}/v1/api/categories/3
+Content-Type: application/json
