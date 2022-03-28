@@ -10,6 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass // 매핑정보 속성만 받는 슈퍼클래스 자주씀
@@ -19,10 +20,10 @@ public class BaseEntity {
 
     @CreatedDate
     @Column(name = "regdate", updatable = false) // 등록 안되게
-    private LocalDate regDate;
+    private LocalDateTime regDate;
     @LastModifiedDate
     @Column(name = "moddate")
-    private LocalDate modDate;
+    private LocalDateTime modDate;
 
     @CreatedBy
     @Column(name = "regdatedby")

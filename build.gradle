@@ -1,6 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.3.8.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id "io.franzbecker.gradle-lombok" version "3.0.0"
 	//querydsl 추가
 	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 	id 'java'
@@ -24,9 +25,12 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 //	implementation "io.springfox:springfox-boot-starter:3.0.0"
 	implementation 'io.springfox:springfox-swagger2:2.6.1'
 	implementation 'io.springfox:springfox-swagger-ui:2.6.1'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+	implementation 'com.google.code.gson:gson:2.8.6'
 
 	//querydsl 추가
 	implementation 'com.querydsl:querydsl-jpa'
@@ -36,6 +40,9 @@ dependencies {
 	//문자열에 작업하는 관련기능 모아놓은 라이브러리
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// Springboot 내장 Tomcat
+	implementation 'org.springframework.boot:spring-boot-starter'
 
     compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
@@ -67,6 +74,7 @@ configurations {
 compileQuerydsl {
 	options.annotationProcessorPath = configurations.querydsl
 }
+
 //querydsl 추가 끝
 bootRun {
 	String activeProfile = System.properties['spring.profiles.active']
