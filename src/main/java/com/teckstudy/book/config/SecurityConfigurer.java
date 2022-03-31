@@ -1,5 +1,6 @@
 package com.teckstudy.book.config;
 
+//import com.teckstudy.book.config.jwt.filter.JwtAuthenticationFilter;
 import com.teckstudy.book.config.jwt.filter.JwtAuthenticationFilter;
 import com.teckstudy.book.config.security.StatelessCSRFFilter;
 import com.teckstudy.book.config.security.UserDetailsServiceImpl;
@@ -40,20 +41,22 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() //세션 사용 x
-                .csrf().disable()
-                .cors().disable()
+//                .csrf().disable()
+//                .cors().disable()
+//                .formLogin().disable()
+//                .logout().disable() // '/logout' uri 를 사용하기 위한 설정
+//                .httpBasic().disable()
                 .formLogin().disable()
-                .logout().disable() // '/logout' uri 를 사용하기 위한 설정
-                .httpBasic().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/csrf-token").permitAll()
-                .antMatchers(HttpMethod.POST, "/authorize", "/users").anonymous()
-                .antMatchers(HttpMethod.POST, "/oauth2/unlink").authenticated()
-                .antMatchers("/oauth2/**").permitAll()
-                .anyRequest().authenticated().and()
-                .exceptionHandling()
-                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
+                .anyRequest().permitAll();
+//                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+//                .antMatchers("/csrf-token").permitAll()
+//                .antMatchers(HttpMethod.POST, "/authorize", "/users", "/api/**").anonymous()
+//                .antMatchers(HttpMethod.POST, "/oauth2/unlink").authenticated()
+//                .antMatchers("/oauth2/**").permitAll()
+//                .anyRequest().authenticated().and()
+//                .exceptionHandling()
+//                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
 
         //로그인 인증을 진행하는 필터 이전에 jwtAuthenticationFilter 가 실행되도록 설정
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

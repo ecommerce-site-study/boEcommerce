@@ -5,26 +5,36 @@ import com.teckstudy.book.config.jwt.JwtProvider;
 import com.teckstudy.book.config.security.StatelessCSRFFilter;
 import com.teckstudy.book.config.security.UserDetailsImpl;
 import com.teckstudy.book.domain.oauth2.*;
+import com.teckstudy.book.domain.oauth2.account.OAuth2AccountDTO;
 import com.teckstudy.book.domain.oauth2.service.OAuth2Service;
 import com.teckstudy.book.domain.oauth2.service.OAuth2ServiceFactory;
 import com.teckstudy.book.domain.oauth2.userInfo.OAuth2UserInfo;
+import com.teckstudy.book.lib.common.fuction.exception.ValidationException;
 import com.teckstudy.book.lib.common.util.CookieUtils;
+import com.teckstudy.book.lib.common.fuction.exception.AuthenticationFailedException;
+import com.teckstudy.book.ui.authentication.request.AuthorizationRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -38,6 +48,52 @@ public class AuthenticationController {
     private final InMemoryOAuth2RequestRepository inMemoryOAuth2RequestRepository;
     private final RestTemplate restTemplate;
     private final JwtProvider jwtProvider;
+
+    @GetMapping("/csrf-token")
+    public ResponseEntity<?> getCsrfToken(HttpServletRequest request, HttpServletResponse response) {
+        String csrfToken = UUID.randomUUID().toString();
+
+        Map<String, String> resMap = new HashMap<>();
+        resMap.put(StatelessCSRFFilter.CSRF_TOKEN, csrfToken);
+
+        generateCSRFTokenCookie(response);
+        return ResponseEntity.ok(resMap);
+    }
+
+    /* 사용자의 계정을 인증하고 로그인 토큰을 발급해주는 컨트롤러 */
+    @PostMapping("/authorize")
+    public void authenticateUsernamePassword(@Valid @RequestBody AuthorizationRequest authorizationRequest, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if (bindingResult.hasErrors()) throw new ValidationException("로그인 유효성 검사 실패.", bindingResult.getFieldErrors());
+        try {
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authorizationRequest.getUsername(), authorizationRequest.getPassword()));
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            generateTokenCookie(userDetails, request, response);
+            generateCSRFTokenCookie(response);
+        } catch (AuthenticationException e) {
+            throw new AuthenticationFailedException("아이디 또는 패스워드가 틀렸습니다.");
+        }
+    }
+
+    /* 토큰 쿠키를 삭제하는 컨트롤러 (로그아웃) */
+    @PostMapping("/logout")
+    public ResponseEntity<?> expiredToken(HttpServletRequest request, HttpServletResponse response) {
+        CookieUtils.deleteCookie(request, response, "access_token");
+        CookieUtils.deleteCookie(request, response, StatelessCSRFFilter.CSRF_TOKEN);
+        return ResponseEntity.ok("success");
+    }
+
+    /* 사용자의 소셜 로그인 요청을 받아 각 소셜 서비스로 인증을 요청하는 컨트롤러 */
+    @GetMapping("/oauth2/authorize/{provider}")
+    public void redirectSocialAuthorizationPage(@PathVariable String provider, @RequestParam(name = "redirect_uri") String redirectUri, @RequestParam String callback, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String state = generateState();
+
+        // 콜백에서 사용할 요청 정보를 저장
+        inMemoryOAuth2RequestRepository.saveOAuth2Request(state, OAuth2AuthorizationRequest.builder().referer(request.getHeader("referer")).redirectUri(redirectUri).callback(callback).build());
+
+        ClientRegistration clientRegistration = clientRegistrationRepository.findByRegistrationId(provider);
+        OAuth2Service oAuth2Service = OAuth2ServiceFactory.getOAuth2Service(restTemplate, provider);
+        oAuth2Service.redirectAuthorizePage(clientRegistration, state, response);
+    }
 
     /* 각 소셜 서비스로부터 인증 결과를 처리하는 컨트롤러 */
     @RequestMapping("/oauth2/callback/{provider}")
@@ -88,6 +144,17 @@ public class AuthenticationController {
 
         //콜백 성공
         response.sendRedirect(oAuth2AuthorizationRequest.getRedirectUri());
+    }
+
+    @PostMapping("/oauth2/unlink")
+    public void unlinkOAuth2Account(@AuthenticationPrincipal UserDetailsImpl loginUser) {
+
+        OAuth2AccountDTO oAuth2AccountDTO = userService.unlinkOAuth2Account(loginUser.getUsername());
+
+        //OAuth 인증 서버에 연동해제 요청
+        ClientRegistration clientRegistration = clientRegistrationRepository.findByRegistrationId(oAuth2AccountDTO.getProvider());
+        OAuth2Service oAuth2Service = OAuth2ServiceFactory.getOAuth2Service(restTemplate, oAuth2AccountDTO.getProvider());
+        oAuth2Service.unlink(clientRegistration, oAuth2AccountDTO.getOAuth2Token());
     }
 
     private void generateTokenCookie(UserDetails userDetails, HttpServletRequest request, HttpServletResponse response) {

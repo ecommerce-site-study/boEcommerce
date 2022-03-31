@@ -21,12 +21,16 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Component
-@RequiredArgsConstructor
 @Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final UserDetailsServiceImpl userDetailsService;
     private final JwtProvider jwtProvider;
+
+    public JwtAuthenticationFilter(UserDetailsServiceImpl userDetailsService, JwtProvider jwtProvider) {
+        this.userDetailsService = userDetailsService;
+        this.jwtProvider = jwtProvider;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
