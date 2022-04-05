@@ -1,5 +1,10 @@
 package com.teckstudy.book.domain.member.types;
 
 public enum SocialType {
-    KAKAO, NAVER, FACEBOOK
+    DEFAULT, KAKAO, NAVER, FACEBOOK
+    ;
+
+    public static SocialType findSocialType(String socialType) {
+        return valueOf(socialType.toUpperCase());
+    }
 }
