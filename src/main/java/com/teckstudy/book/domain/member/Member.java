@@ -8,6 +8,7 @@ import com.teckstudy.book.domain.oauth2.account.OAuth2Account;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class Member extends BaseEntity {
 
@@ -59,8 +61,17 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "SOCIAL_ID")
     private OAuth2Account social;
 
+    @Column(columnDefinition = "longtext")
+    private String baseUrl; // https://s3.amazon.com
+
+    @Column(columnDefinition = "longtext")
+    private String bucketName; // image
+
+    @Column(columnDefinition = "longtext")
+    private String imageUrl; // default image 달라 .
+
     public SocialType getSocialType() {
-        return this.getSocialType();
+        return this.socialType;
     }
 
     public void updateName(String name) {
