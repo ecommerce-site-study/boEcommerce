@@ -1,5 +1,6 @@
 package com.teckstudy.book.config;
 
+import com.teckstudy.book.domain.member.types.SocialType;
 import com.teckstudy.book.domain.oauth2.ClientRegistration;
 import com.teckstudy.book.domain.oauth2.ClientRegistrationRepository;
 import com.teckstudy.book.domain.oauth2.CustomOAuth2Provider;
@@ -29,8 +30,8 @@ public class OAuth2Configurer {
     }
 
     private ClientRegistration getRegistration(String client) {
-        if (client.equals("google")) {
-            return getClientRegistrationBuilder(client)
+        if (client.equalsIgnoreCase(SocialType.GOOGLE.name())) {
+            return ClientRegistration.builder().registrationId(client)
                     .clientId(oAuth2ClientProperties.getRegistration().get(client).getClientId())
                     .clientSecret(oAuth2ClientProperties.getRegistration().get(client).getClientSecret())
                     .authorizationGrantType(oAuth2ClientProperties.getRegistration().get(client).getAuthorizationGrantType())
@@ -42,8 +43,8 @@ public class OAuth2Configurer {
                     .unlinkUri(oAuth2ClientProperties.getProvider().get(client).getUnlinkUri())
                     .build();
         }
-        if (client.equals("naver")) {
-            return getClientRegistrationBuilder(client)
+        if (client.equalsIgnoreCase(SocialType.NAVER.name())) {
+            return ClientRegistration.builder().registrationId(client)
                     .clientId(oAuth2ClientProperties.getRegistration().get(client).getClientId())
                     .clientSecret(oAuth2ClientProperties.getRegistration().get(client).getClientSecret())
                     .authorizationGrantType(oAuth2ClientProperties.getRegistration().get(client).getAuthorizationGrantType())
@@ -55,8 +56,8 @@ public class OAuth2Configurer {
                     .unlinkUri(oAuth2ClientProperties.getProvider().get(client).getUnlinkUri())
                     .build();
         }
-        if (client.equals("kakao")) {
-            return getClientRegistrationBuilder(client)
+        if (client.equalsIgnoreCase(SocialType.KAKAO.name())) {
+            return ClientRegistration.builder().registrationId(client)
                     .clientId(oAuth2ClientProperties.getRegistration().get(client).getClientId())
                     .clientSecret(oAuth2ClientProperties.getRegistration().get(client).getClientSecret())
                     .authorizationGrantType(oAuth2ClientProperties.getRegistration().get(client).getAuthorizationGrantType())
@@ -69,9 +70,5 @@ public class OAuth2Configurer {
                     .build();
         }
         return null;
-    }
-
-    private ClientRegistration.ClientRegistrationBuilder getClientRegistrationBuilder(String client) {
-        return ClientRegistration.builder().registrationId(client);
     }
 }

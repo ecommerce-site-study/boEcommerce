@@ -116,11 +116,6 @@ public class AuthenticationController {
         OAuth2Token oAuth2Token = oAuth2Service.getAccessToken(clientRegistration, oAuth2AuthorizationResponse.getCode(), oAuth2AuthorizationResponse.getState());
         OAuth2UserInfo oAuth2UserInfo = oAuth2Service.getUserInfo(clientRegistration, oAuth2Token.getToken());
 
-        // social token 역할 끝
-
-        // 저희 서버에서 하는거 .
-
-
         //로그인에 대한 콜백 처리
         if (oAuth2AuthorizationRequest.getCallback().equalsIgnoreCase("login")) {
             UserDetails userDetails = userService.loginOAuth2User(provider, oAuth2Token, oAuth2UserInfo);
@@ -161,7 +156,9 @@ public class AuthenticationController {
         final int cookieMaxAge = jwtProvider.getTokenExpirationDate().intValue();
         //https 프로토콜인 경우 secure 옵션사용
         boolean secure = request.isSecure();
-        CookieUtils.addCookie(response, "access_token", jwtProvider.generateToken(userDetails.getUsername()), true, secure, cookieMaxAge);
+        String jwtToken = jwtProvider.generateToken(userDetails.getUsername());
+        log.info("JWT TOKEN :: %s", jwtToken);
+        CookieUtils.addCookie(response, "access_token", jwtToken, true, secure, cookieMaxAge);
     }
 
     private void generateCSRFTokenCookie(HttpServletResponse response) {
