@@ -74,9 +74,7 @@ jwt:
   secretKey: swerjv09wau5v09q23u09
   signatureAlgorithm: HS256
   tokenExpired: 604800 #(sec) 7 days
-server:
-  servlet:
-    context-path: /api
+
 client:
   origins: http://localhost:3000
 logging.level:

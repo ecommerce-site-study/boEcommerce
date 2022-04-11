@@ -2,7 +2,7 @@ package com.teckstudy.book.config.security;
 
 
 import com.teckstudy.book.domain.member.Member;
-import com.teckstudy.book.domain.member.repository.MemberRepository;
+import com.teckstudy.book.domain.member.domain.MemberDataProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,12 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final MemberRepository memberRepository;
+    private final MemberDataProvider memberDataProvider;
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = memberRepository.findByUsername(username).orElseThrow(() ->
+        Member member = memberDataProvider.findByUsername(username).orElseThrow(() ->
                 new UsernameNotFoundException("등록되지 않은 회원입니다."));
 
         UserDetailsImpl userDetails = UserDetailsImpl.builder()

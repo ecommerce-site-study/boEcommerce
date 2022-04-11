@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Optional;
 
 public interface MemberService {
-    void saveUser(SignUpRequest signUpRequest);
+    void signUp(SignUpRequest signUpRequest);
 
     void updateProfile(String username, UpdateProfileRequest updateProfileRequest);
 

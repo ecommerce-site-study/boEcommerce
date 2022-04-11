@@ -2,7 +2,7 @@ package com.teckstudy.book.application.member;
 
 import com.teckstudy.book.config.security.UserDetailsImpl;
 import com.teckstudy.book.domain.member.Member;
-import com.teckstudy.book.domain.member.repository.MemberRepository;
+import com.teckstudy.book.domain.member.domain.MemberDataProvider;
 import com.teckstudy.book.domain.member.types.SocialType;
 import com.teckstudy.book.domain.oauth2.OAuth2Token;
 import com.teckstudy.book.domain.oauth2.account.OAuth2Account;
@@ -25,12 +25,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
-    private final MemberRepository memberRepository;
+    private final MemberDataProvider memberDataProvider;
     private final OAuth2AccountRepository oAuth2AccountRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public void saveUser(SignUpRequest signUpRequest){
+    public void signUp(SignUpRequest signUpRequest) {
         checkDuplicateEmail(signUpRequest.getEmail());
         Member member = Member.builder()
                 .username(signUpRequest.getEmail())
@@ -40,21 +40,21 @@ public class MemberServiceImpl implements MemberService {
                 .socialType(SocialType.DEFAULT)
                 .build();
 
-        memberRepository.save(member);
+        memberDataProvider.save(member);
     }
 
     @Override
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public Optional<OAuth2AccountDTO> getOAuth2Account(String username) {
-        Optional<Member> optionalUser = memberRepository.findByUsername(username);
+        Optional<Member> optionalUser = memberDataProvider.findByUsername(username);
         if (!optionalUser.isPresent() || optionalUser.get().getSocial() == null) return Optional.empty();
         return Optional.of(optionalUser.get().getSocial().toDTO());
     }
 
     @Override
-    public void updateProfile(String username, UpdateProfileRequest updateProfileRequest){
+    public void updateProfile(String username, UpdateProfileRequest updateProfileRequest) {
 
-        Member user = memberRepository.findByUsername(username).get();
+        Member user = memberDataProvider.findByUsername(username).get();
 
         //이름이 변경되었는지 체크
         if (!user.getName().equals(updateProfileRequest.getName()))
@@ -95,7 +95,7 @@ public class MemberServiceImpl implements MemberService {
             //이메일 정보가 있을때
             if (memberInfo.getEmail() != null) {
                 // 같은 이메일을 사용하는 계정이 존재하는지 확인 후 있다면 소셜 계정과 연결시키고 없다면 새로 생성한다
-                member = memberRepository.findByEmail(memberInfo.getEmail())
+                member = memberDataProvider.findByEmail(memberInfo.getEmail())
                         .orElse(Member.builder()
                                 .username(provider + "_" + memberInfo.getId())
                                 .name(memberInfo.getName())
@@ -114,7 +114,7 @@ public class MemberServiceImpl implements MemberService {
 
             //새로 생성된 유저이면 db에 저장
             if (member.getMemberId() == null)
-                memberRepository.save(member);
+                memberDataProvider.save(member);
 
             //연관관계 설정
             member.linkSocial(newAccount);
@@ -178,20 +178,19 @@ public class MemberServiceImpl implements MemberService {
         OAuth2AccountDTO oAuth2AccountDTO = null;
         Member member = checkRegisteredUser(username);
         //연동된 소셜 계정이 있다면 계정 정보를 리턴하기 위해 저장
-        if(member.getSocial() != null)
+        if (member.getSocial() != null)
             oAuth2AccountDTO = member.getSocial().toDTO();
-        memberRepository.delete(member);
+        memberDataProvider.delete(member);
         return Optional.ofNullable(oAuth2AccountDTO);
     }
 
     private void checkDuplicateEmail(String email) {
-        if(memberRepository.existsByEmail(email))
-//            throw new DuplicateUserException("사용중인 이메일 입니다.", new SimpleFieldError("email", "사용중인 이메일 입니다."));
-                throw  new IllegalArgumentException("사용중인 이메일 입니다.");
+        if (memberDataProvider.existsByEmail(email))
+            throw new IllegalArgumentException("사용중인 이메일 입니다.");
     }
 
     private Member checkRegisteredUser(String username) {
-        Optional<Member> optUser = memberRepository.findByUsername(username);
+        Optional<Member> optUser = memberDataProvider.findByUsername(username);
         Assert.state(optUser.isPresent(), "가입되지 않은 회원입니다.");
         return optUser.get();
     }

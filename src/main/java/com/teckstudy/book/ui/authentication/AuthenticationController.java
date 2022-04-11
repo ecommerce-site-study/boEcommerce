@@ -9,10 +9,12 @@ import com.teckstudy.book.domain.oauth2.account.OAuth2AccountDTO;
 import com.teckstudy.book.domain.oauth2.service.OAuth2Service;
 import com.teckstudy.book.domain.oauth2.service.OAuth2ServiceFactory;
 import com.teckstudy.book.domain.oauth2.userInfo.OAuth2UserInfo;
+import com.teckstudy.book.lib.common.base.SuccessResponse;
 import com.teckstudy.book.lib.common.fuction.exception.ValidationException;
 import com.teckstudy.book.lib.common.util.CookieUtils;
 import com.teckstudy.book.lib.common.fuction.exception.AuthenticationFailedException;
 import com.teckstudy.book.ui.authentication.request.AuthorizationRequest;
+import com.teckstudy.book.ui.authentication.request.SignUpRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -58,6 +60,13 @@ public class AuthenticationController {
 
         generateCSRFTokenCookie(response);
         return ResponseEntity.ok(resMap);
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<SuccessResponse<Void>> signup(@RequestBody SignUpRequest request) {
+
+        userService.signUp(request);
+        return ResponseEntity.ok(SuccessResponse.of(200L, "회원가입", null));
     }
 
     /* 사용자의 계정을 인증하고 로그인 토큰을 발급해주는 컨트롤러 */
