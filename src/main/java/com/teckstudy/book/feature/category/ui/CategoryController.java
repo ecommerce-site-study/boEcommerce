@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.teckstudy.book.feature.category.application.CategoryService;
 import com.teckstudy.book.feature.category.application.dto.CategoryWrapper;
 import com.teckstudy.book.core.lib.common.base.SuccessResponse;
-import com.teckstudy.book.core.lib.common.base.BaseAbstractController;
+import com.teckstudy.book.core.lib.common.base.BaseApiController;
 import com.teckstudy.book.feature.category.ui.request.CategoryRequest;
 import com.teckstudy.book.feature.category.ui.response.CategoryResponse;
 import io.swagger.annotations.*;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Api(value = "CategoryController v1")
 @RestController
 @RequiredArgsConstructor
-public class CategoryController extends BaseAbstractController {
+public class CategoryController extends BaseApiController {
 
     private final CategoryService categoryService;
 
@@ -33,7 +33,7 @@ public class CategoryController extends BaseAbstractController {
     public ResponseEntity<SuccessResponse<List<CategoryResponse.LayerCategory>>> searchCategories() throws JsonProcessingException {
         List<CategoryWrapper.LayerCategoryDto> layerCategories = categoryService.searchCategories();
 
-        return ResponseEntity.ok(SuccessResponse.of(200L, "success", layerCategories.stream().map(CategoryResponse.LayerCategory::from).collect(Collectors.toList())));
+        return ResponseEntity.ok(SuccessResponse.of("200", "success", layerCategories.stream().map(CategoryResponse.LayerCategory::from).collect(Collectors.toList())));
     }
 
     @ApiOperation(value = "[카테고리] 등록", notes = "[카테고리] 등록하기")
@@ -46,7 +46,7 @@ public class CategoryController extends BaseAbstractController {
     public ResponseEntity<SuccessResponse<CategoryResponse.PersistCategory>> registerCategory(@RequestBody CategoryRequest.RegisterCategory categoryRequest) throws IllegalAccessException {
         CategoryWrapper.PersistCategory category = categoryService.addCategory(categoryRequest.toWrapper());
 
-        return ResponseEntity.ok(SuccessResponse.of(201L, "Create Category", CategoryResponse.PersistCategory.from(category)));
+        return ResponseEntity.ok(SuccessResponse.of("201", "Create Category", CategoryResponse.PersistCategory.from(category)));
     }
 
     @ApiOperation(value = "[카테고리] 수정", notes = "[카테고리] 수정하기")
@@ -61,7 +61,7 @@ public class CategoryController extends BaseAbstractController {
 
         CategoryWrapper.UpdateCategory category = categoryService.updateCategory(categoryRequest.toWrapper(categoryId));
 
-        return ResponseEntity.ok(SuccessResponse.of(200L, "Update Category", CategoryResponse.UpdateCategory.from(category)));
+        return ResponseEntity.ok(SuccessResponse.of("200", "Update Category", CategoryResponse.UpdateCategory.from(category)));
     }
 
 
@@ -75,6 +75,6 @@ public class CategoryController extends BaseAbstractController {
     @DeleteMapping("/api/categories/{categoryId}")
     public ResponseEntity<SuccessResponse<String>> deleteCategory(@PathVariable(name = "categoryId") Long categoryId) throws IllegalAccessException {
         categoryService.deleteCategory(categoryId);
-        return ResponseEntity.ok(SuccessResponse.of(200L, "Delete Category", ""));
+        return ResponseEntity.ok(SuccessResponse.of("200", "Delete Category", ""));
     }
 }

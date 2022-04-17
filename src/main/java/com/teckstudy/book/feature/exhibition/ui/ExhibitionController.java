@@ -3,7 +3,7 @@ package com.teckstudy.book.feature.exhibition.ui;
 import com.teckstudy.book.feature.exhibition.application.ExhibitionService;
 import com.teckstudy.book.feature.exhibition.application.dto.ExhibitionDto;
 import com.teckstudy.book.core.lib.common.base.SuccessResponse;
-import com.teckstudy.book.core.lib.common.base.BaseAbstractController;
+import com.teckstudy.book.core.lib.common.base.BaseApiController;
 import com.teckstudy.book.feature.exhibition.ui.request.ExhibitionRequest;
 import com.teckstudy.book.feature.exhibition.ui.request.ExhibitionResponse;
 import io.swagger.annotations.*;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(value = "ExhibitionController v1")
 @RequiredArgsConstructor
 @RestController
-public class ExhibitionController extends BaseAbstractController {
+public class ExhibitionController extends BaseApiController {
 
     private final ExhibitionService exhibitionService;
 
@@ -34,7 +34,7 @@ public class ExhibitionController extends BaseAbstractController {
 
         ExhibitionDto exhibition = exhibitionService.findById(id);
 
-        return ResponseEntity.ok(SuccessResponse.of(200L, "success", ExhibitionResponse.from(exhibition)));
+        return ResponseEntity.ok(SuccessResponse.of("200", "success", ExhibitionResponse.from(exhibition)));
     }
 
     /**
@@ -52,7 +52,7 @@ public class ExhibitionController extends BaseAbstractController {
 
         ExhibitionDto exhibition = exhibitionService.exhibitionSave(requestDto.toWrapper());
 
-        return ResponseEntity.ok(SuccessResponse.of(201L, "success", ExhibitionResponse.from(exhibition)));
+        return ResponseEntity.ok(SuccessResponse.of("201", "success", ExhibitionResponse.from(exhibition)));
     }
 
     /**
@@ -70,7 +70,7 @@ public class ExhibitionController extends BaseAbstractController {
     public ResponseEntity<SuccessResponse> updateExhibition(@PathVariable("id") Long id, @RequestBody ExhibitionRequest requestDto) {
 
         ExhibitionDto exhibition = exhibitionService.exhibitionUpdate(id, requestDto.toWrapper());
-        return ResponseEntity.ok(SuccessResponse.of(200L, "Update Exhibition", ExhibitionResponse.from(exhibition)));
+        return ResponseEntity.ok(SuccessResponse.of("200", "Update Exhibition", ExhibitionResponse.from(exhibition)));
 
     }
 }

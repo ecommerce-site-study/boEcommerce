@@ -1,6 +1,6 @@
 package com.teckstudy.book.feature.member.ui;
 
-import com.teckstudy.book.core.lib.common.base.BaseAbstractController;
+import com.teckstudy.book.core.lib.common.base.BaseApiController;
 import com.teckstudy.book.core.lib.common.base.SuccessResponse;
 import com.teckstudy.book.feature.member.application.MemberService;
 import com.teckstudy.book.feature.member.ui.request.SignUpRequest;
@@ -26,7 +26,7 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 @RestController
 @RequiredArgsConstructor
-public class MemberApiController extends BaseAbstractController {
+public class MemberApiController extends BaseApiController {
 
     private final MemberService userService;
 
@@ -34,6 +34,6 @@ public class MemberApiController extends BaseAbstractController {
     public ResponseEntity<SuccessResponse<Void>> signup(@Valid @RequestBody SignUpRequest request) {
 
         userService.signUp(request);
-        return ResponseEntity.ok(SuccessResponse.of(200L, "회원가입", null));
+        return ResponseEntity.ok(SuccessResponse.of("200", "회원가입", null));
     }
 }
