@@ -1,9 +1,8 @@
 package com.teckstudy.book.feature.member.ui;
 
-import com.teckstudy.book.feature.member.application.MemberService;
-import com.teckstudy.book.core.lib.common.base.SuccessResponse;
 import com.teckstudy.book.core.lib.common.base.BaseAbstractController;
-import com.teckstudy.book.feature.member.ui.request.PhoneNumberAuthRequest;
+import com.teckstudy.book.core.lib.common.base.SuccessResponse;
+import com.teckstudy.book.feature.member.application.MemberService;
 import com.teckstudy.book.feature.member.ui.request.SignUpRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -36,21 +35,5 @@ public class MemberApiController extends BaseAbstractController {
 
         userService.signUp(request);
         return ResponseEntity.ok(SuccessResponse.of(200L, "회원가입", null));
-    }
-
-
-    // 휴대전화 인증요청 API
-    @PostMapping("/phone/auth")
-    public ResponseEntity<SuccessResponse<Void>> phoneNumberAuth(@RequestBody PhoneNumberAuthRequest request) {
-
-
-
-
-        return ResponseEntity.ok(SuccessResponse.of(200L, "휴대폰번호 인증", null));
-    }
-
-    @PostMapping("/phone/auth/verify")
-    public ResponseEntity<SuccessResponse<Void>> phoneNumberAuthVerify() {
-        return ResponseEntity.ok(SuccessResponse.of(200L, "휴대폰번호 인증", null));
     }
 }

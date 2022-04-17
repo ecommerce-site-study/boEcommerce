@@ -1,5 +1,6 @@
-package com.teckstudy.book.feature.member.ui.request;
+package com.teckstudy.book.feature.auth_verify.ui.request;
 
+import com.teckstudy.book.core.types.AuthInfoType;
 import lombok.Getter;
 
 import java.io.Serializable;
@@ -15,9 +16,14 @@ import java.io.Serializable;
  */
 
 @Getter
-public class PhoneNumberAuthRequest implements Serializable {
+public class AuthRequest implements Serializable {
 
     private static final long serialVersionUID = -294679248324742964L;
 
-    private String phoneNumber;
+    private AuthInfoType type;
+    private String authIdentity;
+
+    public void type(AuthInfoType type) {
+        this.type = type;
+    }
 }

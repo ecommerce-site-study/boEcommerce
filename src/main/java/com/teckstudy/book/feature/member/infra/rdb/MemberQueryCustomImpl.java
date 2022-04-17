@@ -2,23 +2,24 @@ package com.teckstudy.book.feature.member.infra.rdb;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.teckstudy.book.feature.member.domain.Member;
-import com.teckstudy.book.domain.member.QMember;
+import com.teckstudy.book.feature.member.domain.QMember;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Objects;
 import java.util.Optional;
 
+import static com.teckstudy.book.feature.member.domain.QMember.member;
+
 @Repository
 @RequiredArgsConstructor
 public class MemberQueryCustomImpl implements MemberQueryCustom {
 
     private final JPAQueryFactory queryFactory;
+    private final QMember qMember = member;
 
     @Override
     public Optional<Member> findByEmail(String email) {
-        QMember qMember = QMember.member;
-
         return Optional.ofNullable(
                 queryFactory
                         .selectFrom(qMember)
@@ -29,8 +30,6 @@ public class MemberQueryCustomImpl implements MemberQueryCustom {
 
     @Override
     public Optional<Member> findByUsername(String username) {
-        QMember qMember = QMember.member;
-
         return Optional.ofNullable(
                 queryFactory
                         .selectFrom(qMember)
@@ -41,8 +40,6 @@ public class MemberQueryCustomImpl implements MemberQueryCustom {
 
     @Override
     public boolean existsByEmail(String email) {
-        QMember qMember = QMember.member;
-
         return Objects.nonNull(queryFactory.selectFrom(qMember)
                 .where(qMember.email.eq(email))
                 .fetchFirst());
@@ -50,8 +47,6 @@ public class MemberQueryCustomImpl implements MemberQueryCustom {
 
     @Override
     public boolean existsByUsername(String username) {
-        QMember qMember = QMember.member;
-
         return Objects.nonNull(queryFactory.selectFrom(qMember)
                 .where(qMember.username.eq(username))
                 .fetchFirst());

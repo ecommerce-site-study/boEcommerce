@@ -1,6 +1,8 @@
 package com.teckstudy.book.feature.auth_verify.domain;
 
 import com.teckstudy.book.core.types.AuthInfoType;
+import com.teckstudy.book.feature.base.BaseEntity;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +20,8 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class AuthVerify {
+@NoArgsConstructor
+public class AuthVerify extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +29,20 @@ public class AuthVerify {
 
     private AuthInfoType authType;
 
-    private String authKey;
-    private String authValue;
+    private String verifyIdentity;
+    private String verifyCode;
+
+    private AuthVerify(AuthInfoType authType, String verifyIdentity, String verifyCode) {
+        this.authType = authType;
+        this.verifyIdentity = verifyIdentity;
+        this.verifyCode = verifyCode;
+    }
+
+    public static AuthVerify authVerify(AuthInfoType type, String verifyIdentity, String verifyCode) {
+        return new AuthVerify(type, verifyIdentity, verifyCode);
+    }
+
+    public boolean isMatched(String verifyCode) {
+        return this.verifyCode.equalsIgnoreCase(verifyCode);
+    }
 }
