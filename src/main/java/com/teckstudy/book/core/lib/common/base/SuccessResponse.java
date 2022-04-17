@@ -16,17 +16,17 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class SuccessResponse<T> {
-    private Long status;
+    private String code;
     private String message;
     private T data;
 
-    private SuccessResponse(Long status, String message, T data) {
-        this.status = status;
+    private SuccessResponse(String code, String message, T data) {
+        this.code = code;
         this.message = message;
         this.data = data;
     }
 
-    public static <T> SuccessResponse of(Long status, String message, T data) {
-        return new SuccessResponse(status,message,data);
+    public static <T> SuccessResponse of(String code, String message, T data) {
+        return new SuccessResponse(code,message,data);
     }
 }

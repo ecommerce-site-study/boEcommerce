@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @since 2022-01-23 오후 11:54
  */
 
-@RequestMapping("/v1")
-public class BaseAbstractController {
+@RequestMapping("/api/v1")
+public class BaseApiController {
 }
