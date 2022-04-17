@@ -1,14 +1,17 @@
 package com.teckstudy.book.feature.auth_verify.application;
 
+import com.teckstudy.book.core.lib.common.fuction.exception.AuthVerifyException;
 import com.teckstudy.book.core.lib.common.util.RandomUtils;
+import com.teckstudy.book.core.types.AuthInfoType;
 import com.teckstudy.book.feature.auth_verify.domain.AuthVerify;
 import com.teckstudy.book.feature.auth_verify.domain.AuthVerifyDataprovider;
 import com.teckstudy.book.feature.auth_verify.ui.request.AuthRequest;
 import com.teckstudy.book.feature.auth_verify.ui.request.AuthVerifyRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
@@ -16,19 +19,46 @@ public class AuthVerifyService {
 
     private final AuthVerifyDataprovider authVerifyDataprovider;
 
-    public void createAuthVerify(AuthRequest request) {
-        AuthVerify authVerify = AuthVerify.authVerify(request.getType(), request.getAuthIdentity(), RandomUtils.verify(6));
-        authVerifyDataprovider.save(authVerify);
+    @Transactional
+    public void createAuthVerify(AuthInfoType type, AuthRequest request) {
+
+        String authIdentity = request.getAuthIdentity();
+        AuthVerify authVerify= authVerifyDataprovider.enabledAuthVerify(type, authIdentity);
+
+        checkAlreadyCertification(authVerify);
+        checkAuthenticatingAuthVerify(authVerify);
+
+        authVerifyDataprovider.save(AuthVerify.authVerify(type, authIdentity, RandomUtils.verify(6)));
     }
 
-    public void verify(AuthVerifyRequest request) {
-        Optional<AuthVerify> authVerify = authVerifyDataprovider.findAuthVerifyByType(request.getType(), request.getAuthIdentity());
+    @Transactional
+    public void verify(AuthInfoType type, AuthVerifyRequest request) {
+        AuthVerify authVerify = authVerifyDataprovider.enabledAuthVerify(type, request.getAuthIdentity());
+        checkNotExistAuthVerify(authVerify);
+        checkAlreadyCertification(authVerify);
 
-        if(!authVerify.isPresent()) {
-            // 없어서 인증 안됨
+        if(authVerify.isNotMatched(request.getAuthCode())) {
+            throw AuthVerifyException.AUTH_VERIFY_NOT_MATCHED.throwException();
         }
 
-        // 맞는지 인증 필요
-        AuthVerify authVerify = authVerify.get();
+        authVerify.certification();
+    }
+
+    private void checkAlreadyCertification(AuthVerify authVerify){
+        if(Objects.nonNull(authVerify) && authVerify.isCertification()) {
+            throw AuthVerifyException.IS_ALREADY_CERTIFICATION.throwException();
+        }
+    }
+
+    private void checkAuthenticatingAuthVerify(AuthVerify authVerify) {
+        if (Objects.nonNull(authVerify)) {
+            authVerify.expired();
+        }
+    }
+
+    private void checkNotExistAuthVerify(AuthVerify authVerify) {
+        if (Objects.isNull(authVerify)) {
+            throw AuthVerifyException.AUTH_VERIFY_NOT_FOUND.throwException();
+        }
     }
 }

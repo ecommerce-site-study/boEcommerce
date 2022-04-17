@@ -1,12 +1,11 @@
 package com.teckstudy.book.feature.auth_verify.infra.rdb;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.teckstudy.book.core.types.AuthInfoStatusType;
 import com.teckstudy.book.core.types.AuthInfoType;
 import com.teckstudy.book.feature.auth_verify.domain.AuthVerify;
 import com.teckstudy.book.feature.auth_verify.domain.QAuthVerify;
 import lombok.RequiredArgsConstructor;
-
-import java.util.Optional;
 
 import static com.teckstudy.book.feature.auth_verify.domain.QAuthVerify.authVerify;
 
@@ -17,16 +16,15 @@ public class AuthVerifyQueryCustomImpl implements AuthVerifyQueryCustom {
     private final QAuthVerify qAuthVerify = authVerify;
 
     @Override
-    public Optional<AuthVerify> findAuthVerifyByType(AuthInfoType type, String authIdentity) {
-
-        return Optional.ofNullable(queryFactory
+    public AuthVerify findEnabledAuthVerify(AuthInfoType type, String authIdentity) {
+        return queryFactory
                 .selectFrom(qAuthVerify)
                 .where(
-                        qAuthVerify.authType.eq(type),
-                        qAuthVerify.verifyIdentity.eq(authIdentity)
+                        qAuthVerify.verifyIdentity.eq(authIdentity),
+                        qAuthVerify.authType.eq(type)
                 )
                 .orderBy(qAuthVerify.regDate.desc())
                 .limit(1)
-                .fetchOne());
+                .fetchOne();
     }
 }

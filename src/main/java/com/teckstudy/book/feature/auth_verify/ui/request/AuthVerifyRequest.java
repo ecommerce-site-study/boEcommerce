@@ -11,11 +11,7 @@ public class AuthVerifyRequest implements Serializable {
 
     private static final long serialVersionUID = 8193613902146150782L;
 
-    private AuthInfoType type;
     private String authIdentity;
     private String authCode;
 
-    public void type(AuthInfoType type) {
-        this.type = type;
-    }
 }

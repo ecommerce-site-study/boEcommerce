@@ -20,10 +20,10 @@ public class AuthRequest implements Serializable {
 
     private static final long serialVersionUID = -294679248324742964L;
 
-    private AuthInfoType type;
+//    private AuthInfoType type;
     private String authIdentity;
 
-    public void type(AuthInfoType type) {
-        this.type = type;
-    }
+//    public void type(AuthInfoType type) {
+//        this.type = type;
+//    }
 }

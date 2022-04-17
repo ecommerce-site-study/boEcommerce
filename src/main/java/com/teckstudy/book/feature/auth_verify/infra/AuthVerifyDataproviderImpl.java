@@ -20,7 +20,7 @@ public class AuthVerifyDataproviderImpl implements AuthVerifyDataprovider {
     }
 
     @Override
-    public Optional<AuthVerify> findAuthVerifyByType(AuthInfoType type, String authIdentity) {
-        return authVerifyRepository.findAuthVerifyByType(type, authIdentity);
+    public AuthVerify enabledAuthVerify(AuthInfoType type,String authIdentity) {
+        return authVerifyRepository.findEnabledAuthVerify(type, authIdentity);
     }
 }
