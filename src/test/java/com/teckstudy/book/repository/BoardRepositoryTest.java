@@ -41,7 +41,7 @@
 ////                .member_id("member1")
 ////                .password("1234")
 ////                .name("펩시맨")
-////                .sex(Gender.MALE)
+////                .sex(GenderType.MALE)
 ////                .birthday("1990-09-12")
 ////                .phone_number("010-2027-1163")
 ////                .address("서울특별시 봉천동")

@@ -6,7 +6,7 @@
 //import com.teckstudy.book.domain.enums.*;
 //import com.teckstudy.book.domain.member.Member;
 //import com.teckstudy.book.domain.member.repository.MemberRepository;
-//import com.teckstudy.book.domain.member.types.Gender;
+//import com.teckstudy.book.domain.member.types.GenderType;
 //import com.teckstudy.book.domain.member.types.MemberStatus;
 //import com.teckstudy.book.domain.product.Product;
 //import com.teckstudy.book.domain.product.repository.*;
@@ -73,7 +73,7 @@
 //                .member_id("member1")
 //                .password("1234")
 //                .name("홍길동")
-//                .sex(Gender.MALE)
+//                .sex(GenderType.MALE)
 //                .birthday("1990-09-12")
 //                .phone_number("010-2027-1163")
 //                .address("서울특별시 봉천동")

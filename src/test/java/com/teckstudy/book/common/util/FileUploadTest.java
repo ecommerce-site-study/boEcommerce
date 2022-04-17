@@ -1,8 +1,8 @@
 package com.teckstudy.book.common.util;
 
 import com.teckstudy.book.common.WebIntegrationTest;
-import com.teckstudy.book.feature.lib.common.UploadResult;
-import com.teckstudy.book.feature.lib.common.util.service.FileService;
+import com.teckstudy.book.core.lib.common.UploadResult;
+import com.teckstudy.book.core.lib.common.util.service.FileService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

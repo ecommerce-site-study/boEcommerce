@@ -3,7 +3,7 @@
 //import com.querydsl.jpa.impl.JPAQueryFactory;
 //import com.teckstudy.book.domain.member.Member;
 //import com.teckstudy.book.domain.member.repository.MemberRepository;
-//import com.teckstudy.book.domain.member.types.Gender;
+//import com.teckstudy.book.domain.member.types.GenderType;
 //import com.teckstudy.book.domain.member.types.MemberStatus;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.DisplayName;
@@ -36,7 +36,7 @@
 //    @BeforeEach
 //    public void setup() {
 //        member = new Member("prodo@naver.com","1234", "홍길동",
-//                Gender.MALE, "19900912", "01020271163",
+//                GenderType.MALE, "19900912", "01020271163",
 //                "서울특별시 봉천동", MemberStatus.NORMAL);
 //    }
 //
@@ -44,7 +44,7 @@
 //    @DisplayName("회원가입 검증")
 //    public void memberSaveTest() {
 //        Member memberResult = new Member("prodo2@naver.com","1234", "홍길동",
-//                Gender.MALE, "19900912", "01020271163",
+//                GenderType.MALE, "19900912", "01020271163",
 //                "서울특별시 봉천동", MemberStatus.NORMAL);
 //
 //        memberRepository.save(memberResult);
@@ -60,7 +60,7 @@
 //    @DisplayName("회원조회")
 //    public void memberSearch() {
 //        Member memberResult = new Member("prodo3@naver.com","1234", "홍길동",
-//                Gender.MALE, "19900912", "01020271163",
+//                GenderType.MALE, "19900912", "01020271163",
 //                "서울특별시 봉천동", MemberStatus.NORMAL);
 //        memberRepository.save(memberResult);
 //
@@ -77,7 +77,7 @@
 //    @DisplayName("사용자 삭제 테스트")
 //    void delete() {
 //        Member memberResult = new Member("prodo2@naver,com","1234", "홍길동",
-//                Gender.MALE, "19900912", "01020271163",
+//                GenderType.MALE, "19900912", "01020271163",
 //                "서울특별시 봉천동", MemberStatus.NORMAL);
 //        memberRepository.save(memberResult);
 //        memberRepository.deleteById(memberResult.getMemberId());
