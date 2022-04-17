@@ -21,17 +21,8 @@ public class BaseEntity {
     @CreatedDate
     @Column(name = "regdate", updatable = false) // 등록 안되게
     private LocalDateTime regDate;
+
     @LastModifiedDate
     @Column(name = "moddate")
     private LocalDateTime modDate;
-
-    @CreatedBy
-    @Column(name = "regdatedby")
-    private String regDateBy;
-
-    @LastModifiedBy
-    @Column(name = "moddatedby")
-    private String modDatedBy;
-
-
 }
