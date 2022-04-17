@@ -1,0 +1,6 @@
+POST http://{{host}}:8080/v1/api/auth/PHONE
+Content-Type: application/json
+
+{
+  "authIdentity":"01077599183"
+}
