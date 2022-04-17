@@ -8,7 +8,7 @@ spring:
       max-request-size: 10MB
     active: default
   datasource:
-    url: jdbc:mysql://petlendar.csni78yzxjkm.ap-northeast-2.rds.amazonaws.com/babybook?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://petlendar.csni78yzxjkm.ap-northeast-2.rds.amazonaws.com/babybook?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: petlendar
     password: petlendar12
     driver-class-name: com.mysql.cj.jdbc.Driver
