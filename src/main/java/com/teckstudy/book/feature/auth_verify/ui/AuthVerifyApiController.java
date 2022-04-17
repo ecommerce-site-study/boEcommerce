@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 
 @RequiredArgsConstructor
 @RestController
@@ -21,7 +23,7 @@ public class AuthVerifyApiController extends BaseApiController {
     @PostMapping("/auth/{authType}")
     public ResponseEntity<SuccessResponse<Void>> phoneNumberAuth(
             @PathVariable(value = "authType") AuthInfoType type,
-            @RequestBody AuthRequest request) {
+            @Valid @RequestBody AuthRequest request) {
 
         authVerifyService.createAuthVerify(type, request);
         return ResponseEntity.ok(SuccessResponse.of("200", "인증", null));
@@ -30,7 +32,7 @@ public class AuthVerifyApiController extends BaseApiController {
     @PostMapping("/auth/{authType}/verify")
     public ResponseEntity<SuccessResponse<Void>> phoneNumberAuthVerify(
             @PathVariable(value = "authType") AuthInfoType type,
-            @RequestBody AuthVerifyRequest request) {
+            @Valid @RequestBody AuthVerifyRequest request) {
 
         authVerifyService.verify(type,request);
         return ResponseEntity.ok(SuccessResponse.of("200", "인증 성공", null));

@@ -3,6 +3,7 @@ package com.teckstudy.book.feature.auth_verify.ui.request;
 import com.teckstudy.book.core.types.AuthInfoType;
 import lombok.Getter;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -20,10 +21,6 @@ public class AuthRequest implements Serializable {
 
     private static final long serialVersionUID = -294679248324742964L;
 
-//    private AuthInfoType type;
+    @NotBlank
     private String authIdentity;
-
-//    public void type(AuthInfoType type) {
-//        this.type = type;
-//    }
 }
