@@ -90,3 +90,9 @@ management:
   endpoint:
     health:
       show-details: always
+
+assets:
+  images:
+    base-url: http://localhost:8080
+    bucket: bucket
+    default: default.png

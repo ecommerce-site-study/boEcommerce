@@ -23,4 +23,9 @@ public class AuthVerifyDataproviderImpl implements AuthVerifyDataprovider {
     public AuthVerify enabledAuthVerify(AuthInfoType type,String authIdentity) {
         return authVerifyRepository.findEnabledAuthVerify(type, authIdentity);
     }
+
+    @Override
+    public AuthVerify certificationAuthVerify(String authIdentity, String authCode) {
+        return authVerifyRepository.findCertificationAuthVerify(authIdentity, authCode);
+    }
 }

@@ -1,6 +1,9 @@
 package com.teckstudy.book.feature.member.application;
 
 import com.teckstudy.book.core.configuration.security.UserDetailsImpl;
+import com.teckstudy.book.feature.auth_verify.domain.AuthVerify;
+import com.teckstudy.book.feature.auth_verify.domain.AuthVerifyDataprovider;
+import com.teckstudy.book.feature.member.application.mapper.MemberMapper;
 import com.teckstudy.book.feature.member.domain.Member;
 import com.teckstudy.book.feature.member.domain.MemberDataProvider;
 import com.teckstudy.book.core.types.SocialType;
@@ -26,19 +29,26 @@ import java.util.Optional;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberDataProvider memberDataProvider;
+    private final AuthVerifyDataprovider authVerifyDataprovider;
     private final OAuth2AccountRepository oAuth2AccountRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final MemberMapper memberMapper;
 
     @Override
     public void signUp(SignUpRequest signUpRequest) {
+        // 이미 존재하는 email일 경우
         checkDuplicateEmail(signUpRequest.getEmail());
-        Member member = Member.builder()
-                .username(signUpRequest.getEmail())
-                .name(signUpRequest.getName())
-                .email(signUpRequest.getEmail())
-                .password(passwordEncoder.encode(signUpRequest.getPassword()))
-                .socialType(SocialType.DEFAULT)
-                .build();
+
+        // 입력바든 휴대폰번호에 대한 값이 인증이 되었는지 여부 확인.
+        AuthVerify authVerify = authVerifyDataprovider.certificationAuthVerify(signUpRequest.getAuthIdentity(), signUpRequest.getAuthCode());
+
+        // 존재 하지 않는 정보라면 exception
+
+        // 회원가입시 인증이 안되어 있을경우 exception
+
+        // 회원가입 객체 생성
+        Member member = memberMapper.createDefaultUser(signUpRequest);
+
+        // 회원 정보랑 authVerify 연동
 
         memberDataProvider.save(member);
     }

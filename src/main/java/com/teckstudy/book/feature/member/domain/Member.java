@@ -45,7 +45,6 @@ public class Member extends BaseEntity {
     @Column(length = 11)
     private String phoneNumber;
 
-    //    @Embedded
     private String address;
 
     @Enumerated(EnumType.STRING)

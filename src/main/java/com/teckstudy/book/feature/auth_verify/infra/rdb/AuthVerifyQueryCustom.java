@@ -5,4 +5,6 @@ import com.teckstudy.book.feature.auth_verify.domain.AuthVerify;
 
 public interface AuthVerifyQueryCustom {
     AuthVerify findEnabledAuthVerify(AuthInfoType type, String authIdentity);
+
+    AuthVerify findCertificationAuthVerify(String authIdentity, String authCode);
 }

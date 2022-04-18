@@ -7,6 +7,9 @@ import java.util.Optional;
 
 public interface AuthVerifyDataprovider {
 
-    public void save(AuthVerify authVerify);
+    void save(AuthVerify authVerify);
+
     AuthVerify enabledAuthVerify(AuthInfoType type, String authIdentity);
+
+    AuthVerify certificationAuthVerify(String authIdentity, String authCode);
 }

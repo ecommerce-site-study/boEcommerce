@@ -1,8 +1,11 @@
 package com.teckstudy.book.feature.member.ui.request;
 
+import com.teckstudy.book.core.types.SocialType;
+import com.teckstudy.book.feature.member.domain.Member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -23,10 +26,6 @@ public class SignUpRequest {
     @Pattern(regexp = "[a-zA-Z!@#$%^&*-_]{6,20}", message = "6~20 길이의 알파벳과 숫자, 특수문자만 사용할 수 있습니다.")
     private String password;
 
-    @Builder
-    public SignUpRequest(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
+    private String authIdentity;
+    private String authCode;
 }

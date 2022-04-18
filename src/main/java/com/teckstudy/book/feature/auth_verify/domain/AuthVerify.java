@@ -28,16 +28,16 @@ public class AuthVerify extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private AuthInfoType authType;
 
-    private String verifyIdentity;
-    private String verifyCode;
+    private String authIdentity;
+    private String authCode;
 
     @Enumerated(value = EnumType.STRING)
     private AuthInfoStatusType status;
 
-    private AuthVerify(AuthInfoType authType, String verifyIdentity, String verifyCode, AuthInfoStatusType status) {
+    private AuthVerify(AuthInfoType authType, String authIdentity, String authCode, AuthInfoStatusType status) {
         this.authType = authType;
-        this.verifyIdentity = verifyIdentity;
-        this.verifyCode = verifyCode;
+        this.authIdentity = authIdentity;
+        this.authCode = authCode;
         this.status = status;
     }
 
@@ -46,7 +46,7 @@ public class AuthVerify extends BaseEntity {
     }
 
     public boolean isNotMatched(String verifyCode) {
-        return !this.verifyCode.equalsIgnoreCase(verifyCode);
+        return !this.authCode.equalsIgnoreCase(verifyCode);
     }
 
     public void expired() {

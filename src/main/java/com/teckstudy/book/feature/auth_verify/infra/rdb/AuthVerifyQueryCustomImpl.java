@@ -20,10 +20,23 @@ public class AuthVerifyQueryCustomImpl implements AuthVerifyQueryCustom {
         return queryFactory
                 .selectFrom(qAuthVerify)
                 .where(
-                        qAuthVerify.verifyIdentity.eq(authIdentity),
+                        qAuthVerify.authIdentity.eq(authIdentity),
                         qAuthVerify.authType.eq(type)
                 )
                 .orderBy(qAuthVerify.regDate.desc())
+                .limit(1)
+                .fetchOne();
+    }
+
+    @Override
+    public AuthVerify findCertificationAuthVerify(String authIdentity, String authCode) {
+        return queryFactory
+                .selectFrom(qAuthVerify)
+                .where(
+                        qAuthVerify.authIdentity.eq(authIdentity),
+                        qAuthVerify.authCode.eq(authCode),
+                        qAuthVerify.status.eq(AuthInfoStatusType.CERTIFIED)
+                ).orderBy(qAuthVerify.regDate.desc())
                 .limit(1)
                 .fetchOne();
     }
