@@ -3,6 +3,7 @@ package com.teckstudy.book.feature.member.domain;
 import com.teckstudy.book.core.types.GenderType;
 import com.teckstudy.book.core.types.MemberStatusType;
 import com.teckstudy.book.core.types.SocialType;
+import com.teckstudy.book.feature.auth_verify.domain.AuthVerify;
 import com.teckstudy.book.feature.base.BaseEntity;
 import com.teckstudy.book.feature.oauth2.account.OAuth2Account;
 import lombok.AllArgsConstructor;
@@ -53,6 +54,9 @@ public class Member extends BaseEntity {
     @OneToOne(mappedBy = "member")
     private AuthInfo authInfo;
 
+    @OneToOne
+    private AuthVerify authVerify;
+
     @Enumerated(EnumType.STRING)
     private SocialType socialType;
 
@@ -92,5 +96,9 @@ public class Member extends BaseEntity {
         Assert.state(social != null, "연동된 소셜 계정 정보가 없습니다.");
         this.social.unlinkUser();
         this.social = null;
+    }
+
+    public void certificate(AuthVerify authVerify) {
+        this.authVerify = authVerify;
     }
 }

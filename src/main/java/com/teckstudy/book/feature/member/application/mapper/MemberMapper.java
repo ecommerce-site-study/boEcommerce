@@ -7,6 +7,7 @@ import com.teckstudy.book.feature.member.ui.request.SignUpRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 /**
  * <pre>
@@ -18,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @since 2022-04-19 오전 12:03
  */
 
+@Component
 @RequiredArgsConstructor
 public class MemberMapper {
 

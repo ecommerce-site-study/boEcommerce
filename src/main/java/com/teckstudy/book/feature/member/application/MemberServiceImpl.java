@@ -1,6 +1,7 @@
 package com.teckstudy.book.feature.member.application;
 
 import com.teckstudy.book.core.configuration.security.UserDetailsImpl;
+import com.teckstudy.book.core.lib.common.fuction.exception.AuthVerifyException;
 import com.teckstudy.book.feature.auth_verify.domain.AuthVerify;
 import com.teckstudy.book.feature.auth_verify.domain.AuthVerifyDataprovider;
 import com.teckstudy.book.feature.member.application.mapper.MemberMapper;
@@ -21,6 +22,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.security.auth.message.AuthException;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -42,13 +45,13 @@ public class MemberServiceImpl implements MemberService {
         AuthVerify authVerify = authVerifyDataprovider.certificationAuthVerify(signUpRequest.getAuthIdentity(), signUpRequest.getAuthCode());
 
         // 존재 하지 않는 정보라면 exception
-
-        // 회원가입시 인증이 안되어 있을경우 exception
+        checkEmptyAuthVerify(authVerify);
 
         // 회원가입 객체 생성
         Member member = memberMapper.createDefaultUser(signUpRequest);
 
         // 회원 정보랑 authVerify 연동
+        member.certificate(authVerify);
 
         memberDataProvider.save(member);
     }
@@ -203,5 +206,11 @@ public class MemberServiceImpl implements MemberService {
         Optional<Member> optUser = memberDataProvider.findByUsername(username);
         Assert.state(optUser.isPresent(), "가입되지 않은 회원입니다.");
         return optUser.get();
+    }
+
+    private void checkEmptyAuthVerify(AuthVerify authVerify) {
+        if(Objects.isNull(authVerify)) {
+            throw AuthVerifyException.AUTH_VERIFY_NOT_FOUND.throwException();
+        }
     }
 }
