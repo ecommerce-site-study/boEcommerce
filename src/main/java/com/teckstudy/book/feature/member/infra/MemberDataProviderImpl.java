@@ -2,14 +2,16 @@ package com.teckstudy.book.feature.member.infra;
 
 import com.teckstudy.book.feature.member.domain.Member;
 import com.teckstudy.book.feature.member.domain.MemberDataProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
+@RequiredArgsConstructor
 public class MemberDataProviderImpl implements MemberDataProvider {
 
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
     @Override
     public Optional<Member> findByEmail(String email) {
