@@ -17,6 +17,8 @@ import com.teckstudy.book.feature.member.ui.request.SignUpRequest;
 import com.teckstudy.book.feature.member.ui.request.UpdateProfileRequest;
 import io.jsonwebtoken.lang.Assert;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,7 +26,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.security.auth.message.AuthException;
 import java.util.Objects;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -36,6 +42,10 @@ public class MemberServiceImpl implements MemberService {
     private final OAuth2AccountRepository oAuth2AccountRepository;
     private final MemberMapper memberMapper;
 
+    // 계층권한
+    private final RoleRepository roleRepository;
+
+    @Transactional
     @Override
     public void signUp(SignUpRequest signUpRequest) {
         // 이미 존재하는 email일 경우
@@ -203,6 +213,68 @@ public class MemberServiceImpl implements MemberService {
     }
 
     private Member checkRegisteredUser(String username) {
+//        Optional<Member> optUser = memberRepository.findByUsername(username);
+//        Assert.state(optUser.isPresent(), "가입되지 않은 회원입니다.");
+//        return optUser.get();
+        return null;
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    @Transactional
+    @Override
+    public void createUser(Member member){
+
+        Role role = roleRepository.findByRoleName("ROLE_USER");
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
+        member.setMemberRoles(roles);
+        memberRepository.save(member);
+    }
+
+    @Transactional
+    @Override
+    public void modifyUser(MemberDto memberDto){
+
+        ModelMapper modelMapper = new ModelMapper();
+        Member member = modelMapper.map(memberDto, Member.class);
+
+        if(memberDto.getRoles() != null){
+            Set<Role> roles = new HashSet<>();
+            memberDto.getRoles().forEach(role -> {
+                Role r = roleRepository.findByRoleName(role);
+                roles.add(r);
+            });
+            member.setMemberRoles(roles);
+        }
+        member.setPassword(passwordEncoder.encode(memberDto.getPassword()));
+        memberRepository.save(member);
+
+    }
+
+    @Transactional
+    public List<Member> getUsers() {
+        return memberRepository.findAll();
+    }
+
+    @Transactional
+    public MemberDto getUser(Long id) {
+
+        Member member = memberRepository.findById(id).orElse(new Member());
+        ModelMapper modelMapper = new ModelMapper();
+        MemberDto memberDto = modelMapper.map(member, MemberDto.class);
+
+        List<String> roles = member.getMemberRoles()
+                .stream()
+                .map(role -> role.getRoleName())
+                .collect(Collectors.toList());
+
+        memberDto.setRoles(roles);
+        return memberDto;
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        memberRepository.deleteById(id);
         Optional<Member> optUser = memberDataProvider.findByUsername(username);
         Assert.state(optUser.isPresent(), "가입되지 않은 회원입니다.");
         return optUser.get();

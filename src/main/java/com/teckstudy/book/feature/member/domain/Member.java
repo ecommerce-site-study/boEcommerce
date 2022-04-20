@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -73,6 +75,11 @@ public class Member extends BaseEntity {
     @Column(columnDefinition = "longtext")
     private String imageUrl; // default image 달라 .
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
+    @JoinTable(name = "member_roles", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
+            @JoinColumn(name = "role_id") })
+    private Set<Role> memberRoles = new HashSet<>();
+
     public SocialType getSocialType() {
         return this.socialType;
     }
@@ -97,6 +104,29 @@ public class Member extends BaseEntity {
         this.social.unlinkUser();
         this.social = null;
     }
+
+    // 계층권한
+    public void setMemberRoles(Set<Role> memberRoles) {
+        this.memberRoles = memberRoles;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getMemberRoles() {
+        return memberRoles;
+    }
+
+
 
     public void certificate(AuthVerify authVerify) {
         this.authVerify = authVerify;

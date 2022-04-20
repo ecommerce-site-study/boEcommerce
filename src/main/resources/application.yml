@@ -6,6 +6,8 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+  thymeleaf:
+    cache: false
   profiles:
     active: default
   datasource:
@@ -17,7 +19,7 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       use-new-id-generator-mappings: true
     properties:
       hibernate:
@@ -74,7 +76,6 @@ jwt:
   secretKey: swerjv09wau5v09q23u09
   signatureAlgorithm: HS256
   tokenExpired: 604800 #(sec) 7 days
-
 client:
   origins: http://localhost:3000
 logging.level:
@@ -96,3 +97,4 @@ assets:
     base-url: http://localhost:8080
     bucket: bucket
     default: default.png
+
