@@ -1,6 +1,6 @@
-package com.teckstudy.book.domain.role.repository;
+package com.teckstudy.book.feature.role.repository;
 
-import com.teckstudy.book.domain.role.Role;
+import com.teckstudy.book.feature.role.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {

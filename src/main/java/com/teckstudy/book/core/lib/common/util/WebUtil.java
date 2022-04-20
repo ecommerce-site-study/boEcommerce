@@ -1,4 +1,4 @@
-package com.teckstudy.book.lib.common.util;
+package com.teckstudy.book.core.lib.common.util;
 
 import javax.servlet.http.HttpServletRequest;
 

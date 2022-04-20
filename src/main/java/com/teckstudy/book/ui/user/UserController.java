@@ -1,10 +1,10 @@
 package com.teckstudy.book.ui.user;
 
-import com.teckstudy.book.application.member.MemberService;
-import com.teckstudy.book.application.member.dto.MemberDto;
 import com.teckstudy.book.config.security.token.AjaxAuthenticationToken;
-import com.teckstudy.book.domain.member.Member;
-import com.teckstudy.book.domain.role.repository.RoleRepository;
+import com.teckstudy.book.feature.member.application.MemberService;
+import com.teckstudy.book.feature.member.application.dto.MemberDto;
+import com.teckstudy.book.feature.member.domain.Member;
+import com.teckstudy.book.feature.role.repository.RoleRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

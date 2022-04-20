@@ -1,7 +1,7 @@
 package com.teckstudy.book.application.security;
 
-import com.teckstudy.book.domain.resource.Resources;
-import com.teckstudy.book.domain.resource.repository.ResourcesRepository;
+import com.teckstudy.book.feature.resource.Resources;
+import com.teckstudy.book.feature.resource.repository.ResourcesRepository;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;

@@ -1,6 +1,6 @@
-package com.teckstudy.book.domain.resource.repository;
+package com.teckstudy.book.feature.resource.repository;
 
-import com.teckstudy.book.domain.resource.Resources;
+import com.teckstudy.book.feature.resource.Resources;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

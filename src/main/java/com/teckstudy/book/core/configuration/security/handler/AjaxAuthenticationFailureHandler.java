@@ -1,4 +1,4 @@
-package com.teckstudy.book.config.security.handler;
+package com.teckstudy.book.core.configuration.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;

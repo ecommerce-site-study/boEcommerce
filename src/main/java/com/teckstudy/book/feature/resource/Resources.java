@@ -1,6 +1,6 @@
-package com.teckstudy.book.domain.resource;
+package com.teckstudy.book.feature.resource;
 
-import com.teckstudy.book.domain.role.Role;
+import com.teckstudy.book.feature.role.Role;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 

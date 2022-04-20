@@ -1,4 +1,4 @@
-package com.teckstudy.book.config.security.matadatasource;
+package com.teckstudy.book.core.configuration.security.matadatasource;
 
 import com.teckstudy.book.application.security.SecurityResourceService;
 import lombok.extern.slf4j.Slf4j;

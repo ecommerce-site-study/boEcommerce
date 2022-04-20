@@ -2,8 +2,10 @@ package com.teckstudy.book.feature.member.application;
 
 import com.teckstudy.book.core.configuration.security.UserDetailsImpl;
 import com.teckstudy.book.core.lib.common.fuction.exception.AuthVerifyException;
+import com.teckstudy.book.core.lib.common.fuction.exception.UserException;
 import com.teckstudy.book.feature.auth_verify.domain.AuthVerify;
 import com.teckstudy.book.feature.auth_verify.domain.AuthVerifyDataprovider;
+import com.teckstudy.book.feature.member.application.dto.MemberDto;
 import com.teckstudy.book.feature.member.application.mapper.MemberMapper;
 import com.teckstudy.book.feature.member.domain.Member;
 import com.teckstudy.book.feature.member.domain.MemberDataProvider;
@@ -15,16 +17,16 @@ import com.teckstudy.book.feature.oauth2.account.OAuth2AccountRepository;
 import com.teckstudy.book.feature.oauth2.userInfo.OAuth2UserInfo;
 import com.teckstudy.book.feature.member.ui.request.SignUpRequest;
 import com.teckstudy.book.feature.member.ui.request.UpdateProfileRequest;
+import com.teckstudy.book.feature.role.Role;
+import com.teckstudy.book.feature.role.repository.RoleRepository;
 import io.jsonwebtoken.lang.Assert;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.security.auth.message.AuthException;
 import java.util.Objects;
 import java.util.HashSet;
 import java.util.List;
@@ -41,6 +43,7 @@ public class MemberServiceImpl implements MemberService {
     private final AuthVerifyDataprovider authVerifyDataprovider;
     private final OAuth2AccountRepository oAuth2AccountRepository;
     private final MemberMapper memberMapper;
+    private final PasswordEncoder passwordEncoder;
 
     // 계층권한
     private final RoleRepository roleRepository;
@@ -222,23 +225,32 @@ public class MemberServiceImpl implements MemberService {
     ///////////////////////////////////////////////////////////////////
     @Transactional
     @Override
-    public void createUser(Member member){
+    public void createUser(Member member) {
 
         Role role = roleRepository.findByRoleName("ROLE_USER");
         Set<Role> roles = new HashSet<>();
         roles.add(role);
         member.setMemberRoles(roles);
-        memberRepository.save(member);
+        memberDataProvider.save(member);
     }
 
     @Transactional
     @Override
-    public void modifyUser(MemberDto memberDto){
+    public void modifyUser(MemberDto memberDto) {
 
+
+        // 존제 한다면 업데이트
         ModelMapper modelMapper = new ModelMapper();
         Member member = modelMapper.map(memberDto, Member.class);
 
-        if(memberDto.getRoles() != null){
+        // todo 존재하는 유저인지 검사 필요
+        memberDataProvider.findById(member.getMemberId())
+                .orElseThrow(UserException.USER_NOT_FOUND::throwException);
+
+        member.setPassword(passwordEncoder.encode(memberDto.getPassword()));
+
+        // 3번 권한
+        if (memberDto.getRoles() != null) {
             Set<Role> roles = new HashSet<>();
             memberDto.getRoles().forEach(role -> {
                 Role r = roleRepository.findByRoleName(role);
@@ -246,20 +258,21 @@ public class MemberServiceImpl implements MemberService {
             });
             member.setMemberRoles(roles);
         }
-        member.setPassword(passwordEncoder.encode(memberDto.getPassword()));
-        memberRepository.save(member);
+
+        // SAVE
+        memberDataProvider.save(member);
 
     }
 
     @Transactional
     public List<Member> getUsers() {
-        return memberRepository.findAll();
+        return memberDataProvider.findAll();
     }
 
     @Transactional
     public MemberDto getUser(Long id) {
 
-        Member member = memberRepository.findById(id).orElse(new Member());
+        Member member = memberDataProvider.findById(id).orElse(new Member());
         ModelMapper modelMapper = new ModelMapper();
         MemberDto memberDto = modelMapper.map(member, MemberDto.class);
 
@@ -274,14 +287,11 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void deleteUser(Long id) {
-        memberRepository.deleteById(id);
-        Optional<Member> optUser = memberDataProvider.findByUsername(username);
-        Assert.state(optUser.isPresent(), "가입되지 않은 회원입니다.");
-        return optUser.get();
+        memberDataProvider.deleteById(id);
     }
 
     private void checkEmptyAuthVerify(AuthVerify authVerify) {
-        if(Objects.isNull(authVerify)) {
+        if (Objects.isNull(authVerify)) {
             throw AuthVerifyException.AUTH_VERIFY_NOT_FOUND.throwException();
         }
     }

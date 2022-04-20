@@ -1,6 +1,6 @@
 package com.teckstudy.book.application.security;
 
-import com.teckstudy.book.domain.resource.Resources;
+import com.teckstudy.book.feature.resource.Resources;
 
 import java.util.List;
 

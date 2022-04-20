@@ -2,6 +2,7 @@ package com.teckstudy.book.feature.member.application.mapper;
 
 import com.teckstudy.book.core.types.MemberStatusType;
 import com.teckstudy.book.core.types.SocialType;
+import com.teckstudy.book.feature.member.application.dto.MemberDto;
 import com.teckstudy.book.feature.member.domain.Member;
 import com.teckstudy.book.feature.member.ui.request.SignUpRequest;
 import lombok.RequiredArgsConstructor;
@@ -47,4 +48,5 @@ public class MemberMapper {
                 .memberStatus(MemberStatusType.NORMAL)
                 .build();
     }
+
 }

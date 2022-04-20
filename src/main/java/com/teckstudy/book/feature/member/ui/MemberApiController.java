@@ -23,14 +23,13 @@ import javax.validation.Valid;
  * @since 2022-04-16 오전 12:44
  */
 
-@RequestMapping("/users")
 @RestController
 @RequiredArgsConstructor
 public class MemberApiController extends BaseApiController {
 
     private final MemberService userService;
 
-    @PostMapping
+    @PostMapping("/users")
     public ResponseEntity<SuccessResponse<Void>> signup(@Valid @RequestBody SignUpRequest request) {
 
         userService.signUp(request);

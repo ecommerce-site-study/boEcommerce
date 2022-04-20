@@ -1,4 +1,4 @@
-package com.teckstudy.book.config.security.factory;
+package com.teckstudy.book.core.configuration.security.factory;
 
 import com.teckstudy.book.application.security.SecurityResourceService;
 import org.springframework.beans.factory.FactoryBean;

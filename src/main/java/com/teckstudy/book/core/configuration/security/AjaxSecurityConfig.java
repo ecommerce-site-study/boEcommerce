@@ -1,10 +1,10 @@
-package com.teckstudy.book.config.security;
+package com.teckstudy.book.core.configuration.security;
 
 import com.teckstudy.book.config.security.common.AjaxLoginAuthenticationEntryPoint;
 import com.teckstudy.book.config.security.handler.AjaxAccessDeniedHandler;
-import com.teckstudy.book.config.security.handler.AjaxAuthenticationFailureHandler;
-import com.teckstudy.book.config.security.handler.AjaxAuthenticationSuccessHandler;
-import com.teckstudy.book.config.security.provider.AjaxAuthenticationProvider;
+import com.teckstudy.book.core.configuration.security.handler.AjaxAuthenticationFailureHandler;
+import com.teckstudy.book.core.configuration.security.handler.AjaxAuthenticationSuccessHandler;
+import com.teckstudy.book.core.configuration.security.provider.AjaxAuthenticationProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;

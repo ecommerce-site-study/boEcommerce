@@ -15,7 +15,9 @@ import lombok.NoArgsConstructor;
  */
 
 public enum UserException implements BaseException<UserException.UserBaseException> {
-    USER_ID_IS_ALREADY_EXISTS("100409", "이미 존재하는 ID 입니다");
+    USER_ID_IS_ALREADY_EXISTS("100409", "이미 존재하는 ID 입니다"),
+    USER_NOT_FOUND("100404", "존재하지 않는 유저 ID 입니다")
+    ;
 
     private final String code;
     private final String message;

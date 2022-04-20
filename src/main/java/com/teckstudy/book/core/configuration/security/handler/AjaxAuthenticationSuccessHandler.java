@@ -1,7 +1,7 @@
-package com.teckstudy.book.config.security.handler;
+package com.teckstudy.book.core.configuration.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.teckstudy.book.domain.member.Member;
+import com.teckstudy.book.feature.member.domain.Member;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;

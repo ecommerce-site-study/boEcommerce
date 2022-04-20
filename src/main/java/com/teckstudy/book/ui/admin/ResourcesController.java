@@ -2,21 +2,15 @@ package com.teckstudy.book.ui.admin;
 
 import com.teckstudy.book.application.security.ResourcesService;
 import com.teckstudy.book.application.security.RoleService;
-import com.teckstudy.book.config.security.matadatasource.UrlSecurityMetadataSource;
-import com.teckstudy.book.domain.resource.Resources;
-import com.teckstudy.book.domain.role.Role;
-import com.teckstudy.book.domain.role.repository.RoleRepository;
-import org.modelmapper.ModelMapper;
+import com.teckstudy.book.core.configuration.security.matadatasource.UrlSecurityMetadataSource;
+import com.teckstudy.book.feature.resource.Resources;
+import com.teckstudy.book.feature.role.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class ResourcesController {

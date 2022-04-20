@@ -1,4 +1,4 @@
-package com.teckstudy.book.config.security.handler;
+package com.teckstudy.book.core.configuration.security.handler;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.DefaultRedirectStrategy;

@@ -1,8 +1,8 @@
 package com.teckstudy.book.application.security.impl;
 
 import com.teckstudy.book.application.security.ResourcesService;
-import com.teckstudy.book.domain.resource.Resources;
-import com.teckstudy.book.domain.resource.repository.ResourcesRepository;
+import com.teckstudy.book.feature.resource.Resources;
+import com.teckstudy.book.feature.resource.repository.ResourcesRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -16,25 +16,25 @@ import java.util.List;
 public class ResourcesServiceImpl implements ResourcesService {
 
     @Autowired
-    private ResourcesRepository ResourcesRepository;
+    private ResourcesRepository resourcesRepository;
 
     @Transactional
     public Resources getResources(long id) {
-        return ResourcesRepository.findById(id).orElse(new Resources());
+        return resourcesRepository.findById(id).orElse(new Resources());
     }
 
     @Transactional
     public List<Resources> getResources() {
-        return ResourcesRepository.findAll(Sort.by(Sort.Order.asc("orderNum")));
+        return resourcesRepository.findAll(Sort.by(Sort.Order.asc("orderNum")));
     }
 
     @Transactional
     public void createResources(Resources resources){
-        ResourcesRepository.save(resources);
+        resourcesRepository.save(resources);
     }
 
     @Transactional
     public void deleteResources(long id) {
-        ResourcesRepository.deleteById(id);
+        resourcesRepository.deleteById(id);
     }
 }

@@ -1,4 +1,4 @@
-package com.teckstudy.book.config.permit;
+package com.teckstudy.book.core.configuration.permit;
 
 import org.springframework.security.access.intercept.InterceptorStatusToken;
 import org.springframework.security.web.FilterInvocation;

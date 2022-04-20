@@ -5,6 +5,7 @@ import com.teckstudy.book.feature.member.domain.MemberDataProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -41,5 +42,20 @@ public class MemberDataProviderImpl implements MemberDataProvider {
     @Override
     public void delete(Member member) {
         memberRepository.delete(member);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        memberRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Member> findAll() {
+        return memberRepository.findAll();
+    }
+
+    @Override
+    public Optional<Member> findById(Long id) {
+        return memberRepository.findById(id);
     }
 }

@@ -1,24 +1,45 @@
 package com.teckstudy.book.core.configuration;
 
-//import com.teckstudy.book.config.jwt.filter.JwtAuthenticationFilter;
-
+import com.teckstudy.book.application.security.SecurityResourceService;
 import com.teckstudy.book.core.configuration.jwt.filter.JwtAuthenticationFilter;
-import com.teckstudy.book.core.configuration.security.StatelessCSRFFilter;
+import com.teckstudy.book.core.configuration.permit.PermitAllFilter;
+import com.teckstudy.book.core.configuration.security.AjaxLoginConfigurer;
 import com.teckstudy.book.core.configuration.security.UserDetailsServiceImpl;
+import com.teckstudy.book.core.configuration.security.common.FormWebAuthenticationDetailsSource;
+import com.teckstudy.book.core.configuration.security.factory.UrlResourcesMapFactoryBean;
+import com.teckstudy.book.core.configuration.security.handler.AjaxAuthenticationFailureHandler;
+import com.teckstudy.book.core.configuration.security.handler.AjaxAuthenticationSuccessHandler;
+import com.teckstudy.book.core.configuration.security.handler.FormAccessDeniedHandler;
+import com.teckstudy.book.core.configuration.security.matadatasource.UrlSecurityMetadataSource;
+import com.teckstudy.book.core.configuration.security.provider.AjaxAuthenticationProvider;
+import com.teckstudy.book.core.configuration.security.provider.FormAuthenticationProvider;
+import com.teckstudy.book.feature.resource.repository.ResourcesRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.AccessDecisionManager;
+import org.springframework.security.access.AccessDecisionVoter;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
+import org.springframework.security.access.vote.AffirmativeBased;
+import org.springframework.security.access.vote.RoleHierarchyVoter;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -27,7 +48,16 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsServiceImpl userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    @Autowired
+    private FormWebAuthenticationDetailsSource formWebAuthenticationDetailsSource;
+    @Autowired
+    private AuthenticationSuccessHandler formAuthenticationSuccessHandler;
+    @Autowired
+    private AuthenticationFailureHandler formAuthenticationFailureHandler;
+    @Autowired
+    private SecurityResourceService securityResourceService;
 
+    private String[] permitAllResources = {"/", "/login", "/user/login/**"};
     /*
          AuthenticationManager 에서 authenticate 메소드를 실행할때
          내부적으로 사용할 UserDetailsService 와 PasswordEncoder 를 설정

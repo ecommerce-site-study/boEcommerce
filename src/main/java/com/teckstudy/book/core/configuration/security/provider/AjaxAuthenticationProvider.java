@@ -1,7 +1,7 @@
-package com.teckstudy.book.config.security.provider;
+package com.teckstudy.book.core.configuration.security.provider;
 
-import com.teckstudy.book.config.security.MemberContext;
 import com.teckstudy.book.config.security.token.AjaxAuthenticationToken;
+import com.teckstudy.book.core.configuration.security.MemberContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

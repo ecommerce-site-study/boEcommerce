@@ -6,6 +6,7 @@ import com.teckstudy.book.core.types.SocialType;
 import com.teckstudy.book.feature.auth_verify.domain.AuthVerify;
 import com.teckstudy.book.feature.base.BaseEntity;
 import com.teckstudy.book.feature.oauth2.account.OAuth2Account;
+import com.teckstudy.book.feature.role.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

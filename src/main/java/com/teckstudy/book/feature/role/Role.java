@@ -1,7 +1,7 @@
-package com.teckstudy.book.domain.role;
+package com.teckstudy.book.feature.role;
 
-import com.teckstudy.book.domain.member.Member;
-import com.teckstudy.book.domain.resource.Resources;
+import com.teckstudy.book.feature.member.domain.Member;
+import com.teckstudy.book.feature.resource.Resources;
 import lombok.*;
 
 import javax.persistence.*;

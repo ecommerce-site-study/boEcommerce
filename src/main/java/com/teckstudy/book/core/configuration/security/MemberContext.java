@@ -1,6 +1,6 @@
-package com.teckstudy.book.config.security;
+package com.teckstudy.book.core.configuration.security;
 
-import com.teckstudy.book.domain.member.Member;
+import com.teckstudy.book.feature.member.domain.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 

@@ -1,7 +1,7 @@
 package com.teckstudy.book.ui.login;
 
 import com.teckstudy.book.config.security.token.AjaxAuthenticationToken;
-import com.teckstudy.book.domain.member.Member;
+import com.teckstudy.book.feature.member.domain.Member;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

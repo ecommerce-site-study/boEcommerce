@@ -1,4 +1,4 @@
-package com.teckstudy.book.config.security.common;
+package com.teckstudy.book.core.configuration.security.common;
 
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 

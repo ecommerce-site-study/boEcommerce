@@ -1,17 +1,12 @@
 package com.teckstudy.book.feature.member.application;
 
+import com.teckstudy.book.feature.member.application.dto.MemberDto;
+import com.teckstudy.book.feature.member.domain.Member;
+import com.teckstudy.book.feature.member.ui.request.SignUpRequest;
+import com.teckstudy.book.feature.member.ui.request.UpdateProfileRequest;
 import com.teckstudy.book.feature.oauth2.OAuth2Token;
 import com.teckstudy.book.feature.oauth2.account.OAuth2AccountDTO;
 import com.teckstudy.book.feature.oauth2.userInfo.OAuth2UserInfo;
-import com.teckstudy.book.feature.member.ui.request.SignUpRequest;
-import com.teckstudy.book.feature.member.ui.request.UpdateProfileRequest;
-import com.teckstudy.book.application.member.dto.MemberDto;
-import com.teckstudy.book.domain.member.Member;
-import com.teckstudy.book.domain.oauth2.OAuth2Token;
-import com.teckstudy.book.domain.oauth2.account.OAuth2AccountDTO;
-import com.teckstudy.book.domain.oauth2.userInfo.OAuth2UserInfo;
-import com.teckstudy.book.ui.authentication.request.SignUpRequest;
-import com.teckstudy.book.ui.authentication.request.UpdateProfileRequest;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;

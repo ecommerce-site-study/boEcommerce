@@ -1,4 +1,4 @@
-package com.teckstudy.book.config.security;
+package com.teckstudy.book.core.configuration.security;
 
 import com.teckstudy.book.config.permit.AjaxLoginProcessingFilter;
 import org.springframework.security.authentication.AuthenticationManager;

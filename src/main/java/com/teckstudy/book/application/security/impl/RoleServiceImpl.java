@@ -1,8 +1,8 @@
 package com.teckstudy.book.application.security.impl;
 
 import com.teckstudy.book.application.security.RoleService;
-import com.teckstudy.book.domain.role.Role;
-import com.teckstudy.book.domain.role.repository.RoleRepository;
+import com.teckstudy.book.feature.role.Role;
+import com.teckstudy.book.feature.role.repository.RoleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

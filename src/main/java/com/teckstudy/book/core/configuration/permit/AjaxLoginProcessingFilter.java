@@ -1,9 +1,9 @@
 package com.teckstudy.book.config.permit;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.teckstudy.book.application.member.dto.MemberDto;
 import com.teckstudy.book.config.security.token.AjaxAuthenticationToken;
-import com.teckstudy.book.lib.common.util.WebUtil;
+import com.teckstudy.book.feature.member.application.dto.MemberDto;
+import com.teckstudy.book.core.lib.common.util.WebUtil;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;

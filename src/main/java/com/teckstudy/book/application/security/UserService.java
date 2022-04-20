@@ -1,7 +1,7 @@
 package com.teckstudy.book.application.security;
 
-import com.teckstudy.book.application.member.dto.MemberDto;
-import com.teckstudy.book.domain.member.Member;
+import com.teckstudy.book.feature.member.application.dto.MemberDto;
+import com.teckstudy.book.feature.member.domain.Member;
 
 import java.util.List;
 

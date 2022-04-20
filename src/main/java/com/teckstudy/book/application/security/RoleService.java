@@ -1,6 +1,6 @@
 package com.teckstudy.book.application.security;
 
-import com.teckstudy.book.domain.role.Role;
+import com.teckstudy.book.feature.role.Role;
 
 import java.util.List;
 
