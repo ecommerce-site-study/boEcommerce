@@ -5,17 +5,18 @@ import com.teckstudy.book.domain.member.types.Gender;
 import com.teckstudy.book.domain.member.types.MemberStatus;
 import com.teckstudy.book.domain.member.types.SocialType;
 import com.teckstudy.book.domain.oauth2.account.OAuth2Account;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.teckstudy.book.domain.role.Role;
+import lombok.*;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
 @Builder
+//@ToString(exclude = {"memberRoles"})
 @NoArgsConstructor
 @AllArgsConstructor
 public class Member extends BaseEntity {
@@ -70,6 +71,11 @@ public class Member extends BaseEntity {
     @Column(columnDefinition = "longtext")
     private String imageUrl; // default image 달라 .
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
+    @JoinTable(name = "member_roles", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
+            @JoinColumn(name = "role_id") })
+    private Set<Role> memberRoles = new HashSet<>();
+
     public SocialType getSocialType() {
         return this.socialType;
     }
@@ -94,4 +100,27 @@ public class Member extends BaseEntity {
         this.social.unlinkUser();
         this.social = null;
     }
+
+    // 계층권한
+    public void setMemberRoles(Set<Role> memberRoles) {
+        this.memberRoles = memberRoles;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getMemberRoles() {
+        return memberRoles;
+    }
+
+
 }

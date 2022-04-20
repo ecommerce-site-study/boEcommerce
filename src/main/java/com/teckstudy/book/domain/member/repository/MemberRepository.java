@@ -9,7 +9,12 @@ import java.util.Optional;
 // QuerydslPredicateExecutor<Member> 생략
 public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByEmail(String email);
-    Optional<Member> findByUsername(String username);
+//    Optional<Member> findByUsername(String username);
     boolean existsByEmail(String email);
     boolean existsByUsername(String username);
+    
+    // 계층권한 관련 확인
+    Member findByUsername(String username);
+
+    int countByUsername(String username);
 }

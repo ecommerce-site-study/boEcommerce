@@ -1,5 +1,6 @@
 package com.teckstudy.book.application.member;
 
+import com.teckstudy.book.application.member.dto.MemberDto;
 import com.teckstudy.book.config.security.UserDetailsImpl;
 import com.teckstudy.book.domain.member.Member;
 import com.teckstudy.book.domain.member.repository.MemberRepository;
@@ -9,16 +10,24 @@ import com.teckstudy.book.domain.oauth2.account.OAuth2Account;
 import com.teckstudy.book.domain.oauth2.account.OAuth2AccountDTO;
 import com.teckstudy.book.domain.oauth2.account.OAuth2AccountRepository;
 import com.teckstudy.book.domain.oauth2.userInfo.OAuth2UserInfo;
+import com.teckstudy.book.domain.role.Role;
+import com.teckstudy.book.domain.role.repository.RoleRepository;
 import com.teckstudy.book.ui.authentication.request.SignUpRequest;
 import com.teckstudy.book.ui.authentication.request.UpdateProfileRequest;
 import io.jsonwebtoken.lang.Assert;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -29,6 +38,10 @@ public class MemberServiceImpl implements MemberService {
     private final OAuth2AccountRepository oAuth2AccountRepository;
     private final PasswordEncoder passwordEncoder;
 
+    // 계층권한
+    private final RoleRepository roleRepository;
+
+    @Transactional
     @Override
     public void saveUser(SignUpRequest signUpRequest){
         checkDuplicateEmail(signUpRequest.getEmail());
@@ -46,15 +59,16 @@ public class MemberServiceImpl implements MemberService {
     @Override
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public Optional<OAuth2AccountDTO> getOAuth2Account(String username) {
-        Optional<Member> optionalUser = memberRepository.findByUsername(username);
-        if (!optionalUser.isPresent() || optionalUser.get().getSocial() == null) return Optional.empty();
-        return Optional.of(optionalUser.get().getSocial().toDTO());
+//        Optional<Member> optionalUser = memberRepository.findByUsername(username);
+//        if (!optionalUser.isPresent() || optionalUser.get().getSocial() == null) return Optional.empty();
+//        return Optional.of(optionalUser.get().getSocial().toDTO());
+        return null;
     }
 
     @Override
     public void updateProfile(String username, UpdateProfileRequest updateProfileRequest){
 
-        Member user = memberRepository.findByUsername(username).get();
+        Member user = memberRepository.findByUsername(username); // .get();
 
         //이름이 변경되었는지 체크
         if (!user.getName().equals(updateProfileRequest.getName()))
@@ -191,8 +205,67 @@ public class MemberServiceImpl implements MemberService {
     }
 
     private Member checkRegisteredUser(String username) {
-        Optional<Member> optUser = memberRepository.findByUsername(username);
-        Assert.state(optUser.isPresent(), "가입되지 않은 회원입니다.");
-        return optUser.get();
+//        Optional<Member> optUser = memberRepository.findByUsername(username);
+//        Assert.state(optUser.isPresent(), "가입되지 않은 회원입니다.");
+//        return optUser.get();
+        return null;
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    @Transactional
+    @Override
+    public void createUser(Member member){
+
+        Role role = roleRepository.findByRoleName("ROLE_USER");
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
+        member.setMemberRoles(roles);
+        memberRepository.save(member);
+    }
+
+    @Transactional
+    @Override
+    public void modifyUser(MemberDto memberDto){
+
+        ModelMapper modelMapper = new ModelMapper();
+        Member member = modelMapper.map(memberDto, Member.class);
+
+        if(memberDto.getRoles() != null){
+            Set<Role> roles = new HashSet<>();
+            memberDto.getRoles().forEach(role -> {
+                Role r = roleRepository.findByRoleName(role);
+                roles.add(r);
+            });
+            member.setMemberRoles(roles);
+        }
+        member.setPassword(passwordEncoder.encode(memberDto.getPassword()));
+        memberRepository.save(member);
+
+    }
+
+    @Transactional
+    public List<Member> getUsers() {
+        return memberRepository.findAll();
+    }
+
+    @Transactional
+    public MemberDto getUser(Long id) {
+
+        Member member = memberRepository.findById(id).orElse(new Member());
+        ModelMapper modelMapper = new ModelMapper();
+        MemberDto memberDto = modelMapper.map(member, MemberDto.class);
+
+        List<String> roles = member.getMemberRoles()
+                .stream()
+                .map(role -> role.getRoleName())
+                .collect(Collectors.toList());
+
+        memberDto.setRoles(roles);
+        return memberDto;
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        memberRepository.deleteById(id);
     }
 }
