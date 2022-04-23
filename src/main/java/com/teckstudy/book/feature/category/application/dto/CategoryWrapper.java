@@ -2,7 +2,7 @@ package com.teckstudy.book.feature.category.application.dto;
 
 import com.teckstudy.book.feature.category.application.CategoryValidator;
 import com.teckstudy.book.core.types.YesNoStatus;
-import com.teckstudy.book.feature.category.Category;
+import com.teckstudy.book.feature.category.domain.Category;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

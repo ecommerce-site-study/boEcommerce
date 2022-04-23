@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Api(value = "CategoryController v1")
 @RestController
 @RequiredArgsConstructor
-public class CategoryController extends BaseApiController {
+public class CategoryApiController extends BaseApiController {
 
     private final CategoryService categoryService;
 

@@ -1,4 +1,4 @@
-package com.teckstudy.book.feature.category;
+package com.teckstudy.book.feature.category.domain;
 
 
 import com.teckstudy.book.core.types.YesNoStatus;
