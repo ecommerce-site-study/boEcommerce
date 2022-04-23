@@ -4,8 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.teckstudy.book.feature.category.application.dto.Categories;
 import com.teckstudy.book.feature.category.application.dto.CategoryWrapper;
 import com.teckstudy.book.core.types.YesNoStatus;
-import com.teckstudy.book.feature.category.Category;
-import com.teckstudy.book.feature.category.repository.CategoryRepository;
+import com.teckstudy.book.feature.category.domain.Category;
+import com.teckstudy.book.feature.category.domain.CategoryDataprovider;
+import com.teckstudy.book.feature.category.infra.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,12 +19,12 @@ import java.util.Optional;
 public class CategoryService {
 
     private final CategoryValidator categoryValidator;
-    private final CategoryRepository categoryRepository;
+    private final CategoryDataprovider categoryDataprovider;
 
     @Transactional(readOnly = true)
     public List<CategoryWrapper.LayerCategoryDto> searchCategories() throws JsonProcessingException {
 
-        Categories categories = Categories.from(categoryRepository.findAll());
+        Categories categories = Categories.from(categoryDataprovider.findCategories());
         return  categories.layerList();
     }
 
@@ -34,7 +35,7 @@ public class CategoryService {
         persistCategory.validate(categoryValidator);
 
         if(persistCategory.isParentId()) existingParentCategory(persistCategory.getParentId());
-        Category save = categoryRepository.save(persistCategory.toEntity());
+        Category save = categoryDataprovider.save(persistCategory.toEntity());
 
        return CategoryWrapper.PersistCategory.from(save);
     }
@@ -44,7 +45,7 @@ public class CategoryService {
 
         updateCategory.validate(categoryValidator);
         Category category = existingCategory(
-                categoryRepository.findCategoryByCategoryId(updateCategory.getCategoryId()),
+                categoryDataprovider.findCategoryByCategoryId(updateCategory.getCategoryId()),
                 "존재하지 않는 카테고리입니다."
         );
         category.update(
@@ -62,14 +63,14 @@ public class CategoryService {
     public void deleteCategory(Long categoryId) throws IllegalAccessException {
 
         Category category = existingCategory(
-                categoryRepository.findCategoryByCategoryId(categoryId),
+                categoryDataprovider.findCategoryByCategoryId(categoryId),
                 String.format("[%s] 해당 카테고리는 존재하지 않습니다.", categoryId)
         );
-        categoryRepository.delete(category);
+        categoryDataprovider.delete(category);
     }
 
     private void existingParentCategory(Long parentId) throws IllegalAccessException {
-        Optional<Category> categoryById = categoryRepository.findCategoryByCategoryId(parentId);
+        Optional<Category> categoryById = categoryDataprovider.findCategoryByCategoryId(parentId);
         existingCategory(categoryById,"존재하지 않는 ParentId 입니다." );
     }
 

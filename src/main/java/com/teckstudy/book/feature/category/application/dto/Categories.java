@@ -1,6 +1,6 @@
 package com.teckstudy.book.feature.category.application.dto;
 
-import com.teckstudy.book.feature.category.Category;
+import com.teckstudy.book.feature.category.domain.Category;
 
 import java.util.List;
 import java.util.stream.Collectors;
